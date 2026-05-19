@@ -10,4 +10,5 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>br.com.mycompany.chaponibus.ChapOnibus</exec.mainClass>
     </properties>
+    <name>ChapOnibus-app</name>
 </project>
