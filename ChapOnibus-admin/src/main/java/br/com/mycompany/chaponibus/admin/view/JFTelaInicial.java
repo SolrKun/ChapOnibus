@@ -4,6 +4,9 @@
  */
 package br.com.mycompany.chaponibus.admin.view;
 
+import br.com.mycompany.chaponibus.admin.model.Sessao;
+import br.com.mycompany.chaponibus.admin.model.Usuario;
+
 /**
  *
  * @author ce498
@@ -18,6 +21,7 @@ public class JFTelaInicial extends javax.swing.JFrame {
     public JFTelaInicial() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Usuario atual = Sessao.getUsuarioLogado();
     }
 
     /**

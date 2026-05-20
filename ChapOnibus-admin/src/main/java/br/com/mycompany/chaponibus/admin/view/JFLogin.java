@@ -5,7 +5,13 @@
 package br.com.mycompany.chaponibus.admin.view;
 
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
+import br.com.mycompany.chaponibus.admin.model.Sessao;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
+import static java.awt.EventQueue.invokeLater;
+import java.awt.Image;
+import java.net.URL;
+import static java.util.logging.Level.WARNING;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +34,7 @@ public class JFLogin extends javax.swing.JFrame {
         this.usuarioDAO = new UsuarioDAO();
         Usuario teste = new Usuario("teste", "1111", "teste");
         usuarioDAO.salvar(teste);
+        jTFUsuario.requestFocusInWindow();
     }
 
     /**
@@ -67,11 +74,6 @@ public class JFLogin extends javax.swing.JFrame {
         jLUsuario.setText("Usuário:");
 
         jTFUsuario.addActionListener(this::jTFUsuarioActionPerformed);
-        jTFUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTFUsuarioKeyPressed(evt);
-            }
-        });
 
         jLSenha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLSenha.setText("Senha:");
@@ -149,10 +151,6 @@ public class JFLogin extends javax.swing.JFrame {
         jPFSenha.requestFocus();
     }//GEN-LAST:event_jBVerSenhaActionPerformed
 
-    private void jTFUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFUsuarioKeyPressed
-
     private void jTFUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUsuarioActionPerformed
         efetuarLogin();
     }//GEN-LAST:event_jTFUsuarioActionPerformed
@@ -176,16 +174,46 @@ public class JFLogin extends javax.swing.JFrame {
             return;
         }
         
-        Usuario validaUsuario = usuarioDAO.validarLogin(jTFUsuario.getText(), senha);
+        jBLogin.setEnabled(false);
+        jBLogin.setText("");
         
-        if (validaUsuario != null) {
-            new JFTelaInicial().setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Informe um usuário e senha válidos");
-            jPFSenha.setText("");
-            jPFSenha.requestFocus();
+        try {
+            URL imgURL = getClass().getResource("/br/com/mycompany/chaponibus/admin/assets/loading.gif");
+            if (imgURL != null) {
+                ImageIcon iconeOriginal = new ImageIcon(imgURL);
+                Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+                jBLogin.setIcon(new ImageIcon(imagemRedimensionada));
+            } else {
+                jBLogin.setText("Carregando...");
+            }
+        } catch (Exception e) {
+            logger.log(WARNING, "Não foi possível carregar o GIF de loading", e);
         }
+        
+        new Thread(() -> {
+            Usuario validaUsuario = usuarioDAO.validarLogin(jTFUsuario.getText(), senha);
+            
+            invokeLater(() -> {
+                if (validaUsuario != null) {
+                    Sessao.conectar(validaUsuario);
+                    
+                    JOptionPane.showMessageDialog(null, "Bem-vindo, " + validaUsuario.getUsername() + "!");
+                    jBLogin.setIcon(null);
+                    
+                    new JFTelaInicial().setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Informe um usuário e senha válidos");
+                    
+                    jBLogin.setIcon(null);
+                    jBLogin.setEnabled(true);
+                    jBLogin.setText("Login");
+                    
+                    jPFSenha.setText("");
+                    jPFSenha.requestFocus();
+                }
+            });
+        }).start();
     }
     
     /**
