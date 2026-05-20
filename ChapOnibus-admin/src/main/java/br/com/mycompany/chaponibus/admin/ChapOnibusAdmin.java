@@ -4,6 +4,8 @@
 
 package br.com.mycompany.chaponibus.admin;
 
+import br.com.mycompany.chaponibus.admin.view.JFLogin;
+
 /**
  *
  * @author ce498
@@ -11,6 +13,6 @@ package br.com.mycompany.chaponibus.admin;
 public class ChapOnibusAdmin {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new JFLogin().setVisible(true);
     }
 }
