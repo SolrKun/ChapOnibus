@@ -14,6 +14,7 @@ import br.com.mycompany.chaponibus.admin.model.Usuario;
 public class JFTelaInicial extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFTelaInicial.class.getName());
+    private Usuario atual;
 
     /**
      * Creates new form JFTelaInicial
@@ -21,7 +22,11 @@ public class JFTelaInicial extends javax.swing.JFrame {
     public JFTelaInicial() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Usuario atual = Sessao.getUsuarioLogado();
+        this.atual = Sessao.getUsuarioLogado();
+        
+        if (atual == null || !"admin".equalsIgnoreCase(atual.getRole())) {
+            jBCadastro.setVisible(false);
+        }
     }
 
     /**
@@ -33,21 +38,37 @@ public class JFTelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jBCadastro = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jBCadastro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jBCadastro.setText("Tela de cadastro");
+        jBCadastro.addActionListener(this::jBCadastroActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jBCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(641, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jBCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(276, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroActionPerformed
+        
+    }//GEN-LAST:event_jBCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -75,5 +96,6 @@ public class JFTelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCadastro;
     // End of variables declaration//GEN-END:variables
 }
