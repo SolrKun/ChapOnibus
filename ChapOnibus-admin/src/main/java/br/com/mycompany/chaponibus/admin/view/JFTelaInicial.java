@@ -6,6 +6,7 @@ package br.com.mycompany.chaponibus.admin.view;
 
 import br.com.mycompany.chaponibus.admin.model.Sessao;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
+import java.awt.CardLayout;
 
 /**
  *
@@ -24,8 +25,11 @@ public class JFTelaInicial extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.atual = Sessao.getUsuarioLogado();
         
+        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
+        cl.show(jPPainelConteudo, "cardTeste");
+        
         if (atual == null || !"admin".equalsIgnoreCase(atual.getRole())) {
-            jBCadastro.setVisible(false);
+            jBNavCadastro.setVisible(false);
         }
     }
 
@@ -38,37 +42,47 @@ public class JFTelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBCadastro = new javax.swing.JButton();
+        jPPainelNav = new javax.swing.JPanel();
+        jBNavCadastro = new javax.swing.JButton();
+        jPPainelConteudo = new javax.swing.JPanel();
+        jPCadastroDeUsuario1 = new br.com.mycompany.chaponibus.admin.view.JPCadastroDeUsuario();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jBCadastro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jBCadastro.setText("Tela de cadastro");
-        jBCadastro.addActionListener(this::jBCadastroActionPerformed);
+        jBNavCadastro.setText("Tela de cadastro");
+        jBNavCadastro.addActionListener(this::jBNavCadastroActionPerformed);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jBCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(641, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPPainelNavLayout = new javax.swing.GroupLayout(jPPainelNav);
+        jPPainelNav.setLayout(jPPainelNavLayout);
+        jPPainelNavLayout.setHorizontalGroup(
+            jPPainelNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPPainelNavLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBNavCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jBCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(276, Short.MAX_VALUE))
+        jPPainelNavLayout.setVerticalGroup(
+            jPPainelNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPPainelNavLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(jBNavCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(322, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPPainelNav, java.awt.BorderLayout.LINE_START);
+
+        jPPainelConteudo.setLayout(new java.awt.CardLayout());
+        jPPainelConteudo.add(jPCadastroDeUsuario1, "cardUsuarios");
+
+        getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastroActionPerformed
-        
-    }//GEN-LAST:event_jBCadastroActionPerformed
+    private void jBNavCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNavCadastroActionPerformed
+        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
+        cl.show(jPPainelConteudo, "cardUsuarios");
+    }//GEN-LAST:event_jBNavCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,6 +110,9 @@ public class JFTelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBCadastro;
+    private javax.swing.JButton jBNavCadastro;
+    private br.com.mycompany.chaponibus.admin.view.JPCadastroDeUsuario jPCadastroDeUsuario1;
+    private javax.swing.JPanel jPPainelConteudo;
+    private javax.swing.JPanel jPPainelNav;
     // End of variables declaration//GEN-END:variables
 }
