@@ -4,6 +4,10 @@
  */
 package br.com.mycompany.chaponibus.admin.view;
 
+import java.awt.Frame;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author carlos62347296
@@ -83,7 +87,14 @@ public class JPUsuarios extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarUsuarioActionPerformed
-        new JFCadastrarUsuario().setVisible(true);
+        Window janelaMae = SwingUtilities.getWindowAncestor(this);
+        
+        Frame framePai = (janelaMae instanceof Frame) ? (Frame) janelaMae : null;
+        
+        JDCadastrarUsuario telaCadastrarUsuario = new JDCadastrarUsuario(framePai, true);
+        
+        telaCadastrarUsuario.setLocationRelativeTo(janelaMae);
+        telaCadastrarUsuario.setVisible(true);
     }//GEN-LAST:event_jBCadastrarUsuarioActionPerformed
 
 
