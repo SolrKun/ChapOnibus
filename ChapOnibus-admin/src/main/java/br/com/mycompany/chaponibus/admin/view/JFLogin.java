@@ -200,7 +200,7 @@ public class JFLogin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Bem-vindo, " + validaUsuario.getUsername() + "!");
                     jBLogin.setIcon(null);
                     
-                    new JFTelaInicial().setVisible(true);
+                    new JFTelaEstrutural().setVisible(true);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Informe um usuário e senha válidos");

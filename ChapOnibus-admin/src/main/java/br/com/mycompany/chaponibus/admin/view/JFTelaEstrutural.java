@@ -12,21 +12,21 @@ import java.awt.CardLayout;
  *
  * @author ce498
  */
-public class JFTelaInicial extends javax.swing.JFrame {
+public class JFTelaEstrutural extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFTelaInicial.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFTelaEstrutural.class.getName());
     private Usuario atual;
 
     /**
      * Creates new form JFTelaInicial
      */
-    public JFTelaInicial() {
+    public JFTelaEstrutural() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.atual = Sessao.getUsuarioLogado();
         
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
-        cl.show(jPPainelConteudo, "cardTeste");
+        cl.show(jPPainelConteudo, "cardInicial");
         
         if (atual == null || !"admin".equalsIgnoreCase(atual.getRole())) {
             jBNavCadastro.setVisible(false);
@@ -44,13 +44,18 @@ public class JFTelaInicial extends javax.swing.JFrame {
 
         jPPainelNav = new javax.swing.JPanel();
         jBNavCadastro = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
-        jPCadastroDeUsuario1 = new br.com.mycompany.chaponibus.admin.view.JPCadastroDeUsuario();
+        jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
+        jPCadastroDeUsuario1 = new br.com.mycompany.chaponibus.admin.view.JPUsuarios();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jBNavCadastro.setText("Tela de cadastro");
+        jBNavCadastro.setText("Usuários");
         jBNavCadastro.addActionListener(this::jBNavCadastroActionPerformed);
+
+        jButton1.setText("CASA");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout jPPainelNavLayout = new javax.swing.GroupLayout(jPPainelNav);
         jPPainelNav.setLayout(jPPainelNavLayout);
@@ -60,18 +65,37 @@ public class JFTelaInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jBNavCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPainelNavLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(39, 39, 39))
         );
         jPPainelNavLayout.setVerticalGroup(
             jPPainelNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPPainelNavLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addGap(19, 19, 19)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jBNavCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPPainelNav, java.awt.BorderLayout.LINE_START);
 
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPTelaInicialLayout = new javax.swing.GroupLayout(jPTelaInicial);
+        jPTelaInicial.setLayout(jPTelaInicialLayout);
+        jPTelaInicialLayout.setHorizontalGroup(
+            jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        jPTelaInicialLayout.setVerticalGroup(
+            jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 467, Short.MAX_VALUE)
+        );
+
+        jPPainelConteudo.add(jPTelaInicial, "cardInicial");
         jPPainelConteudo.add(jPCadastroDeUsuario1, "cardUsuarios");
 
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
@@ -83,6 +107,11 @@ public class JFTelaInicial extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardUsuarios");
     }//GEN-LAST:event_jBNavCadastroActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
+        cl.show(jPPainelConteudo, "cardInicial");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,13 +135,15 @@ public class JFTelaInicial extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JFTelaInicial().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new JFTelaEstrutural().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBNavCadastro;
-    private br.com.mycompany.chaponibus.admin.view.JPCadastroDeUsuario jPCadastroDeUsuario1;
+    private javax.swing.JButton jButton1;
+    private br.com.mycompany.chaponibus.admin.view.JPUsuarios jPCadastroDeUsuario1;
     private javax.swing.JPanel jPPainelConteudo;
     private javax.swing.JPanel jPPainelNav;
+    private br.com.mycompany.chaponibus.admin.view.JPTelaInicial jPTelaInicial;
     // End of variables declaration//GEN-END:variables
 }
