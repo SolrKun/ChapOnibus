@@ -4,21 +4,53 @@
  */
 package br.com.mycompany.chaponibus.admin.view;
 
+import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
+import br.com.mycompany.chaponibus.admin.model.Usuario;
 import java.awt.Frame;
 import java.awt.Window;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author carlos62347296
  */
 public class JPUsuarios extends javax.swing.JPanel {
+    
+    private final UsuarioDAO usuarioDAO;
 
     /**
      * Creates new form JPCadastroDeUsuario
      */
     public JPUsuarios() {
         initComponents();
+        
+        this.usuarioDAO = new UsuarioDAO();
+        
+        preencherTabela();
+    }
+    
+    private void preencherTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) jTUsuarios.getModel();
+        
+        modelo.setNumRows(0);
+        
+        try {
+            List<Usuario> lista = usuarioDAO.listarTodos();
+        
+            for (Usuario u : lista) {
+                modelo.addRow(new Object[] {
+                    u.getUsername(),
+                    u.getRole()
+                });
+            }   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }
 
     /**
@@ -33,7 +65,7 @@ public class JPUsuarios extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jBCadastrarUsuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTUsuarios = new javax.swing.JTable();
 
         jLabel1.setText("USUÁRIOS");
 
@@ -44,41 +76,58 @@ public class JPUsuarios extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Usuario", "Papel"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        });
+        jTUsuarios.getTableHeader().setReorderingAllowed(false);
+        // Alinha o redimensionamento automático
+        jTUsuarios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+
+        // Coluna 1 (Papel) terá um tamanho fixo e controlado
+        jTUsuarios.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTUsuarios.getColumnModel().getColumn(1).setMaxWidth(200);
+        jTUsuarios.getColumnModel().getColumn(1).setMinWidth(100);
+
+        // Coluna 0 (Usuario) vai engolir todo o resto do espaço da tabela automaticamente
+        jTUsuarios.getColumnModel().getColumn(0).setPreferredWidth(450);
+
+        // Impede o usuário de arrastar e reordenar as colunas de lugar (ex: puxar "Papel" para antes de "Usuario")
+        jTUsuarios.getTableHeader().setReorderingAllowed(false);
+
+        // Impede o usuário de mudar a largura das colunas arrastando com o mouse
+        jTUsuarios.getTableHeader().setResizingAllowed(false);
+        jScrollPane1.setViewportView(jTUsuarios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jBCadastrarUsuario)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(jLabel1)))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBCadastrarUsuario)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(256, 256, 256))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBCadastrarUsuario)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -95,6 +144,8 @@ public class JPUsuarios extends javax.swing.JPanel {
         
         telaCadastrarUsuario.setLocationRelativeTo(janelaMae);
         telaCadastrarUsuario.setVisible(true);
+        
+        preencherTabela();
     }//GEN-LAST:event_jBCadastrarUsuarioActionPerformed
 
 
@@ -102,6 +153,6 @@ public class JPUsuarios extends javax.swing.JPanel {
     private javax.swing.JButton jBCadastrarUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTUsuarios;
     // End of variables declaration//GEN-END:variables
 }
