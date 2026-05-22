@@ -32,7 +32,7 @@ public class JFLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("ChapÔnibus - Login");
         this.usuarioDAO = new UsuarioDAO();
-        Usuario teste = new Usuario("teste", "1111", "teste");
+        Usuario teste = new Usuario("teste", "1111", "admin");
         usuarioDAO.salvar(teste);
         jTFUsuario.requestFocusInWindow();
     }
@@ -121,10 +121,10 @@ public class JFLogin extends javax.swing.JFrame {
                     .addComponent(jLUsuario)
                     .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLSenha)
-                    .addComponent(jPFSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(jBVerSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPFSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jBVerSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLSenha))
                 .addGap(18, 18, 18)
                 .addComponent(jBLogin)
                 .addGap(61, 61, 61))
@@ -200,7 +200,7 @@ public class JFLogin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Bem-vindo, " + validaUsuario.getUsername() + "!");
                     jBLogin.setIcon(null);
                     
-                    new JFTelaInicial().setVisible(true);
+                    new JFTelaEstrutural().setVisible(true);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Informe um usuário e senha válidos");
