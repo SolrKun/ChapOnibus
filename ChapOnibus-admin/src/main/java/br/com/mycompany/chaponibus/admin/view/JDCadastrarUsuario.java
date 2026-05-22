@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class JDCadastrarUsuario extends javax.swing.JDialog {
     
     private final UsuarioDAO usuarioDAO;
+    private Usuario usuarioEmEdicao = null;
 
     /**
      * Creates new form JDCadastrarUsuario
@@ -27,6 +28,17 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
         this.setResizable(false);
+    }
+    
+    public JDCadastrarUsuario(java.awt.Frame parent, boolean modal, Usuario usuario) {
+        this(parent, modal);
+        
+        this.usuarioEmEdicao = usuario;
+        jTFUsuario.setText(usuario.getUsername());
+        jCBPerfil.setSelectedItem(usuario.getRole());
+        
+        jTFUsuario.setEditable(false);
+        jBCadastrar.setText("Atualizar");
     }
 
     /**
@@ -107,23 +119,39 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Selecione um perfil de acesso", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        String username = jTFUsuario.getText().trim();
+        String perfil = jCBPerfil.getSelectedItem().toString();
+        
+        if (usuarioEmEdicao == null) {
+            Usuario novoUsuario = new Usuario(
+                username,
+                "123456",
+                perfil
+            );
+            
+            try {
+                usuarioDAO.salvar(novoUsuario);
 
-        Usuario novoUsuario = new Usuario(
-            jTFUsuario.getText().trim(),
-            "123456",
-            jCBPerfil.getSelectedItem().toString()
-        );
+                JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
-        try {
-            usuarioDAO.salvar(novoUsuario);
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            usuarioEmEdicao.setRole(perfil);
+            
+            try {
+                usuarioDAO.atualizar(usuarioEmEdicao);
 
-            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
-            this.dispose();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao atualizar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     /**

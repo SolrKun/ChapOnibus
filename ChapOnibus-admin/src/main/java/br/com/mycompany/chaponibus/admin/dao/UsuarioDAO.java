@@ -26,6 +26,18 @@ public class UsuarioDAO {
         return bancoEmMemoria;
     }
     
+    public void atualizar(Usuario usuario) {
+        for (int i = 0; i < bancoEmMemoria.size(); i++) {
+            Usuario u = bancoEmMemoria.get(i);
+
+            if (u.getUsername().equals(usuario.getUsername())) {
+                bancoEmMemoria.set(i, usuario);
+                return;
+            }
+        }
+        System.out.println("Usuário não encontrado para atualização.");
+    }
+    
     public void excluir(String username) {
         bancoEmMemoria.removeIf(u -> u.getUsername().equals(username));
     }

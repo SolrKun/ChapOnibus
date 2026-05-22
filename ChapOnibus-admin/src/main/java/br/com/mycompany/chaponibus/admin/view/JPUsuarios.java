@@ -35,6 +35,9 @@ public class JPUsuarios extends javax.swing.JPanel {
         
         jBExcluir.setVisible(false);
         jBEditar.setVisible(false);
+        
+        jBEditar.setToolTipText("Editar usuário selecionado");
+        jBExcluir.setToolTipText("Excluir usuário selecionado");
     }
     
     private void preencherTabela() {
@@ -57,9 +60,7 @@ public class JPUsuarios extends javax.swing.JPanel {
             this.ultimaLinhaSelecionada = -1;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        
+        }   
     }
 
     /**
@@ -134,6 +135,11 @@ public class JPUsuarios extends javax.swing.JPanel {
 
         jBEditar.setBackground(new java.awt.Color(0, 0, 153));
         jBEditar.setText("E");
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -221,6 +227,29 @@ public class JPUsuarios extends javax.swing.JPanel {
             ultimaLinhaSelecionada = linha;
         }
     }//GEN-LAST:event_jTUsuariosMouseClicked
+
+    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+        int linha = jTUsuarios.getSelectedRow();
+        
+        if (linha != -1) {
+            String username = jTUsuarios.getValueAt(linha, 0).toString();
+            
+            Usuario usuario = usuarioDAO.procurarUsuario(username);
+            
+            if (usuario != null) {
+                Window janelaMae = SwingUtilities.getWindowAncestor(this);
+                Frame framePai = (janelaMae instanceof Frame) ? (Frame) janelaMae : null;
+
+                JDCadastrarUsuario telaEditarUsuario = new JDCadastrarUsuario(framePai, true, usuario);
+                telaEditarUsuario.setLocationRelativeTo(janelaMae);
+                telaEditarUsuario.setVisible(true);
+
+                preencherTabela();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro: Nenhum usuário encontrado ou selecionado", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jBEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
