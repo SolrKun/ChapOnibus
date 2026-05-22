@@ -25,6 +25,19 @@ public class UsuarioDAO {
     public List<Usuario> listarTodos() {
         return bancoEmMemoria;
     }
+    
+    public void excluir(String username) {
+        bancoEmMemoria.removeIf(u -> u.getUsername().equals(username));
+    }
+    
+    public Usuario procurarUsuario(String username) {
+        for (Usuario u : bancoEmMemoria) {
+            if (u.getUsername().equals(username)) {
+                return u;
+            }
+        }
+        return null;
+    }
 
     // Método para simular o SELECT com WHERE (útil para o Login)
     public Usuario validarLogin(String username, String senha) {

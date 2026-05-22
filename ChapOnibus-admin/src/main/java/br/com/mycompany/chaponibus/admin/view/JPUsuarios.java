@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 public class JPUsuarios extends javax.swing.JPanel {
     
     private final UsuarioDAO usuarioDAO;
+    
+    int ultimaLinhaSelecionada = -1; 
 
     /**
      * Creates new form JPCadastroDeUsuario
@@ -30,6 +32,9 @@ public class JPUsuarios extends javax.swing.JPanel {
         this.usuarioDAO = new UsuarioDAO();
         
         preencherTabela();
+        
+        jBExcluir.setVisible(false);
+        jBEditar.setVisible(false);
     }
     
     private void preencherTabela() {
@@ -45,7 +50,11 @@ public class JPUsuarios extends javax.swing.JPanel {
                     u.getUsername(),
                     u.getRole()
                 });
-            }   
+            }
+            
+            jBExcluir.setVisible(false);
+            jBEditar.setVisible(false);
+            this.ultimaLinhaSelecionada = -1;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -66,6 +75,8 @@ public class JPUsuarios extends javax.swing.JPanel {
         jBCadastrarUsuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTUsuarios = new javax.swing.JTable();
+        jBExcluir = new javax.swing.JButton();
+        jBEditar = new javax.swing.JButton();
 
         jLabel1.setText("USUÁRIOS");
 
@@ -105,7 +116,24 @@ public class JPUsuarios extends javax.swing.JPanel {
 
         // Impede o usuário de mudar a largura das colunas arrastando com o mouse
         jTUsuarios.getTableHeader().setResizingAllowed(false);
+        jTUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTUsuarios);
+
+        jBExcluir.setBackground(new java.awt.Color(204, 0, 0));
+        jBExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        jBExcluir.setText("A");
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
+
+        jBEditar.setBackground(new java.awt.Color(0, 0, 153));
+        jBEditar.setText("E");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -113,8 +141,13 @@ public class JPUsuarios extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBCadastrarUsuario)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBCadastrarUsuario))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -128,7 +161,10 @@ public class JPUsuarios extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBCadastrarUsuario)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCadastrarUsuario)
+                    .addComponent(jBExcluir)
+                    .addComponent(jBEditar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -148,9 +184,49 @@ public class JPUsuarios extends javax.swing.JPanel {
         preencherTabela();
     }//GEN-LAST:event_jBCadastrarUsuarioActionPerformed
 
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        int linha = jTUsuarios.getSelectedRow();
+        if (linha != -1) {
+            String username = jTUsuarios.getValueAt(linha, 0).toString();
+            
+            int confirmacao = JOptionPane.showConfirmDialog(this, 
+                    "Deseja realmente excluir o usuário " + username + "?",
+                    "", JOptionPane.YES_NO_OPTION);
+            
+            if (confirmacao == JOptionPane.YES_OPTION) {
+                usuarioDAO.excluir(username);
+                preencherTabela();
+            }
+        }
+    }//GEN-LAST:event_jBExcluirActionPerformed
+
+    private void jTUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuariosMouseClicked
+        int linha = jTUsuarios.getSelectedRow();
+        
+        if (linha == -1) {
+            jBExcluir.setVisible(false);
+            jBEditar.setVisible(false);
+            ultimaLinhaSelecionada = -1;
+            return;
+        }
+        
+        if (linha == ultimaLinhaSelecionada) {
+            jBExcluir.setVisible(false);
+            jBEditar.setVisible(false);
+            jTUsuarios.clearSelection(); 
+            ultimaLinhaSelecionada = -1;
+        } else {
+            jBExcluir.setVisible(true);
+            jBEditar.setVisible(true);
+            ultimaLinhaSelecionada = linha;
+        }
+    }//GEN-LAST:event_jTUsuariosMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarUsuario;
+    private javax.swing.JButton jBEditar;
+    private javax.swing.JButton jBExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTUsuarios;
