@@ -10,5 +10,12 @@
         <maven.compiler.release>17</maven.compiler.release>
         <exec.mainClass>br.com.mycompany.chaponibus.ChapOnibus</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+        </dependency>
+    </dependencies>
     <name>ChapOnibus-app</name>
 </project>
