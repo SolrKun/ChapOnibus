@@ -134,6 +134,7 @@ public class JPUsuarios extends javax.swing.JPanel {
         });
 
         jBEditar.setBackground(new java.awt.Color(0, 0, 153));
+        jBEditar.setForeground(new java.awt.Color(255, 255, 255));
         jBEditar.setText("✏");
         jBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
