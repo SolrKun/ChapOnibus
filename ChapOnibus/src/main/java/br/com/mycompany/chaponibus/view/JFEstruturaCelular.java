@@ -23,8 +23,22 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         
+        jPPainelConteudo.removeAll();
+        jPPainelConteudo.setLayout(new java.awt.CardLayout());
+        
+        cardLogin = new br.com.mycompany.chaponibus.view.screens.JPLogin();
+        cardMapa = new br.com.mycompany.chaponibus.view.screens.JPMapa();
+        cardPerfil = new br.com.mycompany.chaponibus.view.screens.JPPerfil();
+        
+        jPPainelConteudo.add(cardLogin, "cardLogin");
+        jPPainelConteudo.add(cardMapa, "cardMapa");
+        jPPainelConteudo.add(cardPerfil, "cardPerfil");
+        
+        this.getContentPane().setLayout(new java.awt.BorderLayout());
+        this.getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
+        
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
-        cl.show(jPPainelConteudo, "cardLogin");
+        cl.show(jPPainelConteudo, "cardMapa");
     }
 
     /**
@@ -36,26 +50,12 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPPainelNav = new javax.swing.JPanel();
         jPPainelConteudo = new javax.swing.JPanel();
         cardLogin = new br.com.mycompany.chaponibus.view.screens.JPLogin();
         cardMapa = new br.com.mycompany.chaponibus.view.screens.JPMapa();
         cardPerfil = new br.com.mycompany.chaponibus.view.screens.JPPerfil();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jPPainelNavLayout = new javax.swing.GroupLayout(jPPainelNav);
-        jPPainelNav.setLayout(jPPainelNavLayout);
-        jPPainelNavLayout.setHorizontalGroup(
-            jPPainelNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-        jPPainelNavLayout.setVerticalGroup(
-            jPPainelNavLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPPainelNav, java.awt.BorderLayout.PAGE_END);
 
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
 
@@ -67,7 +67,7 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         );
         cardLoginLayout.setVerticalGroup(
             cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
 
         jPPainelConteudo.add(cardLogin, "card2");
@@ -80,7 +80,7 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         );
         cardMapaLayout.setVerticalGroup(
             cardMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
 
         jPPainelConteudo.add(cardMapa, "card3");
@@ -93,7 +93,7 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         );
         cardPerfilLayout.setVerticalGroup(
             cardPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
 
         jPPainelConteudo.add(cardPerfil, "card4");
@@ -133,6 +133,5 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     private br.com.mycompany.chaponibus.view.screens.JPMapa cardMapa;
     private br.com.mycompany.chaponibus.view.screens.JPPerfil cardPerfil;
     private javax.swing.JPanel jPPainelConteudo;
-    private javax.swing.JPanel jPPainelNav;
     // End of variables declaration//GEN-END:variables
 }
