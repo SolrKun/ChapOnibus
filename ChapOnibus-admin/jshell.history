@@ -1,0 +1,2 @@
+EXPRESSION#>--enable-native-access=ALL-UNNAMED
+EXPRESSION#>java --enable-native-access=ALL-UNNAMED
