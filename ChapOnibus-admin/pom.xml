@@ -10,4 +10,12 @@
         <maven.compiler.release>17</maven.compiler.release>
         <exec.mainClass>br.com.mycompany.chaponibus.admin.ChapOnibusAdmin</exec.mainClass>
     </properties>
+    
+     <dependencies>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+    </dependencies>
 </project>
