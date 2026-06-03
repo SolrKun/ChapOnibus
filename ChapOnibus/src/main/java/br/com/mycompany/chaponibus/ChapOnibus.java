@@ -4,6 +4,8 @@
 
 package br.com.mycompany.chaponibus;
 
+import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
+
 /**
  *
  * @author ce498
@@ -11,6 +13,6 @@ package br.com.mycompany.chaponibus;
 public class ChapOnibus {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new JFEstruturaCelular().setVisible(true);
     }
 }

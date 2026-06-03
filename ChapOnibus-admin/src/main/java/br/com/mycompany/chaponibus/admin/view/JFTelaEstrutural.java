@@ -28,7 +28,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardInicial");
         
-        if (atual == null || !"admin".equalsIgnoreCase(atual.getRole())) {
+        if (atual == null || !"Super Administrador".equalsIgnoreCase(atual.getRole())) {
             jBNavCadastro.setVisible(false);
         }
     }
@@ -104,6 +104,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNavCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNavCadastroActionPerformed
+        jPCadastroDeUsuario1.preencherTabela();
+        
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardUsuarios");
     }//GEN-LAST:event_jBNavCadastroActionPerformed
