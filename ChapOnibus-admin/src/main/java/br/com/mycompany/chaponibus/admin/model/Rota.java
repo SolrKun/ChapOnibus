@@ -1,4 +1,4 @@
-package br.com.chaponibus.model;
+package br.com.mycompany.chaponibus.admin.model;
 
 public class Rota {
 
