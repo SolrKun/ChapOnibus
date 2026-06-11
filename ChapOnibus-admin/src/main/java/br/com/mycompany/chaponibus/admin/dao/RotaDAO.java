@@ -1,7 +1,7 @@
-package br.com.chaponibus.dao;
+package br.com.mycompany.chaponibus.admin.dao;
 
-import br.com.chaponibus.connection.Conexao;
-import br.com.chaponibus.model.Rota;
+import br.com.mycompany.chaponibus.admin.util.ConexaoBanco;
+import br.com.mycompany.chaponibus.admin.model.Rota;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
