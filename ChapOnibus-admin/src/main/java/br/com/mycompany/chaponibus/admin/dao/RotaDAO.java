@@ -19,7 +19,7 @@ public class RotaDAO {
             "VALUES (?, ?, ?, ?)";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
@@ -50,7 +50,7 @@ public class RotaDAO {
             "WHERE id_rota=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
@@ -75,7 +75,7 @@ public class RotaDAO {
             "WHERE id_rota=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
@@ -98,7 +98,7 @@ public class RotaDAO {
             "ORDER BY nome_rota";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ) {
@@ -140,7 +140,7 @@ public class RotaDAO {
             "WHERE id_rota=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 

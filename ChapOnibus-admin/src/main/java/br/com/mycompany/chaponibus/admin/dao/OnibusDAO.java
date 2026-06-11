@@ -17,7 +17,7 @@ public class OnibusDAO {
             "VALUES (?, ?, ?)";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
@@ -45,7 +45,7 @@ public class OnibusDAO {
             "ORDER BY placa";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ) {
@@ -77,7 +77,7 @@ public class OnibusDAO {
             "WHERE id_onibus=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 
@@ -99,7 +99,7 @@ public class OnibusDAO {
             "DELETE FROM onibus WHERE id_onibus=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
 

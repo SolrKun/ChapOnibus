@@ -17,7 +17,7 @@ public class PontoOnibusDAO {
         "VALUES (?, ?, ?, ?)";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ){
 
@@ -45,7 +45,7 @@ public class PontoOnibusDAO {
         "WHERE id_ponto=?";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ){
 
@@ -69,7 +69,7 @@ public class PontoOnibusDAO {
         "DELETE FROM ponto_onibus WHERE id_ponto=?";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ){
 
@@ -91,7 +91,7 @@ public class PontoOnibusDAO {
         "SELECT * FROM ponto_onibus ORDER BY nome_ponto";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ){
@@ -132,7 +132,7 @@ public class PontoOnibusDAO {
         "SELECT * FROM ponto_onibus WHERE id_ponto = ?";
 
     try (
-        Connection conn = Conexao.conectar();
+        Connection conn = ConexaoBanco.conectar();
         PreparedStatement stmt =
                 conn.prepareStatement(sql)
     ) {

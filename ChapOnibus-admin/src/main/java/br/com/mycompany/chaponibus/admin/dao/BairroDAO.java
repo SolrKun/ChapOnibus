@@ -16,7 +16,7 @@ public class BairroDAO {
         "VALUES (?, ?)";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ){
 
@@ -40,7 +40,7 @@ public class BairroDAO {
         "WHERE id_bairro=?";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ){
 
@@ -62,7 +62,7 @@ public class BairroDAO {
         "DELETE FROM bairro WHERE id_bairro=?";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ){
 
@@ -82,7 +82,7 @@ public class BairroDAO {
         "SELECT * FROM bairro WHERE id_bairro=?";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ){
 
@@ -124,7 +124,7 @@ public class BairroDAO {
         "ORDER BY nome_bairro";
 
         try(
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql);
             ResultSet rs =

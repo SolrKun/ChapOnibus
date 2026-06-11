@@ -20,7 +20,7 @@ public class HorarioDAO {
                 "VALUES (?, ?)";
 
         try (
-                Connection conn = Conexao.conectar();
+                Connection conn = ConexaoBanco.conectar();
                 PreparedStatement stmt =
                         conn.prepareStatement(sql)
         ) {
@@ -51,7 +51,7 @@ public class HorarioDAO {
                 "WHERE id_horario=?";
 
         try (
-                Connection conn = Conexao.conectar();
+                Connection conn = ConexaoBanco.conectar();
                 PreparedStatement stmt =
                         conn.prepareStatement(sql)
         ) {
@@ -80,7 +80,7 @@ public class HorarioDAO {
                 "WHERE id_horario=?";
 
         try (
-                Connection conn = Conexao.conectar();
+                Connection conn = ConexaoBanco.conectar();
                 PreparedStatement stmt =
                         conn.prepareStatement(sql)
         ) {
@@ -105,7 +105,7 @@ public class HorarioDAO {
                 "ORDER BY hora_saida";
 
         try (
-                Connection conn = Conexao.conectar();
+                Connection conn = ConexaoBanco.conectar();
                 PreparedStatement stmt =
                         conn.prepareStatement(sql);
                 ResultSet rs =
@@ -143,7 +143,7 @@ public class HorarioDAO {
                 "WHERE id_horario=?";
 
         try (
-                Connection conn = Conexao.conectar();
+                Connection conn = ConexaoBanco.conectar();
                 PreparedStatement stmt =
                         conn.prepareStatement(sql)
         ) {

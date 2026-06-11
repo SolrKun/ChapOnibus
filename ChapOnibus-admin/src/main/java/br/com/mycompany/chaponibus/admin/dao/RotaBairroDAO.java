@@ -19,7 +19,7 @@ public class RotaBairroDAO {
             "VALUES (?,?)";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql)
         ) {
@@ -44,7 +44,7 @@ public class RotaBairroDAO {
             "AND id_bairro=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql)
         ) {
@@ -69,7 +69,7 @@ public class RotaBairroDAO {
             "SELECT * FROM rota_bairro";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql);
             ResultSet rs =

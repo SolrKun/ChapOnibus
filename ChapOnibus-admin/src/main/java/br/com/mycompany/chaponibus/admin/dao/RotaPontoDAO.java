@@ -19,7 +19,7 @@ public class RotaPontoDAO {
         "VALUES (?, ?, ?)";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql)
         ) {
@@ -48,7 +48,7 @@ public class RotaPontoDAO {
         "AND id_ponto=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql)
         ) {
@@ -74,7 +74,7 @@ public class RotaPontoDAO {
         "AND id_ponto=?";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql)
         ) {
@@ -100,7 +100,7 @@ public class RotaPontoDAO {
         "ORDER BY id_rota, ordem_ponto";
 
         try (
-            Connection conn = Conexao.conectar();
+            Connection conn = ConexaoBanco.conectar();
             PreparedStatement stmt =
                     conn.prepareStatement(sql);
             ResultSet rs =

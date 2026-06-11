@@ -105,13 +105,6 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Component class="br.com.mycompany.chaponibus.admin.view.JPUsuarios" name="jPCadastroDeUsuario1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="cardUsuarios"/>
-            </Constraint>
-          </Constraints>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
