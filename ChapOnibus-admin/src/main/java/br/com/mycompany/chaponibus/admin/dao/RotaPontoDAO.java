@@ -1,6 +1,6 @@
 package br.com.mycompany.chaponibus.admin.dao;
 
-import br.com.mycompany.chaponibus.admin.until.Conexao;
+import br.com.mycompany.chaponibus.admin.util.ConexaoBanco;
 import br.com.mycompany.chaponibus.admin.model.RotaPonto;
 
 import java.sql.Connection;
