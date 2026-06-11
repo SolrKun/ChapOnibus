@@ -1,6 +1,6 @@
 package br.com.mycompany.chaponibus.admn.dao;
 
-import br.com.mycompany.chaponibus.admin.connection.Conexao;
+import br.com.mycompany.chaponibus.admin.utl.ConexaoBanco;
 import br.com.mycompany.chaponibus.admin.model.Horario;
 
 import java.sql.Connection;
