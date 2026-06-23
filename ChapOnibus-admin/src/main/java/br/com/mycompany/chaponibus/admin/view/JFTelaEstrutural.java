@@ -28,7 +28,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardInicial");
         
-        if (atual == null || !"admin".equalsIgnoreCase(atual.getRole())) {
+        if (atual == null || !"Super Administrador".equalsIgnoreCase(atual.getRole())) {
             jBNavCadastro.setVisible(false);
         }
     }
@@ -47,7 +47,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
         jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
-        jPCadastroDeUsuario1 = new br.com.mycompany.chaponibus.admin.view.JPUsuarios();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,7 +95,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         );
 
         jPPainelConteudo.add(jPTelaInicial, "cardInicial");
-        jPPainelConteudo.add(jPCadastroDeUsuario1, "cardUsuarios");
 
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
 
@@ -104,6 +102,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNavCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNavCadastroActionPerformed
+//        jPCadastroDeUsuario1.preencherTabela();
+        
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardUsuarios");
     }//GEN-LAST:event_jBNavCadastroActionPerformed
@@ -141,7 +141,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBNavCadastro;
     private javax.swing.JButton jButton1;
-    private br.com.mycompany.chaponibus.admin.view.JPUsuarios jPCadastroDeUsuario1;
     private javax.swing.JPanel jPPainelConteudo;
     private javax.swing.JPanel jPPainelNav;
     private br.com.mycompany.chaponibus.admin.view.JPTelaInicial jPTelaInicial;

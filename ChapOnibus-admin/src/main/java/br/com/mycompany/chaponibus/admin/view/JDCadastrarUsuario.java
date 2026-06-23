@@ -16,6 +16,8 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
     
     private final UsuarioDAO usuarioDAO;
     private Usuario usuarioEmEdicao = null;
+    
+    private boolean salvouComSucesso = false;
 
     /**
      * Creates new form JDCadastrarUsuario
@@ -28,6 +30,7 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
         this.setResizable(false);
+        this.setLocationRelativeTo(parent);
     }
     
     public JDCadastrarUsuario(java.awt.Frame parent, boolean modal, Usuario usuario) {
@@ -40,7 +43,11 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
         jTFUsuario.setEditable(false);
         jBCadastrar.setText("Atualizar");
     }
-
+    
+    public boolean isSalvouComSucesso() {
+        return salvouComSucesso;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,7 +69,7 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
 
         jLPerfil.setText("Perfil:");
 
-        jCBPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuário padrão", "Administrador" }));
+        jCBPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Super Administrador" }));
 
         jBCadastrar.setText("Cadastrar");
         jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +131,12 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
         String perfil = jCBPerfil.getSelectedItem().toString();
         
         if (usuarioEmEdicao == null) {
+            if (usuarioDAO.procurarUsuario(username) != null) {
+                JOptionPane.showMessageDialog(this, "Esse nome de usuário já está cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                jTFUsuario.requestFocus();
+                return;
+            }
+            
             Usuario novoUsuario = new Usuario(
                 username,
                 "123456",
@@ -135,6 +148,7 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
 
                 JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
+                this.salvouComSucesso = true;
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -143,10 +157,11 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
             usuarioEmEdicao.setRole(perfil);
             
             try {
-                usuarioDAO.atualizar(usuarioEmEdicao);
+                usuarioDAO.atualizar(usuarioEmEdicao, usuarioEmEdicao.getUsername());
 
                 JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-
+                
+                this.salvouComSucesso = true;
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro ao atualizar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

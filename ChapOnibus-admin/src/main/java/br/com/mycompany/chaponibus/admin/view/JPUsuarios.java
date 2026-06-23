@@ -40,7 +40,7 @@ public class JPUsuarios extends javax.swing.JPanel {
         jBExcluir.setToolTipText("Excluir usuário selecionado");
     }
     
-    private void preencherTabela() {
+    public void preencherTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTUsuarios.getModel();
         
         modelo.setNumRows(0);
@@ -57,6 +57,7 @@ public class JPUsuarios extends javax.swing.JPanel {
             
             jBExcluir.setVisible(false);
             jBEditar.setVisible(false);
+            jTUsuarios.clearSelection();
             this.ultimaLinhaSelecionada = -1;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar tabela: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -100,17 +101,16 @@ public class JPUsuarios extends javax.swing.JPanel {
                 return false;
             }
         });
+        jTUsuarios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTUsuarios.getTableHeader().setReorderingAllowed(false);
         // Alinha o redimensionamento automático
-        jTUsuarios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        jTUsuarios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         // Coluna 1 (Papel) terá um tamanho fixo e controlado
         jTUsuarios.getColumnModel().getColumn(1).setPreferredWidth(150);
-        jTUsuarios.getColumnModel().getColumn(1).setMaxWidth(200);
-        jTUsuarios.getColumnModel().getColumn(1).setMinWidth(100);
 
         // Coluna 0 (Usuario) vai engolir todo o resto do espaço da tabela automaticamente
-        jTUsuarios.getColumnModel().getColumn(0).setPreferredWidth(450);
+        jTUsuarios.getColumnModel().getColumn(0).setPreferredWidth(300);
 
         // Impede o usuário de arrastar e reordenar as colunas de lugar (ex: puxar "Papel" para antes de "Usuario")
         jTUsuarios.getTableHeader().setReorderingAllowed(false);
@@ -126,7 +126,7 @@ public class JPUsuarios extends javax.swing.JPanel {
 
         jBExcluir.setBackground(new java.awt.Color(204, 0, 0));
         jBExcluir.setForeground(new java.awt.Color(255, 255, 255));
-        jBExcluir.setText("A");
+        jBExcluir.setText("✖");
         jBExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluirActionPerformed(evt);
@@ -134,7 +134,8 @@ public class JPUsuarios extends javax.swing.JPanel {
         });
 
         jBEditar.setBackground(new java.awt.Color(0, 0, 153));
-        jBEditar.setText("E");
+        jBEditar.setForeground(new java.awt.Color(255, 255, 255));
+        jBEditar.setText("✏");
         jBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEditarActionPerformed(evt);
@@ -147,14 +148,14 @@ public class JPUsuarios extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBCadastrarUsuario))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBCadastrarUsuario)))
                 .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,7 +188,9 @@ public class JPUsuarios extends javax.swing.JPanel {
         telaCadastrarUsuario.setLocationRelativeTo(janelaMae);
         telaCadastrarUsuario.setVisible(true);
         
-        preencherTabela();
+        if (telaCadastrarUsuario.isSalvouComSucesso()) {
+            preencherTabela();
+        }
     }//GEN-LAST:event_jBCadastrarUsuarioActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
@@ -200,8 +203,13 @@ public class JPUsuarios extends javax.swing.JPanel {
                     "", JOptionPane.YES_NO_OPTION);
             
             if (confirmacao == JOptionPane.YES_OPTION) {
-                usuarioDAO.excluir(username);
-                preencherTabela();
+                try {
+                    usuarioDAO.excluir(username);
+                    JOptionPane.showMessageDialog(this, "Usuário excluído com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    preencherTabela();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Erro ao excluir usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
@@ -213,6 +221,11 @@ public class JPUsuarios extends javax.swing.JPanel {
             jBExcluir.setVisible(false);
             jBEditar.setVisible(false);
             ultimaLinhaSelecionada = -1;
+            return;
+        }
+        
+        if (evt.getClickCount() == 2) {
+            jBEditarActionPerformed(null);
             return;
         }
         
@@ -244,7 +257,9 @@ public class JPUsuarios extends javax.swing.JPanel {
                 telaEditarUsuario.setLocationRelativeTo(janelaMae);
                 telaEditarUsuario.setVisible(true);
 
-                preencherTabela();
+                if (telaEditarUsuario.isSalvouComSucesso()) {
+                    preencherTabela();
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Erro: Nenhum usuário encontrado ou selecionado", "Erro", JOptionPane.ERROR_MESSAGE);
             }

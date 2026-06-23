@@ -40,8 +40,6 @@ public class JFLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("ChapÔnibus - Login");
         this.usuarioDAO = new UsuarioDAO();
-        Usuario teste = new Usuario("teste", "1111", "admin");
-        usuarioDAO.salvar(teste);
         jTFUsuario.requestFocusInWindow();
         jBLogin.setBackground(new Color(50,50,134));
         jBLogin.setForeground(Color.WHITE);
@@ -200,6 +198,7 @@ public class JFLogin extends javax.swing.JFrame {
         }
 
         jPFSenha.requestFocus();
+        jPFSenha.setCaretPosition(jPFSenha.getPassword().length);
     }//GEN-LAST:event_jBVerSenhaActionPerformed
 
     private void jPFSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFSenhaActionPerformed
