@@ -4,17 +4,23 @@
  */
 package br.com.mycompany.chaponibus.view.screens;
 
+import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
+
 /**
  *
  * @author ce498
  */
 public class JPLogin extends javax.swing.JPanel {
-
-    /**
-     * Creates new form JPLogin
-     */
-    public JPLogin() {
+    
+    private JFEstruturaCelular telaPrincipal;
+    
+    public JPLogin(JFEstruturaCelular tela) {
+        this.telaPrincipal = tela;
         initComponents();
+        
+        this.setBackground(new java.awt.Color(255, 165, 0));
+        
+        jPCardBranco.putClientProperty("FlatLaf.style", "arc: 30");
     }
 
     /**
@@ -25,20 +31,52 @@ public class JPLogin extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPCardBranco = new javax.swing.JPanel();
+        jPCabecalho = new javax.swing.JPanel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPCardBranco.setBackground(new java.awt.Color(245, 245, 245));
+        jPCardBranco.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPCardBranco.setEnabled(false);
+        jPCardBranco.setPreferredSize(new java.awt.Dimension(375, 600));
+
+        javax.swing.GroupLayout jPCardBrancoLayout = new javax.swing.GroupLayout(jPCardBranco);
+        jPCardBranco.setLayout(jPCardBrancoLayout);
+        jPCardBrancoLayout.setHorizontalGroup(
+            jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 375, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPCardBrancoLayout.setVerticalGroup(
+            jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        add(jPCardBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 375, -1));
+        jPCardBranco.getAccessibleContext().setAccessibleDescription("");
+
+        jPCabecalho.setBackground(new java.awt.Color(255, 165, 0));
+        jPCabecalho.setPreferredSize(new java.awt.Dimension(375, 250));
+
+        javax.swing.GroupLayout jPCabecalhoLayout = new javax.swing.GroupLayout(jPCabecalho);
+        jPCabecalho.setLayout(jPCabecalhoLayout);
+        jPCabecalhoLayout.setHorizontalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 375, Short.MAX_VALUE)
+        );
+        jPCabecalhoLayout.setVerticalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+
+        add(jPCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 375, 200));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPCabecalho;
+    private javax.swing.JPanel jPCardBranco;
     // End of variables declaration//GEN-END:variables
 }

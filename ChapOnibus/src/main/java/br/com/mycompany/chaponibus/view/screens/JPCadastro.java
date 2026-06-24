@@ -8,12 +8,12 @@ package br.com.mycompany.chaponibus.view.screens;
  *
  * @author ce498
  */
-public class JPPerfil extends javax.swing.JPanel {
-    
+public class JPCadastro extends javax.swing.JPanel {
+
     /**
-     * Creates new form JPPerfil
+     * Creates new form JPCadastro
      */
-    public JPPerfil() {
+    public JPCadastro() {
         initComponents();
     }
 
@@ -26,30 +26,19 @@ public class JPPerfil extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-
-        jButton1.setText("jButton1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jButton1)
-                .addContainerGap(163, Short.MAX_VALUE))
+            .addGap(0, 375, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(361, 361, 361)
-                .addComponent(jButton1)
-                .addContainerGap(416, Short.MAX_VALUE))
+            .addGap(0, 800, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,17 @@
             <artifactId>jxmapviewer2</artifactId>
             <version>2.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE290</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.7.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <name>ChapOnibus-app</name>
 </project>

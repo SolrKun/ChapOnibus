@@ -4,6 +4,8 @@
  */
 package br.com.mycompany.chaponibus.view;
 
+import br.com.mycompany.chaponibus.view.screens.JPLogin;
+import br.com.mycompany.chaponibus.view.screens.JPMapa;
 import java.awt.CardLayout;
 
 /**
@@ -12,35 +14,39 @@ import java.awt.CardLayout;
  */
 public class JFEstruturaCelular extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFEstruturaCelular.class.getName());
+
 
     /**
      * Creates new form JFEstruturaCelular
      */
     public JFEstruturaCelular() {
         initComponents();
+        
+        javax.swing.JPanel painelFoco = new javax.swing.JPanel();
+        this.add(painelFoco);
+        painelFoco.requestFocusInWindow();
+
         this.setSize(390, 800);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         
-        jPPainelConteudo.removeAll();
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
         
-        cardLogin = new br.com.mycompany.chaponibus.view.screens.JPLogin();
-        cardMapa = new br.com.mycompany.chaponibus.view.screens.JPMapa();
-        cardPerfil = new br.com.mycompany.chaponibus.view.screens.JPPerfil();
+        JPMapa meuMapa = new JPMapa(this);
+        JPLogin telaLogin = new JPLogin(this);
         
-        jPPainelConteudo.add(cardLogin, "cardLogin");
-        jPPainelConteudo.add(cardMapa, "cardMapa");
+        jPPainelConteudo.add(meuMapa, "cardMapa");
+        jPPainelConteudo.add(telaLogin, "cardLogin");
         jPPainelConteudo.add(cardPerfil, "cardPerfil");
+        jPPainelConteudo.add(cardCadastro, "cardCadastro");
         
-        this.getContentPane().setLayout(new java.awt.BorderLayout());
-        this.getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
-        
-        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
-        cl.show(jPPainelConteudo, "cardMapa");
+        mudarTela("cardMapa");
     }
-
+    
+    public void mudarTela(String nomeDaTela) {
+        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
+        cl.show(jPPainelConteudo, nomeDaTela);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,52 +57,40 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     private void initComponents() {
 
         jPPainelConteudo = new javax.swing.JPanel();
-        cardLogin = new br.com.mycompany.chaponibus.view.screens.JPLogin();
-        cardMapa = new br.com.mycompany.chaponibus.view.screens.JPMapa();
         cardPerfil = new br.com.mycompany.chaponibus.view.screens.JPPerfil();
+        cardCadastro = new br.com.mycompany.chaponibus.view.screens.JPCadastro();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPPainelConteudo.setMaximumSize(new java.awt.Dimension(390, 800));
+        jPPainelConteudo.setMinimumSize(new java.awt.Dimension(390, 800));
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout cardLoginLayout = new javax.swing.GroupLayout(cardLogin);
-        cardLogin.setLayout(cardLoginLayout);
-        cardLoginLayout.setHorizontalGroup(
-            cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-        cardLoginLayout.setVerticalGroup(
-            cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
-        );
-
-        jPPainelConteudo.add(cardLogin, "card2");
-
-        javax.swing.GroupLayout cardMapaLayout = new javax.swing.GroupLayout(cardMapa);
-        cardMapa.setLayout(cardMapaLayout);
-        cardMapaLayout.setHorizontalGroup(
-            cardMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-        cardMapaLayout.setVerticalGroup(
-            cardMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
-        );
-
-        jPPainelConteudo.add(cardMapa, "card3");
 
         javax.swing.GroupLayout cardPerfilLayout = new javax.swing.GroupLayout(cardPerfil);
         cardPerfil.setLayout(cardPerfilLayout);
         cardPerfilLayout.setHorizontalGroup(
             cardPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
         cardPerfilLayout.setVerticalGroup(
             cardPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
 
-        jPPainelConteudo.add(cardPerfil, "card4");
+        jPPainelConteudo.add(cardPerfil, "cardPerfil");
+
+        javax.swing.GroupLayout cardCadastroLayout = new javax.swing.GroupLayout(cardCadastro);
+        cardCadastro.setLayout(cardCadastroLayout);
+        cardCadastroLayout.setHorizontalGroup(
+            cardCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+        cardCadastroLayout.setVerticalGroup(
+            cardCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+
+        jPPainelConteudo.add(cardCadastro, "cardCadastro");
 
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
 
@@ -112,16 +106,16 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
@@ -129,8 +123,7 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.com.mycompany.chaponibus.view.screens.JPLogin cardLogin;
-    private br.com.mycompany.chaponibus.view.screens.JPMapa cardMapa;
+    private br.com.mycompany.chaponibus.view.screens.JPCadastro cardCadastro;
     private br.com.mycompany.chaponibus.view.screens.JPPerfil cardPerfil;
     private javax.swing.JPanel jPPainelConteudo;
     // End of variables declaration//GEN-END:variables
