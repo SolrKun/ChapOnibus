@@ -31,9 +31,12 @@ public class JPLogin extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPCardBranco = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jPCabecalho = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -43,15 +46,46 @@ public class JPLogin extends javax.swing.JPanel {
         jPCardBranco.setEnabled(false);
         jPCardBranco.setPreferredSize(new java.awt.Dimension(375, 600));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Usuario");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Senha");
+
+        jTextField2.setBackground(new java.awt.Color(245, 245, 245));
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField2.setToolTipText("");
+        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jPasswordField1.setText("jPasswordField1");
+
         javax.swing.GroupLayout jPCardBrancoLayout = new javax.swing.GroupLayout(jPCardBranco);
         jPCardBranco.setLayout(jPCardBrancoLayout);
         jPCardBrancoLayout.setHorizontalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField1))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPCardBrancoLayout.setVerticalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(356, Short.MAX_VALUE))
         );
 
         add(jPCardBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 375, -1));
@@ -76,7 +110,11 @@ public class JPLogin extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPCabecalho;
     private javax.swing.JPanel jPCardBranco;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

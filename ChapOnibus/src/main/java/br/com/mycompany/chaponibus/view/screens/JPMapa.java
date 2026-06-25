@@ -7,7 +7,6 @@ package br.com.mycompany.chaponibus.view.screens;
 import br.com.mycompany.chaponibus.util.Sessao;
 import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import javax.swing.event.MouseInputListener;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
