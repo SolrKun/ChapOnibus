@@ -46,6 +46,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBNavCadastro = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
+        jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
+        jPUsuarios1 = new br.com.mycompany.chaponibus.admin.view.JPUsuarios();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,12 +77,27 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBNavCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPPainelNav, java.awt.BorderLayout.LINE_START);
 
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPTelaInicialLayout = new javax.swing.GroupLayout(jPTelaInicial);
+        jPTelaInicial.setLayout(jPTelaInicialLayout);
+        jPTelaInicialLayout.setHorizontalGroup(
+            jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+        jPTelaInicialLayout.setVerticalGroup(
+            jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 478, Short.MAX_VALUE)
+        );
+
+        jPPainelConteudo.add(jPTelaInicial, "cardInicial");
+        jPPainelConteudo.add(jPUsuarios1, "cardUsuarios");
+
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -128,5 +145,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPPainelConteudo;
     private javax.swing.JPanel jPPainelNav;
+    private br.com.mycompany.chaponibus.admin.view.JPTelaInicial jPTelaInicial;
+    private br.com.mycompany.chaponibus.admin.view.JPUsuarios jPUsuarios1;
     // End of variables declaration//GEN-END:variables
 }
