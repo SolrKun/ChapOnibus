@@ -4,7 +4,7 @@
  */
 package br.com.mycompany.chaponibus.admin.view;
 
-import br.com.mycompany.chaponibus.admin.util.Sessao;
+import br.com.mycompany.chaponibus.admin.model.Sessao;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
 import java.awt.CardLayout;
 

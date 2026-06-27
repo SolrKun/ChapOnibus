@@ -17,11 +17,10 @@ import javax.swing.ImageIcon;
  */
 public class JFEstruturaCelular extends javax.swing.JFrame {
     
+    JPMapa meuMapa = new JPMapa(this);
+    JPLogin telaLogin = new JPLogin(this);
+    JPCadastro telaCadastro = new JPCadastro(this);
 
-
-    /**
-     * Creates new form JFEstruturaCelular
-     */
     public JFEstruturaCelular() {
         initComponents();
         
@@ -35,10 +34,6 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
         
-        JPMapa meuMapa = new JPMapa(this);
-        JPLogin telaLogin = new JPLogin(this);
-        JPCadastro telaCadastro = new JPCadastro(this);
-        
         jPPainelConteudo.add(meuMapa, "cardMapa");
         jPPainelConteudo.add(telaLogin, "cardLogin");
         jPPainelConteudo.add(cardPerfil, "cardPerfil");
@@ -50,6 +45,12 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     public void mudarTela(String nomeDaTela) {
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, nomeDaTela);
+        
+        if (nomeDaTela.equals("cardLogin")) {
+            telaLogin.reiniciarTela(); 
+        } else if (nomeDaTela.equals("cardCadastro")) {
+            telaCadastro.reiniciarTela();
+        }
     }
     
     public void showToast(java.awt.Window parent, String message, int r, int g, int b) {

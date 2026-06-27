@@ -5,7 +5,7 @@
 package br.com.mycompany.chaponibus.admin.view;
 
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
-import br.com.mycompany.chaponibus.admin.util.Sessao;
+import br.com.mycompany.chaponibus.admin.model.Sessao;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
 import static java.awt.EventQueue.invokeLater;
 import java.awt.Image;

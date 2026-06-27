@@ -6,6 +6,7 @@ package br.com.mycompany.chaponibus.view.screens;
 
 import br.com.mycompany.chaponibus.util.Sessao;
 import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
+import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.BorderLayout;
 import javax.swing.event.MouseInputListener;
 import org.jxmapviewer.JXMapViewer;
@@ -29,6 +30,8 @@ public class JPMapa extends javax.swing.JPanel {
     public JPMapa(JFEstruturaCelular tela) {        
         this.telaPrincipal = tela;
         initComponents();
+        
+        jBPerfil.putClientProperty("FlatLaf.style", "arc: 999");
         
         TileFactoryInfo info = new OSMTileFactoryInfo("OpenStreetMap", "https://tile.openstreetmap.org");
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
@@ -56,7 +59,6 @@ public class JPMapa extends javax.swing.JPanel {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPAbaSuperior = new javax.swing.JPanel();
         jBPerfil = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPAbaInferior = new javax.swing.JPanel();
         map = new javax.swing.JPanel();
 
@@ -64,6 +66,8 @@ public class JPMapa extends javax.swing.JPanel {
 
         jPAbaSuperior.setOpaque(false);
 
+        jBPerfil.setBackground(new java.awt.Color(21, 80, 150));
+        jBPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/mycompany/chaponibus/assets/perfil.png"))); // NOI18N
         jBPerfil.addActionListener(this::jBPerfilActionPerformed);
 
         javax.swing.GroupLayout jPAbaSuperiorLayout = new javax.swing.GroupLayout(jPAbaSuperior);
@@ -71,20 +75,16 @@ public class JPMapa extends javax.swing.JPanel {
         jPAbaSuperiorLayout.setHorizontalGroup(
             jPAbaSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAbaSuperiorLayout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(314, Short.MAX_VALUE)
                 .addComponent(jBPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap())
         );
         jPAbaSuperiorLayout.setVerticalGroup(
             jPAbaSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAbaSuperiorLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPAbaSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jBPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(jPAbaSuperior, javax.swing.JLayeredPane.PALETTE_LAYER);
@@ -139,10 +139,8 @@ public class JPMapa extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jBPerfilActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBPerfil;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPAbaInferior;
     private javax.swing.JPanel jPAbaSuperior;

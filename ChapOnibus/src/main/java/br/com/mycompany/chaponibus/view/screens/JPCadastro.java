@@ -53,6 +53,14 @@ public class JPCadastro extends javax.swing.JPanel {
         jBVoltar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
         jBVoltar.setIcon(telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/flecha.png", 32));
     }
+    
+    public void reiniciarTela() {
+        jTFUsuario.setText("");
+        jPFSenha.setText("");
+
+        jLAvisoUsuario.setVisible(false);
+        jLAvisoSenha.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
