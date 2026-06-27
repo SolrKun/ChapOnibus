@@ -4,9 +4,12 @@
  */
 package br.com.mycompany.chaponibus.view;
 
+import br.com.mycompany.chaponibus.view.screens.JPCadastro;
 import br.com.mycompany.chaponibus.view.screens.JPLogin;
 import br.com.mycompany.chaponibus.view.screens.JPMapa;
 import java.awt.CardLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -34,11 +37,12 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         
         JPMapa meuMapa = new JPMapa(this);
         JPLogin telaLogin = new JPLogin(this);
+        JPCadastro telaCadastro = new JPCadastro(this);
         
         jPPainelConteudo.add(meuMapa, "cardMapa");
         jPPainelConteudo.add(telaLogin, "cardLogin");
         jPPainelConteudo.add(cardPerfil, "cardPerfil");
-        jPPainelConteudo.add(cardCadastro, "cardCadastro");
+        jPPainelConteudo.add(telaCadastro, "cardCadastro");
         
         mudarTela("cardMapa");
     }
@@ -76,6 +80,13 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         toast.setVisible(true);
     }
     
+    public ImageIcon createIcon(String endereco, int tamanho) {
+        ImageIcon iconeOriginal = new ImageIcon(getClass().getResource(endereco));
+        Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(tamanho, tamanho, Image.SCALE_SMOOTH);
+        ImageIcon iconeUsuario = new ImageIcon(imagemRedimensionada);
+        return iconeUsuario;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,7 +98,6 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
 
         jPPainelConteudo = new javax.swing.JPanel();
         cardPerfil = new br.com.mycompany.chaponibus.view.screens.JPPerfil();
-        cardCadastro = new br.com.mycompany.chaponibus.view.screens.JPCadastro();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,19 +117,6 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         );
 
         jPPainelConteudo.add(cardPerfil, "cardPerfil");
-
-        javax.swing.GroupLayout cardCadastroLayout = new javax.swing.GroupLayout(cardCadastro);
-        cardCadastro.setLayout(cardCadastroLayout);
-        cardCadastroLayout.setHorizontalGroup(
-            cardCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-        cardCadastroLayout.setVerticalGroup(
-            cardCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-
-        jPPainelConteudo.add(cardCadastro, "cardCadastro");
 
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
 
@@ -152,7 +149,6 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.com.mycompany.chaponibus.view.screens.JPCadastro cardCadastro;
     private br.com.mycompany.chaponibus.view.screens.JPPerfil cardPerfil;
     private javax.swing.JPanel jPPainelConteudo;
     // End of variables declaration//GEN-END:variables

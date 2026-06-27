@@ -38,19 +38,19 @@ public class JPLogin extends javax.swing.JPanel {
         
         jPCardBranco.putClientProperty("FlatLaf.style", "arc: 30");
         
-        jTFUsuario.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/usuario.png", 16));
+        jTFUsuario.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/usuario.png", 16));
         jTFUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
         jTFUsuario.setOpaque(false);
         
         jPFSenha.putClientProperty(FlatClientProperties.STYLE, "showRevealButton: true;");
-        jPFSenha.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/chave.png", 16));
+        jPFSenha.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/chave.png", 16));
         jPFSenha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
         jPFSenha.setOpaque(false);
         
-        jBEsqueciSenha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        jBCriarConta.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
         
         jBVoltar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
-        jBVoltar.setIcon(createIcon("/br/com/mycompany/chaponibus/assets/flecha.png", 32));
+        jBVoltar.setIcon(telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/flecha.png", 32));
     }
 
     /**
@@ -68,7 +68,7 @@ public class JPLogin extends javax.swing.JPanel {
         jPFSenha = new javax.swing.JPasswordField();
         jTFUsuario = new javax.swing.JTextField();
         jBLogin = new javax.swing.JButton();
-        jBEsqueciSenha = new javax.swing.JButton();
+        jBCriarConta = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLAvisoUsuario = new javax.swing.JLabel();
         jLAvisoSenha = new javax.swing.JLabel();
@@ -84,7 +84,7 @@ public class JPLogin extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Usuario");
+        jLabel1.setText("Usuário");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -110,9 +110,10 @@ public class JPLogin extends javax.swing.JPanel {
         jBLogin.setText("Login");
         jBLogin.addActionListener(this::jBLoginActionPerformed);
 
-        jBEsqueciSenha.setBackground(new java.awt.Color(244, 247, 249));
-        jBEsqueciSenha.setForeground(new java.awt.Color(21, 80, 150));
-        jBEsqueciSenha.setText("Criar conta");
+        jBCriarConta.setBackground(new java.awt.Color(244, 247, 249));
+        jBCriarConta.setForeground(new java.awt.Color(21, 80, 150));
+        jBCriarConta.setText("Criar conta");
+        jBCriarConta.addActionListener(this::jBCriarContaActionPerformed);
 
         jLabel3.setText("Não tem uma conta?");
 
@@ -136,7 +137,7 @@ public class JPLogin extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBEsqueciSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBCriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
             .addGroup(jPCardBrancoLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -175,7 +176,7 @@ public class JPLogin extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jBEsqueciSenha))
+                    .addComponent(jBCriarConta))
                 .addContainerGap(213, Short.MAX_VALUE))
         );
 
@@ -209,13 +210,6 @@ public class JPLogin extends javax.swing.JPanel {
 
         add(jPCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 375, 200));
     }// </editor-fold>//GEN-END:initComponents
-
-    private ImageIcon createIcon(String endereco, int tamanho) {
-        ImageIcon iconeOriginal = new ImageIcon(getClass().getResource(endereco));
-        Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(tamanho, tamanho, Image.SCALE_SMOOTH);
-        ImageIcon iconeUsuario = new ImageIcon(imagemRedimensionada);
-        return iconeUsuario;
-    }
     
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
         if (jTFUsuario.getText().trim().isEmpty()) {
@@ -297,9 +291,13 @@ public class JPLogin extends javax.swing.JPanel {
         jLAvisoSenha.setVisible(false);
     }//GEN-LAST:event_jPFSenhaKeyTyped
 
+    private void jBCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCriarContaActionPerformed
+        telaPrincipal.mudarTela("cardCadastro");
+    }//GEN-LAST:event_jBCriarContaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBEsqueciSenha;
+    private javax.swing.JButton jBCriarConta;
     private javax.swing.JButton jBLogin;
     private javax.swing.JButton jBVoltar;
     private javax.swing.JLabel jLAvisoSenha;

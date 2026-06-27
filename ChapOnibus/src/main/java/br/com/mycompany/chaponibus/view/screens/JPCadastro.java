@@ -4,17 +4,54 @@
  */
 package br.com.mycompany.chaponibus.view.screens;
 
+import br.com.mycompany.chaponibus.dao.UsuarioDAO;
+import br.com.mycompany.chaponibus.model.Usuario;
+import br.com.mycompany.chaponibus.util.Sessao;
+import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
+import com.formdev.flatlaf.FlatClientProperties;
+import static java.awt.EventQueue.invokeLater;
+import java.awt.Image;
+import java.net.URL;
+import static java.util.logging.Level.WARNING;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ce498
  */
 public class JPCadastro extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JPCadastro
-     */
-    public JPCadastro() {
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JPLogin.class.getName());
+    private JFEstruturaCelular telaPrincipal;
+    private final UsuarioDAO usuarioDAO;
+    
+    public JPCadastro(JFEstruturaCelular tela) {
         initComponents();
+        
+        this.telaPrincipal = tela;
+        this.usuarioDAO = new UsuarioDAO();
+        
+        jLAvisoSenha.setVisible(false);
+        jLAvisoUsuario.setVisible(false);
+        
+        this.setBackground(new java.awt.Color(21,80,150));
+        
+        jPCardBranco.putClientProperty("FlatLaf.style", "arc: 30");
+        
+        jTFUsuario.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/usuario.png", 16));
+        jTFUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
+        jTFUsuario.setOpaque(false);
+        
+        jPFSenha.putClientProperty(FlatClientProperties.STYLE, "showRevealButton: true;");
+        jPFSenha.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/chave.png", 16));
+        jPFSenha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
+        jPFSenha.setOpaque(false);
+        
+        jBFazerLogin.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        
+        jBVoltar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        jBVoltar.setIcon(telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/flecha.png", 32));
     }
 
     /**
@@ -26,19 +63,270 @@ public class JPCadastro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+        jPCardBranco = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPFSenha = new javax.swing.JPasswordField();
+        jTFUsuario = new javax.swing.JTextField();
+        jBCadastrar = new javax.swing.JButton();
+        jBFazerLogin = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLAvisoUsuario = new javax.swing.JLabel();
+        jLAvisoSenha = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPCabecalho = new javax.swing.JPanel();
+        jBVoltar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPCardBranco.setBackground(new java.awt.Color(244, 247, 249));
+        jPCardBranco.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPCardBranco.setEnabled(false);
+        jPCardBranco.setPreferredSize(new java.awt.Dimension(375, 600));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Senha");
+
+        jPFSenha.addActionListener(this::jPFSenhaActionPerformed);
+        jPFSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPFSenhaKeyTyped(evt);
+            }
+        });
+
+        jTFUsuario.addActionListener(this::jTFUsuarioActionPerformed);
+        jTFUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFUsuarioKeyTyped(evt);
+            }
+        });
+
+        jBCadastrar.setBackground(new java.awt.Color(21, 80, 150));
+        jBCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jBCadastrar.setForeground(new java.awt.Color(244, 247, 249));
+        jBCadastrar.setText("Cadastrar");
+        jBCadastrar.addActionListener(this::jBCadastrarActionPerformed);
+
+        jBFazerLogin.setBackground(new java.awt.Color(244, 247, 249));
+        jBFazerLogin.setForeground(new java.awt.Color(21, 80, 150));
+        jBFazerLogin.setText("Fazer login");
+        jBFazerLogin.addActionListener(this::jBFazerLoginActionPerformed);
+
+        jLabel3.setText("Já possui conta?");
+
+        jLAvisoUsuario.setForeground(new java.awt.Color(255, 44, 44));
+        jLAvisoUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAvisoUsuario.setText("Informe um usuário");
+
+        jLAvisoSenha.setForeground(new java.awt.Color(255, 44, 44));
+        jLAvisoSenha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAvisoSenha.setText("Informe uma senha");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("Usuário");
+
+        javax.swing.GroupLayout jPCardBrancoLayout = new javax.swing.GroupLayout(jPCardBranco);
+        jPCardBranco.setLayout(jPCardBrancoLayout);
+        jPCardBrancoLayout.setHorizontalGroup(
+            jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                .addGap(0, 68, Short.MAX_VALUE)
+                .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(jLAvisoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBFazerLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPFSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                        .addComponent(jTFUsuario)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+        jPCardBrancoLayout.setVerticalGroup(
+            jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLAvisoUsuario)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLAvisoSenha)
+                .addGap(34, 34, 34)
+                .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jBFazerLogin))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
+
+        add(jPCardBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 375, -1));
+
+        jPCabecalho.setBackground(new java.awt.Color(21, 80, 150));
+        jPCabecalho.setPreferredSize(new java.awt.Dimension(375, 250));
+
+        jBVoltar.setBackground(new java.awt.Color(21, 80, 150));
+        jBVoltar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBVoltar.setForeground(new java.awt.Color(244, 247, 249));
+        jBVoltar.addActionListener(this::jBVoltarActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(242, 242, 242));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Cadastro de usuário");
+
+        javax.swing.GroupLayout jPCabecalhoLayout = new javax.swing.GroupLayout(jPCabecalho);
+        jPCabecalho.setLayout(jPCabecalhoLayout);
+        jPCabecalhoLayout.setHorizontalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+        );
+        jPCabecalhoLayout.setVerticalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+        );
+
+        add(jPCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 375, 200));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPFSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFSenhaActionPerformed
+        jLAvisoSenha.setVisible(false);
+    }//GEN-LAST:event_jPFSenhaActionPerformed
+
+    private void jPFSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPFSenhaKeyTyped
+        jLAvisoSenha.setVisible(false);
+    }//GEN-LAST:event_jPFSenhaKeyTyped
+
+    private void jTFUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUsuarioActionPerformed
+        jLAvisoUsuario.setVisible(false);
+    }//GEN-LAST:event_jTFUsuarioActionPerformed
+
+    private void jTFUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyTyped
+        jLAvisoUsuario.setVisible(false);
+    }//GEN-LAST:event_jTFUsuarioKeyTyped
+
+    private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
+        if (jTFUsuario.getText().trim().isEmpty()) {
+            jLAvisoUsuario.setVisible(true);
+            jTFUsuario.requestFocus();
+            return;
+        }
+
+        String senha = new String(jPFSenha.getPassword());
+        
+        if (senha.trim().isEmpty()) {
+            jLAvisoSenha.setVisible(true);
+            jPFSenha.requestFocus();
+            return;
+        }
+        
+        String username = jTFUsuario.getText().trim();
+        
+        if (usuarioDAO.procurarUsuario(username) != null) {
+            telaPrincipal.showToast(telaPrincipal, "Esse nome de usuário já está cadastrado", 255, 44, 44);
+            jTFUsuario.requestFocus();
+            return;
+        }
+
+        Usuario novoUsuario = new Usuario(
+            username,
+            senha,
+            "Usuário"
+        );
+        
+        try {
+            URL imgURL = getClass().getResource("/br/com/mycompany/chaponibus/assets/loading.gif");
+            if (imgURL != null) {
+                ImageIcon iconeOriginal = new ImageIcon(imgURL);
+                Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+                jBCadastrar.setIcon(new ImageIcon(imagemRedimensionada));
+            } else {
+                jBCadastrar.setText("Carregando...");
+            }
+        } catch (Exception e) {
+            logger.log(WARNING, "Não foi possível carregar o GIF de loading", e);
+        }
+        
+        new Thread(() -> {            
+                try {
+                    usuarioDAO.salvar(novoUsuario);
+                    Sessao.conectar(novoUsuario);
+                    
+                    invokeLater(() -> {
+                        telaPrincipal.showToast(telaPrincipal, "Conta criada com sucesso!", 21, 80, 150);
+
+                        jBCadastrar.setIcon(null);
+                        jTFUsuario.setText("");
+                        jPFSenha.setText("");
+                        telaPrincipal.mudarTela("cardMapa");
+                    });
+                } catch (Exception e) {
+                    javax.swing.SwingUtilities.invokeLater(() -> {
+                        jBCadastrar.setIcon(null);
+                        JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    });
+                }
+        }).start();
+    }//GEN-LAST:event_jBCadastrarActionPerformed
+
+    private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
+        jTFUsuario.setText("");
+        jPFSenha.setText("");
+        telaPrincipal.mudarTela("cardMapa");
+    }//GEN-LAST:event_jBVoltarActionPerformed
+
+    private void jBFazerLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFazerLoginActionPerformed
+        jTFUsuario.setText("");
+        jPFSenha.setText("");
+        telaPrincipal.mudarTela("cardLogin");
+    }//GEN-LAST:event_jBFazerLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCadastrar;
+    private javax.swing.JButton jBFazerLogin;
+    private javax.swing.JButton jBVoltar;
+    private javax.swing.JLabel jLAvisoSenha;
+    private javax.swing.JLabel jLAvisoUsuario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPCabecalho;
+    private javax.swing.JPanel jPCardBranco;
+    private javax.swing.JPasswordField jPFSenha;
+    private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
 }
