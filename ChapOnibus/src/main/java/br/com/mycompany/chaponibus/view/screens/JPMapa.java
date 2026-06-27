@@ -110,14 +110,14 @@ public class JPMapa extends javax.swing.JPanel {
         map.setLayout(mapLayout);
         mapLayout.setHorizontalGroup(
             mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
         mapLayout.setVerticalGroup(
             mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 800, Short.MAX_VALUE)
         );
 
-        jLayeredPane1.add(map, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 800));
+        jLayeredPane1.add(map, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 800));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

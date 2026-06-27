@@ -5,6 +5,9 @@
 package br.com.mycompany.chaponibus.view.screens;
 
 import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
+import com.formdev.flatlaf.FlatClientProperties;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 /**
  *
@@ -18,9 +21,21 @@ public class JPLogin extends javax.swing.JPanel {
         this.telaPrincipal = tela;
         initComponents();
         
-        this.setBackground(new java.awt.Color(255, 165, 0));
+        this.setBackground(new java.awt.Color(21,80,150));
         
         jPCardBranco.putClientProperty("FlatLaf.style", "arc: 30");
+        jPFSenha.putClientProperty(FlatClientProperties.STYLE, "showRevealButton: true;");
+        jTFUsuario.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/usuario.png", 16));
+        jPFSenha.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/chave.png", 16));
+        
+        jBEsqueciSenha.putClientProperty(FlatClientProperties.STYLE, 
+            "borderWidth: 0;" +                     // Remove a linha da borda
+            "focusWidth: 4;" +                      // Aumenta o tamanho do foco
+            "margin: 6,12,6,12;" +                // Aumenta o tamanho do hover (padding)
+            "hoverBackground: #2196F3;" +           // Cor de fundo ao passar o mouse
+            "hoverForeground: #FFFFFF;" +           // Cor do texto ao passar o mouse
+            "arc: 15"                               // Deixa os cantos arredondados (bônus!)
+        );
     }
 
     /**
@@ -35,13 +50,16 @@ public class JPLogin extends javax.swing.JPanel {
         jPCardBranco = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPFSenha = new javax.swing.JPasswordField();
+        jTFUsuario = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jBEsqueciSenha = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jPCabecalho = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPCardBranco.setBackground(new java.awt.Color(245, 245, 245));
+        jPCardBranco.setBackground(new java.awt.Color(244, 247, 249));
         jPCardBranco.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPCardBranco.setEnabled(false);
         jPCardBranco.setPreferredSize(new java.awt.Dimension(375, 600));
@@ -54,12 +72,16 @@ public class JPLogin extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Senha");
 
-        jTextField2.setBackground(new java.awt.Color(245, 245, 245));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setToolTipText("");
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton1.setBackground(new java.awt.Color(21, 80, 150));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Login");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
-        jPasswordField1.setText("jPasswordField1");
+        jBEsqueciSenha.setForeground(new java.awt.Color(21, 80, 150));
+        jBEsqueciSenha.setText("Criar conta");
+
+        jLabel3.setText("Não tem uma conta?");
 
         javax.swing.GroupLayout jPCardBrancoLayout = new javax.swing.GroupLayout(jPCardBranco);
         jPCardBranco.setLayout(jPCardBrancoLayout);
@@ -68,11 +90,21 @@ public class JPLogin extends javax.swing.JPanel {
             .addGroup(jPCardBrancoLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(jTFUsuario)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(jPFSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBEsqueciSenha)
+                .addGap(83, 83, 83))
         );
         jPCardBrancoLayout.setVerticalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,18 +112,24 @@ public class JPLogin extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBEsqueciSenha)
+                    .addComponent(jLabel3))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         add(jPCardBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 375, -1));
         jPCardBranco.getAccessibleContext().setAccessibleDescription("");
 
-        jPCabecalho.setBackground(new java.awt.Color(255, 165, 0));
+        jPCabecalho.setBackground(new java.awt.Color(21, 80, 150));
         jPCabecalho.setPreferredSize(new java.awt.Dimension(375, 250));
 
         javax.swing.GroupLayout jPCabecalhoLayout = new javax.swing.GroupLayout(jPCabecalho);
@@ -108,13 +146,27 @@ public class JPLogin extends javax.swing.JPanel {
         add(jPCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 375, 200));
     }// </editor-fold>//GEN-END:initComponents
 
+    private ImageIcon createIcon(String endereco, int tamanho) {
+        ImageIcon iconeOriginal = new ImageIcon(getClass().getResource(endereco));
+        Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(tamanho, tamanho, Image.SCALE_SMOOTH);
+        ImageIcon iconeUsuario = new ImageIcon(imagemRedimensionada);
+        return iconeUsuario;
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBEsqueciSenha;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPCabecalho;
     private javax.swing.JPanel jPCardBranco;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField jPFSenha;
+    private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
 }
