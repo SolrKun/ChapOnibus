@@ -4,10 +4,17 @@
  */
 package br.com.mycompany.chaponibus.view.screens;
 
+import br.com.mycompany.chaponibus.dao.UsuarioDAO;
+import br.com.mycompany.chaponibus.model.Usuario;
+import br.com.mycompany.chaponibus.util.Sessao;
 import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
 import com.formdev.flatlaf.FlatClientProperties;
+import static java.awt.EventQueue.invokeLater;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.net.URL;
+import static java.util.logging.Level.WARNING;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,27 +22,35 @@ import java.awt.Image;
  */
 public class JPLogin extends javax.swing.JPanel {
     
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JPLogin.class.getName());
     private JFEstruturaCelular telaPrincipal;
+    private final UsuarioDAO usuarioDAO;
     
     public JPLogin(JFEstruturaCelular tela) {
         this.telaPrincipal = tela;
+        this.usuarioDAO = new UsuarioDAO();
         initComponents();
+        
+        jLAvisoSenha.setVisible(false);
+        jLAvisoUsuario.setVisible(false);
         
         this.setBackground(new java.awt.Color(21,80,150));
         
         jPCardBranco.putClientProperty("FlatLaf.style", "arc: 30");
-        jPFSenha.putClientProperty(FlatClientProperties.STYLE, "showRevealButton: true;");
-        jTFUsuario.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/usuario.png", 16));
-        jPFSenha.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/chave.png", 16));
         
-        jBEsqueciSenha.putClientProperty(FlatClientProperties.STYLE, 
-            "borderWidth: 0;" +                     // Remove a linha da borda
-            "focusWidth: 4;" +                      // Aumenta o tamanho do foco
-            "margin: 6,12,6,12;" +                // Aumenta o tamanho do hover (padding)
-            "hoverBackground: #2196F3;" +           // Cor de fundo ao passar o mouse
-            "hoverForeground: #FFFFFF;" +           // Cor do texto ao passar o mouse
-            "arc: 15"                               // Deixa os cantos arredondados (bônus!)
-        );
+        jTFUsuario.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/usuario.png", 16));
+        jTFUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
+        jTFUsuario.setOpaque(false);
+        
+        jPFSenha.putClientProperty(FlatClientProperties.STYLE, "showRevealButton: true;");
+        jPFSenha.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/assets/chave.png", 16));
+        jPFSenha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
+        jPFSenha.setOpaque(false);
+        
+        jBEsqueciSenha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        
+        jBVoltar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        jBVoltar.setIcon(createIcon("/br/com/mycompany/chaponibus/assets/flecha.png", 32));
     }
 
     /**
@@ -52,10 +67,13 @@ public class JPLogin extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPFSenha = new javax.swing.JPasswordField();
         jTFUsuario = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBLogin = new javax.swing.JButton();
         jBEsqueciSenha = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLAvisoUsuario = new javax.swing.JLabel();
+        jLAvisoSenha = new javax.swing.JLabel();
         jPCabecalho = new javax.swing.JPanel();
+        jBVoltar = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -72,39 +90,70 @@ public class JPLogin extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Senha");
 
-        jButton1.setBackground(new java.awt.Color(21, 80, 150));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPFSenha.addActionListener(this::jPFSenhaActionPerformed);
+        jPFSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPFSenhaKeyTyped(evt);
+            }
+        });
 
+        jTFUsuario.addActionListener(this::jTFUsuarioActionPerformed);
+        jTFUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFUsuarioKeyTyped(evt);
+            }
+        });
+
+        jBLogin.setBackground(new java.awt.Color(21, 80, 150));
+        jBLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jBLogin.setForeground(new java.awt.Color(244, 247, 249));
+        jBLogin.setText("Login");
+        jBLogin.addActionListener(this::jBLoginActionPerformed);
+
+        jBEsqueciSenha.setBackground(new java.awt.Color(244, 247, 249));
         jBEsqueciSenha.setForeground(new java.awt.Color(21, 80, 150));
         jBEsqueciSenha.setText("Criar conta");
 
         jLabel3.setText("Não tem uma conta?");
 
+        jLAvisoUsuario.setForeground(new java.awt.Color(255, 44, 44));
+        jLAvisoUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAvisoUsuario.setText("Informe um usuário");
+
+        jLAvisoSenha.setForeground(new java.awt.Color(255, 44, 44));
+        jLAvisoSenha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAvisoSenha.setText("Informe uma senha");
+
         javax.swing.GroupLayout jPCardBrancoLayout = new javax.swing.GroupLayout(jPCardBranco);
         jPCardBranco.setLayout(jPCardBrancoLayout);
         jPCardBrancoLayout.setHorizontalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTFUsuario)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPFSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 68, Short.MAX_VALUE)
+                .addComponent(jBLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBEsqueciSenha)
-                .addGap(83, 83, 83))
+                .addComponent(jBEsqueciSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPFSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                    .addComponent(jTFUsuario))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(jLAvisoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCardBrancoLayout.setVerticalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,17 +162,21 @@ public class JPLogin extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLAvisoUsuario)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLAvisoSenha)
+                .addGap(34, 34, 34)
+                .addComponent(jBLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBEsqueciSenha)
-                    .addComponent(jLabel3))
-                .addContainerGap(206, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jBEsqueciSenha))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         add(jPCardBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 375, -1));
@@ -132,15 +185,26 @@ public class JPLogin extends javax.swing.JPanel {
         jPCabecalho.setBackground(new java.awt.Color(21, 80, 150));
         jPCabecalho.setPreferredSize(new java.awt.Dimension(375, 250));
 
+        jBVoltar.setBackground(new java.awt.Color(21, 80, 150));
+        jBVoltar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBVoltar.setForeground(new java.awt.Color(244, 247, 249));
+        jBVoltar.addActionListener(this::jBVoltarActionPerformed);
+
         javax.swing.GroupLayout jPCabecalhoLayout = new javax.swing.GroupLayout(jPCabecalho);
         jPCabecalho.setLayout(jPCabecalhoLayout);
         jPCabecalhoLayout.setHorizontalGroup(
             jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+            .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         jPCabecalhoLayout.setVerticalGroup(
             jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         add(jPCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 375, 200));
@@ -153,14 +217,93 @@ public class JPLogin extends javax.swing.JPanel {
         return iconeUsuario;
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
+        if (jTFUsuario.getText().trim().isEmpty()) {
+            jLAvisoUsuario.setVisible(true);
+            jTFUsuario.requestFocus();
+            return;
+        }
+        
+        String senha = new String(jPFSenha.getPassword());
+        
+        if (senha.trim().isEmpty()) {
+            jLAvisoSenha.setVisible(true);
+            jPFSenha.requestFocus();
+            return;
+        }
+        
+        jBLogin.setEnabled(false);
+        jBLogin.setText("");
+        
+        try {
+            URL imgURL = getClass().getResource("/br/com/mycompany/chaponibus/assets/loading.gif");
+            if (imgURL != null) {
+                ImageIcon iconeOriginal = new ImageIcon(imgURL);
+                Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+                jBLogin.setIcon(new ImageIcon(imagemRedimensionada));
+            } else {
+                jBLogin.setText("Carregando...");
+            }
+        } catch (Exception e) {
+            logger.log(WARNING, "Não foi possível carregar o GIF de loading", e);
+        }
+        
+        new Thread(() -> {
+            Usuario validaUsuario = usuarioDAO.validarLogin(jTFUsuario.getText(), senha);
+            
+            invokeLater(() -> {
+                if (validaUsuario != null) {
+                    Sessao.conectar(validaUsuario);
+                    
+                    telaPrincipal.showToast(telaPrincipal, "Login realizado com sucesso!", 21, 80, 150);
+                    jBLogin.setIcon(null);
+                    
+                    jTFUsuario.setText("");
+                    jPFSenha.setText("");
+                    telaPrincipal.mudarTela("cardMapa");
+                } else {
+                    telaPrincipal.showToast(telaPrincipal, "Informe um usuário e senha válidos", 255, 44, 44);
+                    
+                    jBLogin.setIcon(null);
+                    jBLogin.setEnabled(true);
+                    jBLogin.setText("Login");
+                    
+                    jPFSenha.setText("");
+                    jPFSenha.requestFocus();
+                }
+            });
+        }).start();
+    }//GEN-LAST:event_jBLoginActionPerformed
+
+    private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
+        jTFUsuario.setText("");
+        jPFSenha.setText("");
+        telaPrincipal.mudarTela("cardMapa");
+    }//GEN-LAST:event_jBVoltarActionPerformed
+
+    private void jTFUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUsuarioActionPerformed
+        jLAvisoUsuario.setVisible(false);
+    }//GEN-LAST:event_jTFUsuarioActionPerformed
+
+    private void jPFSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFSenhaActionPerformed
+        jLAvisoSenha.setVisible(false);
+    }//GEN-LAST:event_jPFSenhaActionPerformed
+
+    private void jTFUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyTyped
+        jLAvisoUsuario.setVisible(false);
+    }//GEN-LAST:event_jTFUsuarioKeyTyped
+
+    private void jPFSenhaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPFSenhaKeyTyped
+        jLAvisoSenha.setVisible(false);
+    }//GEN-LAST:event_jPFSenhaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBEsqueciSenha;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBLogin;
+    private javax.swing.JButton jBVoltar;
+    private javax.swing.JLabel jLAvisoSenha;
+    private javax.swing.JLabel jLAvisoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -11,21 +11,21 @@ import br.com.mycompany.chaponibus.model.Usuario;
  * @author ce498
  */
 public class Sessao {
-    private static Usuario usuarioLogado = null;
+    private static Usuario usuarioLogado;
 
-    public static boolean isLogado() {
-        return usuarioLogado != null;
-    }
-    
-    public static Usuario getUsuarioAtual() {
-        return usuarioLogado;
-    }
-
-    public static void login(Usuario usuario) {
+    public static void conectar(Usuario usuario) {
         usuarioLogado = usuario;
     }
 
-    public static void logout() {
+    public static void desconectar() {
         usuarioLogado = null;
+    }
+
+    public static Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public static boolean isLogado() {
+        return usuarioLogado != null;
     }
 }

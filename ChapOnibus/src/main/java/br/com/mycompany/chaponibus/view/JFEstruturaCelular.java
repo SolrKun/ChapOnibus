@@ -47,6 +47,35 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, nomeDaTela);
     }
+    
+    public void showToast(java.awt.Window parent, String message, int r, int g, int b) {
+        javax.swing.JDialog toast = new javax.swing.JDialog(parent);
+        toast.setUndecorated(true);
+        toast.setBackground(new java.awt.Color(0, 0, 0, 0));
+
+        javax.swing.JPanel panel = new javax.swing.JPanel();
+        panel.setBackground(new java.awt.Color(r, g, b, 200));
+        panel.setBorder(new javax.swing.border.EmptyBorder(10, 20, 10, 20));
+        panel.putClientProperty("FlatLaf.style", "arc:20");
+
+        javax.swing.JLabel label = new javax.swing.JLabel(message);
+        label.setForeground(java.awt.Color.WHITE);
+        panel.add(label);
+
+        toast.add(panel);
+        toast.pack();
+
+        int x = parent.getX() + (parent.getWidth() - toast.getWidth()) / 2;
+        int y = parent.getY() + parent.getHeight() - toast.getHeight() - 80;
+        toast.setLocation(x, y);
+
+        javax.swing.Timer timer = new javax.swing.Timer(2000, e -> toast.dispose());
+        timer.setRepeats(false);
+        timer.start();
+        
+        toast.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
