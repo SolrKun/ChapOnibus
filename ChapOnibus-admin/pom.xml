@@ -10,7 +10,12 @@
         <maven.compiler.release>17</maven.compiler.release>
         <exec.mainClass>br.com.mycompany.chaponibus.admin.ChapOnibusAdmin</exec.mainClass>
     </properties>
-    <dependencies>
+     <dependencies>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4.1</version>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
