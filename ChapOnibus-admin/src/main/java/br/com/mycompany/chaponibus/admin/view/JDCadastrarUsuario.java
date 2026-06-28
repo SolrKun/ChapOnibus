@@ -19,9 +19,6 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
     
     private boolean salvouComSucesso = false;
 
-    /**
-     * Creates new form JDCadastrarUsuario
-     */
     public JDCadastrarUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

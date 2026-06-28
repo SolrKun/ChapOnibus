@@ -4,7 +4,14 @@
  */
 package br.com.mycompany.chaponibus.view;
 
+import br.com.mycompany.chaponibus.view.screens.JPCadastro;
+import br.com.mycompany.chaponibus.view.screens.JPEditarPerfil;
+import br.com.mycompany.chaponibus.view.screens.JPLogin;
+import br.com.mycompany.chaponibus.view.screens.JPMapa;
+import br.com.mycompany.chaponibus.view.screens.JPPerfil;
 import java.awt.CardLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -12,35 +19,79 @@ import java.awt.CardLayout;
  */
 public class JFEstruturaCelular extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFEstruturaCelular.class.getName());
+    JPMapa meuMapa = new JPMapa(this);
+    JPLogin telaLogin = new JPLogin(this);
+    JPCadastro telaCadastro = new JPCadastro(this);
+    JPPerfil telaPerfil = new JPPerfil(this);
+    JPEditarPerfil telaEditarPerfil = new JPEditarPerfil(this);
 
-    /**
-     * Creates new form JFEstruturaCelular
-     */
     public JFEstruturaCelular() {
         initComponents();
+
         this.setSize(390, 800);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         
-        jPPainelConteudo.removeAll();
-        jPPainelConteudo.setLayout(new java.awt.CardLayout());
+        jPPainelConteudo.add(meuMapa, "cardMapa");
+        jPPainelConteudo.add(telaLogin, "cardLogin");
+        jPPainelConteudo.add(telaPerfil, "cardPerfil");
+        jPPainelConteudo.add(telaCadastro, "cardCadastro");
+        jPPainelConteudo.add(telaEditarPerfil, "cardEditarPerfil");
         
-        cardLogin = new br.com.mycompany.chaponibus.view.screens.JPLogin();
-        cardMapa = new br.com.mycompany.chaponibus.view.screens.JPMapa();
-        cardPerfil = new br.com.mycompany.chaponibus.view.screens.JPPerfil();
-        
-        jPPainelConteudo.add(cardLogin, "cardLogin");
-        jPPainelConteudo.add(cardMapa, "cardMapa");
-        jPPainelConteudo.add(cardPerfil, "cardPerfil");
-        
-        this.getContentPane().setLayout(new java.awt.BorderLayout());
-        this.getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
-        
-        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
-        cl.show(jPPainelConteudo, "cardMapa");
+        mudarTela("cardMapa");
     }
+    
+    public void mudarTela(String nomeDaTela) {
+        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
+        cl.show(jPPainelConteudo, nomeDaTela);
+        
+        if (nomeDaTela.equals("cardLogin")) {
+            telaLogin.reiniciarTela(); 
+        } else if (nomeDaTela.equals("cardCadastro")) {
+            telaCadastro.reiniciarTela();
+        }
+    }
+    
+    public void showToast(java.awt.Window parent, String message, int r, int g, int b) {
+        javax.swing.JDialog toast = new javax.swing.JDialog(parent);
+        toast.setUndecorated(true);
+        toast.setBackground(new java.awt.Color(0, 0, 0, 0));
 
+        javax.swing.JPanel panel = new javax.swing.JPanel();
+        panel.setBackground(new java.awt.Color(r, g, b, 200));
+        panel.setBorder(new javax.swing.border.EmptyBorder(10, 20, 10, 20));
+        panel.putClientProperty("FlatLaf.style", "arc:20");
+
+        javax.swing.JLabel label = new javax.swing.JLabel(message);
+        label.setForeground(java.awt.Color.WHITE);
+        panel.add(label);
+
+        toast.add(panel);
+        toast.pack();
+
+        int x = parent.getX() + (parent.getWidth() - toast.getWidth()) / 2;
+        int y = parent.getY() + parent.getHeight() - toast.getHeight() - 80;
+        toast.setLocation(x, y);
+
+        javax.swing.Timer timer = new javax.swing.Timer(2000, e -> toast.dispose());
+        timer.setRepeats(false);
+        timer.start();
+        
+        toast.setVisible(true);
+    }
+    
+    public ImageIcon createIcon(String endereco, int tamanho) {
+        ImageIcon iconeOriginal = new ImageIcon(getClass().getResource(endereco));
+        Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(tamanho, tamanho, Image.SCALE_SMOOTH);
+        ImageIcon iconeUsuario = new ImageIcon(imagemRedimensionada);
+        return iconeUsuario;
+    }
+    
+    public void atualizarPerfil() {
+        telaPerfil.atualizarDados();
+        telaEditarPerfil.atualizarDados();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,53 +102,12 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     private void initComponents() {
 
         jPPainelConteudo = new javax.swing.JPanel();
-        cardLogin = new br.com.mycompany.chaponibus.view.screens.JPLogin();
-        cardMapa = new br.com.mycompany.chaponibus.view.screens.JPMapa();
-        cardPerfil = new br.com.mycompany.chaponibus.view.screens.JPPerfil();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPPainelConteudo.setMaximumSize(new java.awt.Dimension(390, 800));
+        jPPainelConteudo.setMinimumSize(new java.awt.Dimension(390, 800));
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout cardLoginLayout = new javax.swing.GroupLayout(cardLogin);
-        cardLogin.setLayout(cardLoginLayout);
-        cardLoginLayout.setHorizontalGroup(
-            cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-        cardLoginLayout.setVerticalGroup(
-            cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
-        );
-
-        jPPainelConteudo.add(cardLogin, "card2");
-
-        javax.swing.GroupLayout cardMapaLayout = new javax.swing.GroupLayout(cardMapa);
-        cardMapa.setLayout(cardMapaLayout);
-        cardMapaLayout.setHorizontalGroup(
-            cardMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-        cardMapaLayout.setVerticalGroup(
-            cardMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
-        );
-
-        jPPainelConteudo.add(cardMapa, "card3");
-
-        javax.swing.GroupLayout cardPerfilLayout = new javax.swing.GroupLayout(cardPerfil);
-        cardPerfil.setLayout(cardPerfilLayout);
-        cardPerfilLayout.setHorizontalGroup(
-            cardPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-        cardPerfilLayout.setVerticalGroup(
-            cardPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
-        );
-
-        jPPainelConteudo.add(cardPerfil, "card4");
-
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -112,16 +122,16 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
@@ -129,9 +139,6 @@ public class JFEstruturaCelular extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.com.mycompany.chaponibus.view.screens.JPLogin cardLogin;
-    private br.com.mycompany.chaponibus.view.screens.JPMapa cardMapa;
-    private br.com.mycompany.chaponibus.view.screens.JPPerfil cardPerfil;
     private javax.swing.JPanel jPPainelConteudo;
     // End of variables declaration//GEN-END:variables
 }
