@@ -42,7 +42,6 @@ public class UsuarioDAO {
         }
     }
 
-    // Método para simular o SELECT *
     public List<Usuario> listarTodos() {
         String sql = "SELECT * FROM usuarios";
         List<Usuario> usuarios = new ArrayList<>();
@@ -138,7 +137,6 @@ public class UsuarioDAO {
         return u;
     }
 
-    // Método para simular o SELECT com WHERE (útil para o Login)
     public Usuario validarLogin(String username, String senha) {
         String sql = "SELECT * FROM usuarios WHERE usuario=? AND senha=?";
         Usuario u = null;

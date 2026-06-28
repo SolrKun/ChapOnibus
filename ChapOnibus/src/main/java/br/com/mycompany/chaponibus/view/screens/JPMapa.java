@@ -6,7 +6,6 @@ package br.com.mycompany.chaponibus.view.screens;
 
 import br.com.mycompany.chaponibus.util.Sessao;
 import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
-import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.BorderLayout;
 import javax.swing.event.MouseInputListener;
 import org.jxmapviewer.JXMapViewer;
@@ -32,6 +31,10 @@ public class JPMapa extends javax.swing.JPanel {
         initComponents();
         
         jBPerfil.putClientProperty("FlatLaf.style", "arc: 999");
+        
+        jPAbaInferior.putClientProperty("FlatLaf.style", "arc: 30; background: #FFFFFF;");
+        jPAbaInferior.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPAbaInferior.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         
         TileFactoryInfo info = new OSMTileFactoryInfo("OpenStreetMap", "https://tile.openstreetmap.org");
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
@@ -66,7 +69,7 @@ public class JPMapa extends javax.swing.JPanel {
 
         jPAbaSuperior.setOpaque(false);
 
-        jBPerfil.setBackground(new java.awt.Color(21, 80, 150));
+        jBPerfil.setBackground(new java.awt.Color(244, 247, 249));
         jBPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/mycompany/chaponibus/assets/perfil.png"))); // NOI18N
         jBPerfil.addActionListener(this::jBPerfilActionPerformed);
 
@@ -90,21 +93,23 @@ public class JPMapa extends javax.swing.JPanel {
         jLayeredPane1.setLayer(jPAbaSuperior, javax.swing.JLayeredPane.PALETTE_LAYER);
         jLayeredPane1.add(jPAbaSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 130));
 
+        jPAbaInferior.setBackground(new java.awt.Color(255, 255, 255));
+        jPAbaInferior.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPAbaInferior.setOpaque(false);
 
         javax.swing.GroupLayout jPAbaInferiorLayout = new javax.swing.GroupLayout(jPAbaInferior);
         jPAbaInferior.setLayout(jPAbaInferiorLayout);
         jPAbaInferiorLayout.setHorizontalGroup(
             jPAbaInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 373, Short.MAX_VALUE)
         );
         jPAbaInferiorLayout.setVerticalGroup(
             jPAbaInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 238, Short.MAX_VALUE)
         );
 
         jLayeredPane1.setLayer(jPAbaInferior, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane1.add(jPAbaInferior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 370, 150));
+        jLayeredPane1.add(jPAbaInferior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 375, 240));
 
         javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
         map.setLayout(mapLayout);
@@ -134,6 +139,7 @@ public class JPMapa extends javax.swing.JPanel {
     private void jBPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPerfilActionPerformed
         if (sessaoAtual.isLogado()) {
             telaPrincipal.mudarTela("cardPerfil");
+            telaPrincipal.atualizarPerfil();
         } else {
             telaPrincipal.mudarTela("cardLogin");
         }

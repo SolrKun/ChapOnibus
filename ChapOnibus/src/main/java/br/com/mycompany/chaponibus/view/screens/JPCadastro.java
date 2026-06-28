@@ -140,37 +140,37 @@ public class JPCadastro extends javax.swing.JPanel {
         jPCardBrancoLayout.setHorizontalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
-                .addGap(0, 68, Short.MAX_VALUE)
-                .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(jLAvisoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBFazerLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLAvisoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBFazerLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPFSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                        .addComponent(jTFUsuario)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPFSenha)
+                        .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(46, 46, 46))
         );
         jPCardBrancoLayout.setVerticalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +188,7 @@ public class JPCadastro extends javax.swing.JPanel {
                 .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jBFazerLogin))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         add(jPCardBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 375, -1));
@@ -274,6 +274,9 @@ public class JPCadastro extends javax.swing.JPanel {
             "Usuário"
         );
         
+        jBCadastrar.setEnabled(false);
+        jBCadastrar.setText("");
+        
         try {
             URL imgURL = getClass().getResource("/br/com/mycompany/chaponibus/assets/loading.gif");
             if (imgURL != null) {
@@ -288,24 +291,30 @@ public class JPCadastro extends javax.swing.JPanel {
         }
         
         new Thread(() -> {            
-                try {
-                    usuarioDAO.salvar(novoUsuario);
-                    Sessao.conectar(novoUsuario);
-                    
-                    invokeLater(() -> {
-                        telaPrincipal.showToast(telaPrincipal, "Conta criada com sucesso!", 21, 80, 150);
+            try {
+                usuarioDAO.salvar(novoUsuario);
+                Sessao.conectar(novoUsuario);
 
-                        jBCadastrar.setIcon(null);
-                        jTFUsuario.setText("");
-                        jPFSenha.setText("");
-                        telaPrincipal.mudarTela("cardMapa");
-                    });
-                } catch (Exception e) {
-                    javax.swing.SwingUtilities.invokeLater(() -> {
-                        jBCadastrar.setIcon(null);
-                        JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                    });
-                }
+                invokeLater(() -> {
+                    telaPrincipal.showToast(telaPrincipal, "Conta criada com sucesso!", 21, 80, 150);
+
+                    jBCadastrar.setEnabled(true);
+                    jBCadastrar.setText("Cadastrar");
+                    jBCadastrar.setIcon(null);
+
+                    jTFUsuario.setText("");
+                    jPFSenha.setText("");
+                    telaPrincipal.mudarTela("cardMapa");
+                });
+            } catch (Exception e) {
+                javax.swing.SwingUtilities.invokeLater(() -> {
+                    jBCadastrar.setIcon(null);
+                    jBCadastrar.setEnabled(true);
+                    jBCadastrar.setText("Cadastrar");
+
+                    JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                });
+            }
         }).start();
     }//GEN-LAST:event_jBCadastrarActionPerformed
 

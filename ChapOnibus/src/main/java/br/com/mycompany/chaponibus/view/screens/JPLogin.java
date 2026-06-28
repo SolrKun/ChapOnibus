@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.net.URL;
 import static java.util.logging.Level.WARNING;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -137,37 +136,38 @@ public class JPLogin extends javax.swing.JPanel {
         jPCardBranco.setLayout(jPCardBrancoLayout);
         jPCardBrancoLayout.setHorizontalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
-                .addGap(0, 68, Short.MAX_VALUE)
-                .addComponent(jBLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBCriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
             .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPFSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                    .addComponent(jTFUsuario))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(jLAvisoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jBLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBCriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))
+                    .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPFSenha)
+                        .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPCardBrancoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPCardBrancoLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLAvisoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPCardBrancoLayout.setVerticalGroup(
             jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCardBrancoLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,7 +185,7 @@ public class JPLogin extends javax.swing.JPanel {
                 .addGroup(jPCardBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jBCriarConta))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         add(jPCardBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 375, -1));
@@ -259,6 +259,10 @@ public class JPLogin extends javax.swing.JPanel {
                     
                     telaPrincipal.showToast(telaPrincipal, "Login realizado com sucesso!", 21, 80, 150);
                     jBLogin.setIcon(null);
+                    
+                    jBLogin.setIcon(null);
+                    jBLogin.setEnabled(true);
+                    jBLogin.setText("Login");
                     
                     jTFUsuario.setText("");
                     jPFSenha.setText("");

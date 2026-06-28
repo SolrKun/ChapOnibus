@@ -69,7 +69,7 @@
             <Component class="javax.swing.JButton" name="jBPerfil">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="96" green="50" red="15" type="rgb"/>
+                  <Color blue="f9" green="f7" red="f4" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/br/com/mycompany/chaponibus/assets/perfil.png"/>
@@ -83,6 +83,14 @@
         </Container>
         <Container class="javax.swing.JPanel" name="jPAbaInferior">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder/>
+              </Border>
+            </Property>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -90,19 +98,19 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="650" width="370" height="150"/>
+              <AbsoluteConstraints x="0" y="560" width="375" height="240"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="370" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="373" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="238" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

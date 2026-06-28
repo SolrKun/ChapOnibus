@@ -4,17 +4,29 @@
  */
 package br.com.mycompany.chaponibus.view.screens;
 
+import br.com.mycompany.chaponibus.util.Sessao;
+import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
+
 /**
  *
  * @author ce498
  */
 public class JPPerfil extends javax.swing.JPanel {
     
-    /**
-     * Creates new form JPPerfil
-     */
-    public JPPerfil() {
+    private JFEstruturaCelular telaPrincipal;
+    
+    public JPPerfil(JFEstruturaCelular tela) {
         initComponents();
+        this.telaPrincipal = tela;
+        
+        jPanel1.putClientProperty("FlatLaf.style", "arc: 30");
+        
+        jBVoltar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        jBVoltar.setIcon(telaPrincipal.createIcon("/br/com/mycompany/chaponibus/assets/flecha.png", 32));
+    }
+    
+    public void atualizarDados() {
+        jLabel3.setText(Sessao.getUsuarioLogado().getUsername());
     }
 
     /**
@@ -26,30 +38,109 @@ public class JPPerfil extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jBEditarPerfil = new javax.swing.JButton();
+        jBSairDoPerfil = new javax.swing.JButton();
+        jBVoltar = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
+        setBackground(new java.awt.Color(21, 80, 150));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jButton1)
-                .addContainerGap(163, Short.MAX_VALUE))
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/mycompany/chaponibus/assets/logo.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 360, 180));
+
+        jPanel1.setBackground(new java.awt.Color(244, 247, 249));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("Usuário");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setText("Senha");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("••••••••••");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(361, 361, 361)
-                .addComponent(jButton1)
-                .addContainerGap(416, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 300, 330));
+
+        jBEditarPerfil.setBackground(new java.awt.Color(244, 247, 249));
+        jBEditarPerfil.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jBEditarPerfil.setForeground(new java.awt.Color(21, 80, 150));
+        jBEditarPerfil.setText("Editar dados");
+        jBEditarPerfil.addActionListener(this::jBEditarPerfilActionPerformed);
+        add(jBEditarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 300, 50));
+
+        jBSairDoPerfil.setBackground(new java.awt.Color(255, 44, 44));
+        jBSairDoPerfil.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jBSairDoPerfil.setForeground(new java.awt.Color(244, 247, 249));
+        jBSairDoPerfil.setText("Sair da conta");
+        jBSairDoPerfil.addActionListener(this::jBSairDoPerfilActionPerformed);
+        add(jBSairDoPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, 300, 50));
+
+        jBVoltar.setBackground(new java.awt.Color(21, 80, 150));
+        jBVoltar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBVoltar.setForeground(new java.awt.Color(244, 247, 249));
+        jBVoltar.addActionListener(this::jBVoltarActionPerformed);
+        add(jBVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 60));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarPerfilActionPerformed
+        telaPrincipal.mudarTela("cardEditarPerfil");
+    }//GEN-LAST:event_jBEditarPerfilActionPerformed
+
+    private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
+        telaPrincipal.mudarTela("cardMapa");
+    }//GEN-LAST:event_jBVoltarActionPerformed
+
+    private void jBSairDoPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairDoPerfilActionPerformed
+        Sessao.desconectar();
+        telaPrincipal.mudarTela("cardMapa");
+    }//GEN-LAST:event_jBSairDoPerfilActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBEditarPerfil;
+    private javax.swing.JButton jBSairDoPerfil;
+    private javax.swing.JButton jBVoltar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
