@@ -5,6 +5,8 @@
 package br.com.mycompany.chaponibus.admin;
 
 import br.com.mycompany.chaponibus.admin.view.JFLogin;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import javax.swing.UIManager;
 
 /**
  *
@@ -13,6 +15,12 @@ import br.com.mycompany.chaponibus.admin.view.JFLogin;
 public class ChapOnibusAdmin {
 
     public static void main(String[] args) {
-        new JFLogin().setVisible(true);
+        FlatMacLightLaf.setup();
+        
+        UIManager.put("TextComponent.arc", 10);
+                
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFLogin().setVisible(true);
+        });
     }
 }
