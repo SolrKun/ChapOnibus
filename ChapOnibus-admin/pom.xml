@@ -5,7 +5,14 @@
     <artifactId>ChapOnibus-admin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <properties>
+     <repositories>
+          <repository>
+               <id>unknown-jars-temp-repo</id>
+               <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
+               <url>file:${project.basedir}/lib</url>
+          </repository>
+     </repositories>
+     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
         <exec.mainClass>br.com.mycompany.chaponibus.admin.ChapOnibusAdmin</exec.mainClass>
@@ -14,12 +21,18 @@
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
-            <version>3.4.1</version>
+            <version>3.7.1</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.3</version>
         </dependency>
-    </dependencies>
+          <dependency>
+               <groupId>org.netbeans.external</groupId>
+               <artifactId>AbsoluteLayout</artifactId>
+               <version>RELEASE290</version>
+          </dependency>
+     </dependencies>
 </project>
