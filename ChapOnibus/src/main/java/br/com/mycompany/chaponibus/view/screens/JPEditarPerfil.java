@@ -4,8 +4,16 @@
  */
 package br.com.mycompany.chaponibus.view.screens;
 
+import br.com.mycompany.chaponibus.dao.UsuarioDAO;
+import br.com.mycompany.chaponibus.model.Usuario;
 import br.com.mycompany.chaponibus.util.Sessao;
 import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
+import static java.awt.EventQueue.invokeLater;
+import java.awt.Image;
+import java.net.URL;
+import static java.util.logging.Level.WARNING;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,19 +21,26 @@ import br.com.mycompany.chaponibus.view.JFEstruturaCelular;
  */
 public class JPEditarPerfil extends javax.swing.JPanel {
     
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JPEditarPerfil.class.getName());
+    private final UsuarioDAO usuarioDAO;
     private JFEstruturaCelular telaPrincipal;
     
     public JPEditarPerfil(JFEstruturaCelular tela) {
         initComponents();
+        this.usuarioDAO = new UsuarioDAO();
         this.telaPrincipal = tela;
         
         jPanel1.putClientProperty("FlatLaf.style", "arc: 30");
         
         jBVoltar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        
+        jLAvisoUsuario.setVisible(false);
+        jLAvisoSenhaAntiga.setVisible(false);
+        jLAvisoSenhaNova.setVisible(false);
     }
     
     public void atualizarDados() {
-        jTextField1.setText(Sessao.getUsuarioLogado().getUsername());
+        jTFUsuario.setText(Sessao.getUsuarioLogado().getUsername());
     }
 
     /**
@@ -42,9 +57,12 @@ public class JPEditarPerfil extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        jTFUsuario = new javax.swing.JTextField();
+        jPFSenhaAntiga = new javax.swing.JPasswordField();
+        jPFSenhaNova = new javax.swing.JPasswordField();
+        jLAvisoUsuario = new javax.swing.JLabel();
+        jLAvisoSenhaAntiga = new javax.swing.JLabel();
+        jLAvisoSenhaNova = new javax.swing.JLabel();
         jBVoltar = new javax.swing.JButton();
         jBConfirmar = new javax.swing.JButton();
 
@@ -53,53 +71,60 @@ public class JPEditarPerfil extends javax.swing.JPanel {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/mycompany/chaponibus/assets/logo.png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 360, 180));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 360, 180));
 
         jPanel1.setBackground(new java.awt.Color(244, 247, 249));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Usuário");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 101, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Senha antiga");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 136, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Senha nova");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 136, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
-        );
+        jTFUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTFUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 239, 42));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 300, 390));
+        jPFSenhaAntiga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPFSenhaAntigaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jPFSenhaAntiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 239, 41));
+
+        jPFSenhaNova.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPFSenhaNovaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jPFSenhaNova, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 239, 41));
+
+        jLAvisoUsuario.setForeground(new java.awt.Color(255, 44, 44));
+        jLAvisoUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAvisoUsuario.setText("Informe um usuário");
+        jPanel1.add(jLAvisoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 300, -1));
+
+        jLAvisoSenhaAntiga.setForeground(new java.awt.Color(255, 44, 44));
+        jLAvisoSenhaAntiga.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAvisoSenhaAntiga.setText("Informe sua senha");
+        jPanel1.add(jLAvisoSenhaAntiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 300, -1));
+
+        jLAvisoSenhaNova.setForeground(new java.awt.Color(255, 44, 44));
+        jLAvisoSenhaNova.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAvisoSenhaNova.setText("Informe a senha nova");
+        jPanel1.add(jLAvisoSenhaNova, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 288, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 300, 440));
 
         jBVoltar.setBackground(new java.awt.Color(21, 80, 150));
         jBVoltar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -113,7 +138,7 @@ public class JPEditarPerfil extends javax.swing.JPanel {
         jBConfirmar.setForeground(new java.awt.Color(21, 80, 150));
         jBConfirmar.setText("Confirmar");
         jBConfirmar.addActionListener(this::jBConfirmarActionPerformed);
-        add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, 300, 50));
+        add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 300, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
@@ -121,20 +146,114 @@ public class JPEditarPerfil extends javax.swing.JPanel {
     }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
-        // TODO add your handling code here:
+        if (jTFUsuario.getText().trim().isEmpty()) {
+            jLAvisoUsuario.setVisible(true);
+            jTFUsuario.requestFocus();
+            return;
+        }
+        
+        String usuario = jTFUsuario.getText();
+        String senhaAntiga = new String(jPFSenhaAntiga.getPassword());
+        String senhaNova = new String(jPFSenhaNova.getPassword());
+        
+        if (senhaAntiga.trim().isEmpty()) {
+            jLAvisoSenhaAntiga.setVisible(true);
+            jPFSenhaAntiga.requestFocus();
+            return;
+        }
+        
+        if (senhaNova.trim().isEmpty()) {
+            jLAvisoSenhaNova.setVisible(true);
+            jPFSenhaNova.requestFocus();
+            return;
+        }
+        
+        jBConfirmar.setEnabled(false);
+        jBConfirmar.setText("");
+        
+        try {
+            URL imgURL = getClass().getResource("/br/com/mycompany/chaponibus/assets/loading.gif");
+            if (imgURL != null) {
+                ImageIcon iconeOriginal = new ImageIcon(imgURL);
+                Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+                jBConfirmar.setIcon(new ImageIcon(imagemRedimensionada));
+            } else {
+                jBConfirmar.setText("Carregando...");
+            }
+        } catch (Exception e) {
+            logger.log(WARNING, "Não foi possível carregar o GIF de loading", e);
+        }
+        
+        new Thread(() -> {
+            Usuario validaUsuario = usuarioDAO.validarLogin(jTFUsuario.getText(), senhaAntiga);
+            
+            invokeLater(() -> {
+                if (validaUsuario != null) {
+                    jBConfirmar.setIcon(null);
+                    
+                    if (!usuario.equals(Sessao.getUsuarioLogado().getUsername()) && usuarioDAO.procurarUsuario(usuario) != null) {
+                        telaPrincipal.showToast(telaPrincipal, "Esse usuário já está cadastrado", 255, 44, 44);
+                        jTFUsuario.requestFocus();
+                        return;
+                    }
+                    
+                    Usuario novoUsuario = new Usuario(
+                        usuario,
+                        senhaNova,
+                        Sessao.getUsuarioLogado().getRole()
+                    );
+                    
+                    usuarioDAO.atualizar(novoUsuario, Sessao.getUsuarioLogado().getUsername());
+                    Sessao.conectar(novoUsuario);
+                    
+                    telaPrincipal.showToast(telaPrincipal, "Perfil atualizado com sucesso!", 21, 80, 150);
+                    
+                    jTFUsuario.setText("");
+                    jPFSenhaAntiga.setText("");
+                    jPFSenhaNova.setText("");
+                    
+                    jBConfirmar.setIcon(null);
+                    jBConfirmar.setEnabled(true);
+                    jBConfirmar.setText("Confirmar");
+                    
+                    telaPrincipal.mudarTela("cardPerfil");
+                } else {
+                    telaPrincipal.showToast(telaPrincipal, "A senha informada está errada", 255, 44, 44);
+                    
+                    jBConfirmar.setIcon(null);
+                    jBConfirmar.setEnabled(true);
+                    jBConfirmar.setText("Confirmar");
+                }
+            });
+        }).start();
     }//GEN-LAST:event_jBConfirmarActionPerformed
+
+    private void jTFUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyTyped
+        jLAvisoUsuario.setVisible(false);
+    }//GEN-LAST:event_jTFUsuarioKeyTyped
+
+    private void jPFSenhaAntigaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPFSenhaAntigaKeyTyped
+        jLAvisoSenhaAntiga.setVisible(false);
+    }//GEN-LAST:event_jPFSenhaAntigaKeyTyped
+
+    private void jPFSenhaNovaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPFSenhaNovaKeyTyped
+        jLAvisoSenhaNova.setVisible(false);
+    }//GEN-LAST:event_jPFSenhaNovaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBConfirmar;
     private javax.swing.JButton jBVoltar;
+    private javax.swing.JLabel jLAvisoSenhaAntiga;
+    private javax.swing.JLabel jLAvisoSenhaNova;
+    private javax.swing.JLabel jLAvisoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPasswordField jPFSenhaAntiga;
+    private javax.swing.JPasswordField jPFSenhaNova;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -53,7 +53,7 @@ public class JFLogin extends javax.swing.JFrame {
     )
    
 );
-        jLabel3.setVerticalAlignment(SwingConstants.CENTER);
+//        jLabel3.setVerticalAlignment(SwingConstants.CENTER);
         // Redimensionar o tamanho da imagem/icone
         //URL IconeUsuario = getClass().getResource("/br/com/mycompany/chaponibus/admin/assets/icone usuario teste.png");
         //ImageIcon iconeOriginal = new ImageIcon(IconeUsuario);
@@ -76,7 +76,6 @@ public class JFLogin extends javax.swing.JFrame {
         jBLogin = new javax.swing.JButton();
         jPFSenha = new javax.swing.JPasswordField();
         jBVerSenha = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLUsuario = new javax.swing.JLabel();
         jLSenha = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -94,8 +93,6 @@ public class JFLogin extends javax.swing.JFrame {
 
         jBVerSenha.setText("Mostrar");
         jBVerSenha.addActionListener(this::jBVerSenhaActionPerformed);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/mycompany/chaponibus/admin/assets/foto (1).png"))); // NOI18N
 
         jLUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLUsuario.setText("Usuário:");
@@ -139,10 +136,6 @@ public class JFLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(150, 150, 150))
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -161,9 +154,7 @@ public class JFLogin extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,7 +293,6 @@ public class JFLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPFSenha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFUsuario;
