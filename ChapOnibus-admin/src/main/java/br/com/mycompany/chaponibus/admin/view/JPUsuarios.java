@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,7 +28,8 @@ public class JPUsuarios extends javax.swing.JPanel {
     /**
      * Creates new form JPCadastroDeUsuario
      */
-    public JPUsuarios() {
+    
+        public JPUsuarios() {
         initComponents();
         
         this.usuarioDAO = new UsuarioDAO();
@@ -38,6 +41,13 @@ public class JPUsuarios extends javax.swing.JPanel {
         
         jBEditar.setToolTipText("Editar usuário selecionado");
         jBExcluir.setToolTipText("Excluir usuário selecionado");
+        
+        
+          int iconSize = 20;
+        
+        jBEditar.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/edit_icon.png", iconSize));
+        jBExcluir.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/excluir_icon.png", iconSize));
+        
     }
     
     public void preencherTabela() {
@@ -66,7 +76,18 @@ public class JPUsuarios extends javax.swing.JPanel {
     
     private void ConfigurarVisual (){
         jBEditar.putClientProperty("FlatLaf.style", "");
+      
+      
     }
+    
+    public ImageIcon createIcon(String endereco, int tamanho) {
+        ImageIcon iconeOriginal = new ImageIcon(getClass().getResource(endereco));
+        Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(tamanho, tamanho, Image.SCALE_SMOOTH);
+        ImageIcon iconeUsuario = new ImageIcon(imagemRedimensionada);
+        return iconeUsuario;
+    }
+
+    
     
     
 
@@ -86,9 +107,15 @@ public class JPUsuarios extends javax.swing.JPanel {
         jBExcluir = new javax.swing.JButton();
         jBEditar = new javax.swing.JButton();
 
-        jLabel1.setText("USUÁRIOS");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(21, 80, 150));
+        jLabel1.setText("Usuários");
 
-        jBCadastrarUsuario.setText("Cadastrar");
+        jBCadastrarUsuario.setBackground(new java.awt.Color(21, 80, 150));
+        jBCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jBCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jBCadastrarUsuario.setText("+  Novo Usuário");
+        jBCadastrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastrarUsuarioActionPerformed(evt);
@@ -132,16 +159,14 @@ public class JPUsuarios extends javax.swing.JPanel {
 
         jBExcluir.setBackground(new java.awt.Color(204, 0, 0));
         jBExcluir.setForeground(new java.awt.Color(255, 255, 255));
-        jBExcluir.setText("✖");
         jBExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluirActionPerformed(evt);
             }
         });
 
-        jBEditar.setBackground(new java.awt.Color(0, 0, 153));
+        jBEditar.setBackground(new java.awt.Color(208, 125, 7));
         jBEditar.setForeground(new java.awt.Color(255, 255, 255));
-        jBEditar.setText("✏");
         jBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEditarActionPerformed(evt);
@@ -162,12 +187,11 @@ public class JPUsuarios extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1010, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBCadastrarUsuario)
-                                .addGap(10, 10, 10)))))
+                                .addComponent(jBCadastrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -177,12 +201,12 @@ public class JPUsuarios extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarUsuario)
-                    .addComponent(jBExcluir)
-                    .addComponent(jBEditar))
-                .addGap(18, 18, 18)
+                    .addComponent(jBCadastrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addGap(262, 262, 262))
         );
     }// </editor-fold>//GEN-END:initComponents
 

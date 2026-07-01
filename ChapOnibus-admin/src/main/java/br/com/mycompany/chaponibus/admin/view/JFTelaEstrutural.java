@@ -36,12 +36,13 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         }
         
         
-        
+        // altera a cor da borda (no caso deixa sem, nesse caso)
         jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
         jBNavCadastro1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
         jBRotas.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
         jBUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
         jBBairros.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
+        jBOnibus.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
         
         int iconSize = 20; //variavel do tamanho dos icones
         
@@ -53,7 +54,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBNavCadastro1.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/usuarios_icon.png", iconSize));
         jBNavCadastro1.setIconTextGap(10);
         
-        jBRotas.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/bus_icon.png", iconSize));
+        jBRotas.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/rotas_icon.png", iconSize));
         jBRotas.setIconTextGap(10);
         
         jBBairros.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/map_icon.png", iconSize));
@@ -61,6 +62,9 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         
         jBUsuario.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/usuario.png", iconSize));
         jBUsuario.setIconTextGap(10);
+        
+        jBOnibus.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/bus_icon.png", iconSize));
+        jBOnibus.setIconTextGap(10);
     }
     
     public ImageIcon createIcon(String endereco, int tamanho) {
@@ -87,6 +91,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBBairros = new javax.swing.JButton();
         jLLogo = new javax.swing.JLabel();
         jLLogo1 = new javax.swing.JLabel();
+        jBOnibus = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
         jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
         jPUsuarios1 = new br.com.mycompany.chaponibus.admin.view.JPUsuarios();
@@ -104,7 +109,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBNavCadastro1.setText("Usuários");
         jBNavCadastro1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBNavCadastro1.addActionListener(this::jBNavCadastro1ActionPerformed);
-        jPPainelNav.add(jBNavCadastro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 40));
+        jPPainelNav.add(jBNavCadastro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 130, 40));
 
         jButton1.setBackground(new java.awt.Color(238, 241, 243));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -146,6 +151,14 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jLLogo1.setForeground(new java.awt.Color(0, 48, 99));
         jLLogo1.setText("Chapônibus");
         jPPainelNav.add(jLLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 70));
+
+        jBOnibus.setBackground(new java.awt.Color(238, 241, 243));
+        jBOnibus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBOnibus.setForeground(new java.awt.Color(21, 80, 150));
+        jBOnibus.setText("Ônibus");
+        jBOnibus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBOnibus.addActionListener(this::jBOnibusActionPerformed);
+        jPPainelNav.add(jBOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 40));
 
         getContentPane().add(jPPainelNav, java.awt.BorderLayout.LINE_START);
 
@@ -190,6 +203,10 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBBairrosActionPerformed
 
+    private void jBOnibusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOnibusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBOnibusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,6 +235,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBairros;
     private javax.swing.JButton jBNavCadastro1;
+    private javax.swing.JButton jBOnibus;
     private javax.swing.JButton jBRotas;
     private javax.swing.JButton jBUsuario;
     private javax.swing.JButton jButton1;
