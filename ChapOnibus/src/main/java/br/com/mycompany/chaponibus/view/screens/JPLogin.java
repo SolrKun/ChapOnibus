@@ -258,7 +258,6 @@ public class JPLogin extends javax.swing.JPanel {
                     Sessao.conectar(validaUsuario);
                     
                     telaPrincipal.showToast(telaPrincipal, "Login realizado com sucesso!", 21, 80, 150);
-                    jBLogin.setIcon(null);
                     
                     jBLogin.setIcon(null);
                     jBLogin.setEnabled(true);
