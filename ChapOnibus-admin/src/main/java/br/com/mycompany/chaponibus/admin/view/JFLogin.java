@@ -94,6 +94,8 @@ public class JFLogin extends javax.swing.JFrame {
         jBVerSenha.setText("Mostrar");
         jBVerSenha.addActionListener(this::jBVerSenhaActionPerformed);
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/mycompany/chaponibus/admin/assets/logo cert.png"))); // NOI18N
+
         jLUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLUsuario.setText("Usuário:");
 
@@ -165,7 +167,7 @@ public class JFLogin extends javax.swing.JFrame {
                             .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBVerSenha)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 105, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLUsuario)
                         .addGap(18, 18, 18)
                         .addComponent(jLSenha)))
