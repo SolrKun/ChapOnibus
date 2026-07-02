@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package br.com.mycompany.chaponibus.admin.view;
+package br.com.mycompany.chaponibus.admin.view.usuarios;
 
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
 import br.com.mycompany.chaponibus.admin.model.Usuario;

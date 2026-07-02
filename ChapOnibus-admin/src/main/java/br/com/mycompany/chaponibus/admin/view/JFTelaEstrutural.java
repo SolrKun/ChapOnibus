@@ -94,13 +94,14 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBOnibus = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
         jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
-        jPUsuarios1 = new br.com.mycompany.chaponibus.admin.view.JPUsuarios();
+        jPRotas = new br.com.mycompany.chaponibus.admin.view.rotas.JPRotas();
+        jPUsuarios1 = new br.com.mycompany.chaponibus.admin.view.usuarios.JPUsuarios();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPPainelNav.setBackground(new java.awt.Color(238, 241, 243));
-        jPPainelNav.setMinimumSize(new java.awt.Dimension(170, 160));
-        jPPainelNav.setPreferredSize(new java.awt.Dimension(170, 160));
+        jPPainelNav.setMinimumSize(new java.awt.Dimension(180, 160));
+        jPPainelNav.setPreferredSize(new java.awt.Dimension(180, 160));
         jPPainelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBNavCadastro1.setBackground(new java.awt.Color(238, 241, 243));
@@ -124,6 +125,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBRotas.setForeground(new java.awt.Color(21, 80, 150));
         jBRotas.setText("Rotas");
         jBRotas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBRotas.addActionListener(this::jBRotasActionPerformed);
         jPPainelNav.add(jBRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 40));
 
         jBUsuario.setBackground(new java.awt.Color(238, 241, 243));
@@ -168,7 +170,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jPTelaInicial.setLayout(jPTelaInicialLayout);
         jPTelaInicialLayout.setHorizontalGroup(
             jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1110, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
         jPTelaInicialLayout.setVerticalGroup(
             jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,6 +178,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         );
 
         jPPainelConteudo.add(jPTelaInicial, "cardInicial");
+        jPPainelConteudo.add(jPRotas, "cardRotas");
         jPPainelConteudo.add(jPUsuarios1, "cardUsuarios");
 
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
@@ -184,8 +187,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNavCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNavCadastro1ActionPerformed
-//        jPCadastroDeUsuario1.preencherTabela();
-        
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardUsuarios");
     }//GEN-LAST:event_jBNavCadastro1ActionPerformed
@@ -206,6 +207,11 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private void jBOnibusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOnibusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBOnibusActionPerformed
+
+    private void jBRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRotasActionPerformed
+        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
+        cl.show(jPPainelConteudo, "cardRotas");
+    }//GEN-LAST:event_jBRotasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,7 +249,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private javax.swing.JLabel jLLogo1;
     private javax.swing.JPanel jPPainelConteudo;
     private javax.swing.JPanel jPPainelNav;
+    private br.com.mycompany.chaponibus.admin.view.rotas.JPRotas jPRotas;
     private br.com.mycompany.chaponibus.admin.view.JPTelaInicial jPTelaInicial;
-    private br.com.mycompany.chaponibus.admin.view.JPUsuarios jPUsuarios1;
+    private br.com.mycompany.chaponibus.admin.view.usuarios.JPUsuarios jPUsuarios1;
     // End of variables declaration//GEN-END:variables
 }
