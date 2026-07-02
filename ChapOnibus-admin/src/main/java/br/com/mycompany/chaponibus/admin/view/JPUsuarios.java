@@ -107,20 +107,24 @@ public class JPUsuarios extends javax.swing.JPanel {
         jBExcluir = new javax.swing.JButton();
         jBEditar = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(21, 80, 150));
         jLabel1.setText("Usuários");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
 
         jBCadastrarUsuario.setBackground(new java.awt.Color(21, 80, 150));
         jBCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jBCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jBCadastrarUsuario.setText("+  Novo Usuário");
         jBCadastrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBCadastrarUsuario.setLabel("Novo Usuário");
         jBCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastrarUsuarioActionPerformed(evt);
             }
         });
+        add(jBCadastrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, 130, 40));
 
         jTUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,6 +161,8 @@ public class JPUsuarios extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTUsuarios);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 356, 1010, 353));
+
         jBExcluir.setBackground(new java.awt.Color(204, 0, 0));
         jBExcluir.setForeground(new java.awt.Color(255, 255, 255));
         jBExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +170,7 @@ public class JPUsuarios extends javax.swing.JPanel {
                 jBExcluirActionPerformed(evt);
             }
         });
+        add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 70, 45));
 
         jBEditar.setBackground(new java.awt.Color(208, 125, 7));
         jBEditar.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,42 +179,7 @@ public class JPUsuarios extends javax.swing.JPanel {
                 jBEditarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(407, 407, 407)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1010, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBCadastrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(75, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(262, 262, 262))
-        );
+        add(jBEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 70, 45));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarUsuarioActionPerformed

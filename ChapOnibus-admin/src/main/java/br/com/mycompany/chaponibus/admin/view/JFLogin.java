@@ -5,7 +5,7 @@
 package br.com.mycompany.chaponibus.admin.view;
 
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
-import br.com.mycompany.chaponibus.admin.model.Sessao;
+import br.com.mycompany.chaponibus.admin.util.Sessao;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
 import static java.awt.EventQueue.invokeLater;
 import java.awt.Image;
@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.BorderFactory;
-import com.formdev.flatlaf.FlatLightLaf;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -47,20 +45,11 @@ public class JFLogin extends javax.swing.JFrame {
         jBLogin.setBorderPainted(false);
         jBLogin.setFont(new Font("Segoe UI", Font.BOLD, 16));
         jPanel1.setBorder(
-    BorderFactory.createCompoundBorder(
-        BorderFactory.createLineBorder(new Color(210,210,210), 1),
-        BorderFactory.createEmptyBorder(25,25,25,25)
-    )
-   
-);
-//        jLabel3.setVerticalAlignment(SwingConstants.CENTER);
-        // Redimensionar o tamanho da imagem/icone
-        //URL IconeUsuario = getClass().getResource("/br/com/mycompany/chaponibus/admin/assets/icone usuario teste.png");
-        //ImageIcon iconeOriginal = new ImageIcon(IconeUsuario);
-        //Image image = iconeOriginal.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
-        //jLabel5.setIcon(new ImageIcon(image));
-        
-         //getContentPane().setBackground(new Color(45,45,45));
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(210,210,210), 1),
+                BorderFactory.createEmptyBorder(25,25,25,25)
+            )
+        );
     }
 
     /**
@@ -93,8 +82,6 @@ public class JFLogin extends javax.swing.JFrame {
 
         jBVerSenha.setText("Mostrar");
         jBVerSenha.addActionListener(this::jBVerSenhaActionPerformed);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/mycompany/chaponibus/admin/assets/logo cert.png"))); // NOI18N
 
         jLUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLUsuario.setText("Usuário:");
@@ -137,26 +124,30 @@ public class JFLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLSenha)
-                    .addComponent(jLUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBLogin)
-                    .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLSenha)
+                            .addComponent(jLUsuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBVerSenha)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jBLogin)
+                            .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBVerSenha)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(153, 153, 153)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +164,7 @@ public class JFLogin extends javax.swing.JFrame {
                         .addComponent(jLSenha)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBLogin)
-                .addGap(228, 228, 228))
+                .addGap(107, 107, 107))
         );
 
         pack();

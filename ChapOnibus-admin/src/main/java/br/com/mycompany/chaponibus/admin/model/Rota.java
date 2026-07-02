@@ -1,33 +1,32 @@
 package br.com.mycompany.chaponibus.admin.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rota {
 
-    private int idRota;
+    private int id;
     private String nomeRota;
-    private String descricao;
-    private boolean ativa;
-    private int idOnibus;
+    private String trajetoGeom;
+    private List<PontoRota> listaCliquesTrajeto = new ArrayList<>();
+    private List<PontoOnibus> listaPontosOnibus = new ArrayList<>();
+    private Onibus onibus;
 
     public Rota() {
     }
 
-    public Rota(String nomeRota,
-                String descricao,
-                boolean ativa,
-                int idOnibus) {
-
+    public Rota(int id, String nomeRota, String trajetoGeom) {
+        this.id = id;
         this.nomeRota = nomeRota;
-        this.descricao = descricao;
-        this.ativa = ativa;
-        this.idOnibus = idOnibus;
+        this.trajetoGeom = trajetoGeom;
     }
 
-    public int getIdRota() {
-        return idRota;
+    public int getId() {
+        return id;
     }
 
-    public void setIdRota(int idRota) {
-        this.idRota = idRota;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNomeRota() {
@@ -38,29 +37,38 @@ public class Rota {
         this.nomeRota = nomeRota;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getTrajetoGeom() {
+        return trajetoGeom;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTrajetoGeom(String trajetoGeom) {
+        this.trajetoGeom = trajetoGeom;
     }
 
-    public boolean isAtiva() {
-        return ativa;
+    public List<PontoRota> getListaCliquesTrajeto() {
+        return listaCliquesTrajeto;
     }
 
-    public void setAtiva(boolean ativa) {
-        this.ativa = ativa;
+    public void setListaCliquesTrajeto(List<PontoRota> listaCliquesTrajeto) {
+        this.listaCliquesTrajeto = listaCliquesTrajeto;
     }
 
-    public int getIdOnibus() {
-        return idOnibus;
+    public List<PontoOnibus> getListaPontosOnibus() {
+        return listaPontosOnibus;
     }
 
-    public void setIdOnibus(int idOnibus) {
-        this.idOnibus = idOnibus;
+    public void setListaPontosOnibus(List<PontoOnibus> listaPontosOnibus) {
+        this.listaPontosOnibus = listaPontosOnibus;
     }
+
+    public Onibus getOnibus() {
+        return onibus;
+    }
+
+    public void setOnibus(Onibus onibus) {
+        this.onibus = onibus;
+    }
+
     @Override
     public String toString() {
         return nomeRota;

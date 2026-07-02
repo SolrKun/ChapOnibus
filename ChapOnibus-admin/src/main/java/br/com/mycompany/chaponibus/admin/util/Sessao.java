@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.mycompany.chaponibus.admin.model;
+package br.com.mycompany.chaponibus.admin.util;
+
+import br.com.mycompany.chaponibus.admin.model.Usuario;
 
 /**
  *
