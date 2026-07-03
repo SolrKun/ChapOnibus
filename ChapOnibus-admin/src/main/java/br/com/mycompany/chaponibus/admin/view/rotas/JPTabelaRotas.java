@@ -4,6 +4,12 @@
  */
 package br.com.mycompany.chaponibus.admin.view.rotas;
 
+import br.com.mycompany.chaponibus.admin.dao.RotaDAO;
+import br.com.mycompany.chaponibus.admin.model.Rota;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ce498
@@ -15,6 +21,28 @@ public class JPTabelaRotas extends javax.swing.JPanel {
      */
     public JPTabelaRotas() {
         initComponents();
+        carregarTabela();
+    }
+    
+    public void carregarTabela() {
+        try {
+            RotaDAO dao = new RotaDAO();
+            List<Rota> rotas = dao.listarTodas();
+
+            DefaultTableModel modelo = (DefaultTableModel) jTTabelaRotas.getModel();
+            modelo.setRowCount(0);
+
+            for (Rota r : rotas) {
+                modelo.addRow(new Object[]{ r.getId(), r.getNomeRota() });
+            }
+
+            jTTabelaRotas.getColumnModel().getColumn(0).setMinWidth(0);
+            jTTabelaRotas.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTTabelaRotas.getColumnModel().getColumn(0).setWidth(0);
+
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar rotas: " + e.getMessage());
+        }
     }
 
     /**
@@ -36,10 +64,26 @@ public class JPTabelaRotas extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Rotas"
+                "id", "Rotas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTTabelaRotas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTTabelaRotasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTTabelaRotas);
+        if (jTTabelaRotas.getColumnModel().getColumnCount() > 0) {
+            jTTabelaRotas.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,6 +102,18 @@ public class JPTabelaRotas extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTTabelaRotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaRotasMouseClicked
+        if (evt.getClickCount() == 2) { // Ao clicar duas vezes
+            int linha = jTTabelaRotas.getSelectedRow();
+            int idRota = (int) jTTabelaRotas.getValueAt(linha, 0);
+            
+            JPRotas parent = (JPRotas) javax.swing.SwingUtilities.getAncestorOfClass(JPRotas.class, JPTabelaRotas.this);
+            if (parent != null) {
+                parent.iniciarEdicao(idRota);
+            }
+        }
+    }//GEN-LAST:event_jTTabelaRotasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

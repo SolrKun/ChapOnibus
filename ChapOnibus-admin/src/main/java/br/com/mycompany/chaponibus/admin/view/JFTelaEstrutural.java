@@ -7,7 +7,6 @@ package br.com.mycompany.chaponibus.admin.view;
 import br.com.mycompany.chaponibus.admin.util.Sessao;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
 import java.awt.CardLayout;
-import com.formdev.flatlaf.FlatClientProperties;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
@@ -32,39 +31,28 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         cl.show(jPPainelConteudo, "cardInicial");
         
         if (atual == null || !"Super Administrador".equalsIgnoreCase(atual.getRole())) {
-            jBNavCadastro1.setVisible(false);
+            jBUsuarios.setVisible(false);
         }
         
+        jBUsuario.setText(Sessao.getUsuarioLogado().getUsername());
         
-        // altera a cor da borda (no caso deixa sem, nesse caso)
-        jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
-        jBNavCadastro1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
-        jBRotas.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
-        jBUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
-        jBBairros.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
-        jBOnibus.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, java.awt.Color.GRAY));
-        
-        int iconSize = 20; //variavel do tamanho dos icones
-        
-        //adicionar icone ao botao ou outro item
-        jButton1.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/home_icon.png", iconSize));
-        //adicionar espaço entre o icone e texto
-        jButton1.setIconTextGap(10);
-        
-        jBNavCadastro1.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/usuarios_icon.png", iconSize));
-        jBNavCadastro1.setIconTextGap(10);
-        
-        jBRotas.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/rotas_icon.png", iconSize));
-        jBRotas.setIconTextGap(10);
-        
-        jBBairros.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/map_icon.png", iconSize));
-        jBBairros.setIconTextGap(10);
-        
-        jBUsuario.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/usuario.png", iconSize));
-        jBUsuario.setIconTextGap(10);
-        
-        jBOnibus.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/bus_icon.png", iconSize));
-        jBOnibus.setIconTextGap(10);
+        configurarBotaoNav(jBHome, "/br/com/mycompany/chaponibus/admin/assets/home_icon.png", "Home");
+        configurarBotaoNav(jBRotas, "/br/com/mycompany/chaponibus/admin/assets/rotas_icon.png", "Rotas");
+        configurarBotaoNav(jBOnibus, "/br/com/mycompany/chaponibus/admin/assets/bus_icon.png", "Ônibus");
+        configurarBotaoNav(jBBairros, "/br/com/mycompany/chaponibus/admin/assets/map_icon.png", "Bairros");
+        configurarBotaoNav(jBUsuarios, "/br/com/mycompany/chaponibus/admin/assets/usuarios_icon.png", "Usuários");
+        configurarBotaoNav(jBUsuario, "/br/com/mycompany/chaponibus/admin/assets/usuario.png", Sessao.getUsuarioLogado().getUsername());
+    }
+    
+    private void configurarBotaoNav(javax.swing.JButton btn, String iconPath, String texto) {
+        btn.putClientProperty("JButton.buttonType", "borderless");
+        btn.setFocusPainted(false);
+        btn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn.setIconTextGap(15);
+
+        btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 15, 8, 15));
+
+        btn.setIcon(createIcon(iconPath, 20));
     }
     
     public ImageIcon createIcon(String endereco, int tamanho) {
@@ -84,8 +72,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private void initComponents() {
 
         jPPainelNav = new javax.swing.JPanel();
-        jBNavCadastro1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jBUsuarios = new javax.swing.JButton();
+        jBHome = new javax.swing.JButton();
         jBRotas = new javax.swing.JButton();
         jBUsuario = new javax.swing.JButton();
         jBBairros = new javax.swing.JButton();
@@ -99,28 +87,28 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPPainelNav.setBackground(new java.awt.Color(238, 241, 243));
+        jPPainelNav.setBackground(new java.awt.Color(244, 247, 249));
         jPPainelNav.setMinimumSize(new java.awt.Dimension(180, 160));
         jPPainelNav.setPreferredSize(new java.awt.Dimension(180, 160));
         jPPainelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBNavCadastro1.setBackground(new java.awt.Color(238, 241, 243));
-        jBNavCadastro1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBNavCadastro1.setForeground(new java.awt.Color(21, 80, 150));
-        jBNavCadastro1.setText("Usuários");
-        jBNavCadastro1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jBNavCadastro1.addActionListener(this::jBNavCadastro1ActionPerformed);
-        jPPainelNav.add(jBNavCadastro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 130, 40));
+        jBUsuarios.setBackground(new java.awt.Color(244, 247, 249));
+        jBUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBUsuarios.setForeground(new java.awt.Color(21, 80, 150));
+        jBUsuarios.setText("Usuários");
+        jBUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBUsuarios.addActionListener(this::jBUsuariosActionPerformed);
+        jPPainelNav.add(jBUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 130, 40));
 
-        jButton1.setBackground(new java.awt.Color(238, 241, 243));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(21, 80, 150));
-        jButton1.setText("Home");
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPPainelNav.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 40));
+        jBHome.setBackground(new java.awt.Color(244, 247, 249));
+        jBHome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBHome.setForeground(new java.awt.Color(21, 80, 150));
+        jBHome.setText("Home");
+        jBHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBHome.addActionListener(this::jBHomeActionPerformed);
+        jPPainelNav.add(jBHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 40));
 
-        jBRotas.setBackground(new java.awt.Color(238, 241, 243));
+        jBRotas.setBackground(new java.awt.Color(244, 247, 249));
         jBRotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBRotas.setForeground(new java.awt.Color(21, 80, 150));
         jBRotas.setText("Rotas");
@@ -128,7 +116,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBRotas.addActionListener(this::jBRotasActionPerformed);
         jPPainelNav.add(jBRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 40));
 
-        jBUsuario.setBackground(new java.awt.Color(238, 241, 243));
+        jBUsuario.setBackground(new java.awt.Color(244, 247, 249));
         jBUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBUsuario.setForeground(new java.awt.Color(24, 28, 30));
         jBUsuario.setText("NomeUsuario");
@@ -136,7 +124,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBUsuario.addActionListener(this::jBUsuarioActionPerformed);
         jPPainelNav.add(jBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 130, 40));
 
-        jBBairros.setBackground(new java.awt.Color(238, 241, 243));
+        jBBairros.setBackground(new java.awt.Color(244, 247, 249));
         jBBairros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBBairros.setForeground(new java.awt.Color(21, 80, 150));
         jBBairros.setText("Bairros");
@@ -154,7 +142,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jLLogo1.setText("Chapônibus");
         jPPainelNav.add(jLLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 70));
 
-        jBOnibus.setBackground(new java.awt.Color(238, 241, 243));
+        jBOnibus.setBackground(new java.awt.Color(244, 247, 249));
         jBOnibus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBOnibus.setForeground(new java.awt.Color(21, 80, 150));
         jBOnibus.setText("Ônibus");
@@ -186,15 +174,15 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBNavCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNavCadastro1ActionPerformed
+    private void jBUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUsuariosActionPerformed
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardUsuarios");
-    }//GEN-LAST:event_jBNavCadastro1ActionPerformed
+    }//GEN-LAST:event_jBUsuariosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHomeActionPerformed
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardInicial");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBHomeActionPerformed
 
     private void jBUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUsuarioActionPerformed
         // TODO add your handling code here:
@@ -217,34 +205,16 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new JFTelaEstrutural().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBairros;
-    private javax.swing.JButton jBNavCadastro1;
+    private javax.swing.JButton jBHome;
     private javax.swing.JButton jBOnibus;
     private javax.swing.JButton jBRotas;
     private javax.swing.JButton jBUsuario;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBUsuarios;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLLogo1;
     private javax.swing.JPanel jPPainelConteudo;

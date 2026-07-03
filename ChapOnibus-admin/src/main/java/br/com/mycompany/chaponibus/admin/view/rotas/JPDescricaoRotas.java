@@ -4,9 +4,13 @@
  */
 package br.com.mycompany.chaponibus.admin.view.rotas;
 
+import br.com.mycompany.chaponibus.admin.dao.RotaDAO;
+import br.com.mycompany.chaponibus.admin.model.PontoOnibus;
+import br.com.mycompany.chaponibus.admin.model.Rota;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingUtilities;
 import java.util.List;
-import org.jxmapviewer.viewer.GeoPosition;
 
 /**
  *
@@ -20,7 +24,7 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
     public JPDescricaoRotas() {
         initComponents();
         
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(21,80,150), 1));
+        jBRemoverPonto.setVisible(false);
     }
 
     /**
@@ -33,43 +37,29 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        jPTabela = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTPontosOnibus = new javax.swing.JTable();
+        jPCabecalho = new javax.swing.JPanel();
         jLNome = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jRBPontoRota = new javax.swing.JRadioButton();
         jLCadastrarPontos = new javax.swing.JLabel();
         jRBPontoOnibus = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTPontosOnibus = new javax.swing.JTable();
         jBRemoverPonto = new javax.swing.JButton();
+        jBDesfazerUltimoPonto = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPBotoes = new javax.swing.JPanel();
         jBConfirmar = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jBExcluir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(244, 247, 249));
         setOpaque(false);
+        setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(244, 247, 249));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLNome.setText("Nome da rota");
-        jPanel1.add(jLNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 360, -1));
-
-        buttonGroup1.add(jRBPontoRota);
-        jRBPontoRota.setSelected(true);
-        jRBPontoRota.setText("Ponto de Rota");
-        jRBPontoRota.addActionListener(this::jRBPontoRotaActionPerformed);
-        jPanel1.add(jRBPontoRota, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        jLCadastrarPontos.setText("Cadastrar pontos");
-        jPanel1.add(jLCadastrarPontos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        buttonGroup1.add(jRBPontoOnibus);
-        jRBPontoOnibus.setText("Ponto de Ônibus");
-        jRBPontoOnibus.setActionCommand("");
-        jRBPontoOnibus.addActionListener(this::jRBPontoOnibusActionPerformed);
-        jPanel1.add(jRBPontoOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, -1));
+        jPTabela.setOpaque(false);
+        jPTabela.setPreferredSize(new java.awt.Dimension(440, 380));
 
         jTPontosOnibus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,52 +80,133 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTPontosOnibus.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTPontosOnibus.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTPontosOnibus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTPontosOnibusMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTPontosOnibus);
         if (jTPontosOnibus.getColumnModel().getColumnCount() > 0) {
             jTPontosOnibus.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 360, 340));
+        javax.swing.GroupLayout jPTabelaLayout = new javax.swing.GroupLayout(jPTabela);
+        jPTabela.setLayout(jPTabelaLayout);
+        jPTabelaLayout.setHorizontalGroup(
+            jPTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTabelaLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        jPTabelaLayout.setVerticalGroup(
+            jPTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPTabelaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        add(jPTabela, java.awt.BorderLayout.CENTER);
+
+        jPCabecalho.setBackground(new java.awt.Color(244, 247, 249));
+        jPCabecalho.setOpaque(false);
+        jPCabecalho.setPreferredSize(new java.awt.Dimension(440, 170));
+        jPCabecalho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLNome.setText("Nome da rota");
+        jPCabecalho.add(jLNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jPCabecalho.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 400, 30));
+
+        buttonGroup1.add(jRBPontoRota);
+        jRBPontoRota.setSelected(true);
+        jRBPontoRota.setText("Ponto de Rota");
+        jRBPontoRota.addActionListener(this::jRBPontoRotaActionPerformed);
+        jPCabecalho.add(jRBPontoRota, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        jLCadastrarPontos.setText("Cadastrar pontos");
+        jPCabecalho.add(jLCadastrarPontos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        buttonGroup1.add(jRBPontoOnibus);
+        jRBPontoOnibus.setText("Ponto de Ônibus");
+        jRBPontoOnibus.setActionCommand("");
+        jRBPontoOnibus.addActionListener(this::jRBPontoOnibusActionPerformed);
+        jPCabecalho.add(jRBPontoOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
         jBRemoverPonto.setText("Remover ponto");
-        jPanel1.add(jBRemoverPonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 130, -1));
+        jBRemoverPonto.addActionListener(this::jBRemoverPontoActionPerformed);
+        jPCabecalho.add(jBRemoverPonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 130, -1));
 
-        jBConfirmar.setText("Confirmar");
+        jBDesfazerUltimoPonto.setText("Desfazer último ponto clicado");
+        jBDesfazerUltimoPonto.addActionListener(this::jBDesfazerUltimoPontoActionPerformed);
+        jPCabecalho.add(jBDesfazerUltimoPonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 210, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(21, 80, 150));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Cadastro de Nova Rota");
+        jPCabecalho.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 440, -1));
+
+        add(jPCabecalho, java.awt.BorderLayout.NORTH);
+
+        jPBotoes.setMinimumSize(new java.awt.Dimension(440, 50));
+        jPBotoes.setOpaque(false);
+        jPBotoes.setPreferredSize(new java.awt.Dimension(440, 50));
+        jPBotoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jBConfirmar.setBackground(new java.awt.Color(21, 80, 150));
+        jBConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        jBConfirmar.setText("Salvar Rota");
         jBConfirmar.addActionListener(this::jBConfirmarActionPerformed);
-        jPanel1.add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 120, -1));
+        jPBotoes.add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 130, 30));
 
         jBCancelar.setText("Cancelar");
         jBCancelar.addActionListener(this::jBCancelarActionPerformed);
-        jPanel1.add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 120, -1));
+        jPBotoes.add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 120, 30));
 
-        jButton1.setText("Desfazer último ponto clicado");
-        jButton1.setActionCommand("Desfazer último ponto clicado");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 210, -1));
+        jBExcluir.setText("Excluir Rota");
+        jBExcluir.addActionListener(this::jBExcluirActionPerformed);
+        jPBotoes.add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
-        );
+        add(jPBotoes, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void atualizarListaPontosOnibus(List<PontoOnibus> pontosOnibus) {
+        DefaultTableModel modelo = (DefaultTableModel) jTPontosOnibus.getModel();
+        modelo.setNumRows(0);
+
+        for (PontoOnibus po : pontosOnibus) {
+            modelo.addRow(new Object[]{ po.getReferencia() });
+        }
+
+        jBRemoverPonto.setVisible(false);
+    }
+    
+    public void carregarDadosDaRota(int idRota) {
+        try {
+            RotaDAO dao = new RotaDAO();
+            Rota rota = dao.buscarCompleta(idRota);
+
+            if (rota != null) {
+                jTextField1.setText(rota.getNomeRota());
+                atualizarListaPontosOnibus(rota.getListaPontosOnibus());
+                // Aqui você também deve chamar o método do seu mapa para desenhar o trajetoGeom
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         JPRotas parent = (JPRotas) SwingUtilities.getAncestorOfClass(JPRotas.class, this);
         if (parent != null) {
-            parent.exibirTabela();
+            parent.finalizarEdicao();
             jTextField1.setText("");
+            
+            DefaultTableModel modelo = (DefaultTableModel) jTPontosOnibus.getModel();
+            modelo.setNumRows(0);
         }
     }//GEN-LAST:event_jBCancelarActionPerformed
 
@@ -149,47 +220,105 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
         if (parent != null) parent.setModoAtual(JPRotas.ModoEdicao.ONIBUS);
     }//GEN-LAST:event_jRBPontoOnibusActionPerformed
 
-    private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
-        String nomeRota = jTextField1.getText();
-    
-        JPRotas parent = (JPRotas) SwingUtilities.getAncestorOfClass(JPRotas.class, this);
-        if (parent != null) {
-            List<GeoPosition> trajeto = parent.getPontosTrajeto();
-            List<GeoPosition> paradas = parent.getPontosOnibus();
-
-            if (nomeRota.trim().isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Preencha o nome da rota!");
-                return;
-            }
-            if (trajeto.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Desenhe pelo menos um trajeto no mapa!");
-                return;
-            }
-
-            // TODO: Chamar sua classe RotaDAO aqui passando os dados!
-            System.out.println("Salvando Rota: " + nomeRota);
-            System.out.println("Total de pontos do trajeto: " + trajeto.size());
-            System.out.println("Total de paradas de ônibus: " + paradas.size());
-        }
-    }//GEN-LAST:event_jBConfirmarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBDesfazerUltimoPontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesfazerUltimoPontoActionPerformed
         JPRotas parent = (JPRotas) SwingUtilities.getAncestorOfClass(JPRotas.class, this);
         if (parent != null) {
             parent.desfazerUltimoPonto();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBDesfazerUltimoPontoActionPerformed
 
+    private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
+        JPRotas parent = (JPRotas) SwingUtilities.getAncestorOfClass(JPRotas.class, this);
+
+        if (parent == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro: Interface pai não encontrada.");
+            return;
+        }
+
+        if (jTextField1.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, informe o nome da rota.");
+            return;
+        }
+
+        Rota rota = parent.montarObjetoRota(jTextField1.getText());
+
+        try {
+            RotaDAO dao = new RotaDAO();
+            dao.salvar(rota); 
+            dao.sincronizarPontosDaRota(rota.getId(), rota.getListaCliquesTrajeto());
+            dao.sincronizarParadas(rota.getId(), rota.getListaPontosOnibus());
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Rota salva com sucesso!");
+
+            jTextField1.setText("");
+            ((DefaultTableModel) jTPontosOnibus.getModel()).setNumRows(0);
+
+            parent.finalizarEdicao();
+
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jBConfirmarActionPerformed
+
+    private void jBRemoverPontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverPontoActionPerformed
+        int linhaSelecionada = jTPontosOnibus.getSelectedRow();
+        
+        if (linhaSelecionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um ponto na tabela para remover!");
+            return;
+        }
+        
+        JPRotas parent = (JPRotas) SwingUtilities.getAncestorOfClass(JPRotas.class, this);
+        if (parent != null) {
+            parent.removerPontoOnibus(linhaSelecionada);
+        }
+    }//GEN-LAST:event_jBRemoverPontoActionPerformed
+
+    private void jTPontosOnibusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPontosOnibusMouseClicked
+        boolean selecionado = (jTPontosOnibus.getSelectedRow() != -1);
+        
+        jBRemoverPonto.setVisible(selecionado);
+    }//GEN-LAST:event_jTPontosOnibusMouseClicked
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        int confirmacao = javax.swing.JOptionPane.showConfirmDialog(this, 
+                "Tem certeza que deseja excluir esta rota permanentemente?", 
+                "Confirmar Exclusão", 
+                javax.swing.JOptionPane.YES_NO_OPTION);
+
+        if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
+            try {
+                JPRotas parent = (JPRotas) javax.swing.SwingUtilities.getAncestorOfClass(JPRotas.class, this);
+
+                if (parent != null) {
+                    Rota r = parent.montarObjetoRota(jTextField1.getText());
+
+                    RotaDAO dao = new RotaDAO();
+                    dao.excluir(r.getId());
+
+                    javax.swing.JOptionPane.showMessageDialog(this, "Rota excluída com sucesso!");
+
+                    parent.finalizarEdicao();
+                }
+            } catch (java.sql.SQLException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao excluir rota: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jBExcluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBConfirmar;
+    private javax.swing.JButton jBDesfazerUltimoPonto;
+    private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBRemoverPonto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLCadastrarPontos;
     private javax.swing.JLabel jLNome;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPBotoes;
+    private javax.swing.JPanel jPCabecalho;
+    private javax.swing.JPanel jPTabela;
     private javax.swing.JRadioButton jRBPontoOnibus;
     private javax.swing.JRadioButton jRBPontoRota;
     private javax.swing.JScrollPane jScrollPane1;
