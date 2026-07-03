@@ -202,18 +202,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         getContentPane().add(jPPainelNav, java.awt.BorderLayout.LINE_START);
 
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout jPTelaInicialLayout = new javax.swing.GroupLayout(jPTelaInicial);
-        jPTelaInicial.setLayout(jPTelaInicialLayout);
-        jPTelaInicialLayout.setHorizontalGroup(
-            jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1110, Short.MAX_VALUE)
-        );
-        jPTelaInicialLayout.setVerticalGroup(
-            jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-
         jPPainelConteudo.add(jPTelaInicial, "cardInicial");
         jPPainelConteudo.add(jPRotas, "cardRotas");
         jPPainelConteudo.add(jPUsuarios1, "cardUsuarios");
