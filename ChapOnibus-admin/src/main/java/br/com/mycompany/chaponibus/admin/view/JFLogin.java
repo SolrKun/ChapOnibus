@@ -7,6 +7,7 @@ package br.com.mycompany.chaponibus.admin.view;
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
 import br.com.mycompany.chaponibus.admin.util.Sessao;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
+import br.com.mycompany.chaponibus.admin.view.usuarios.login.JFTrocarSenhaPrimeiroAcesso;
 import static java.awt.EventQueue.invokeLater;
 import java.awt.Image;
 import java.net.URL;
@@ -241,11 +242,20 @@ public class JFLogin extends javax.swing.JFrame {
                 if (validaUsuario != null) {
                     Sessao.conectar(validaUsuario);
                     
-                    JOptionPane.showMessageDialog(null, "Bem-vindo, " + validaUsuario.getUsername() + "!");
                     jBLogin.setIcon(null);
+                    
+                    if (validaUsuario.isPrimeiroAcesso()) {
+                         new JFTrocarSenhaPrimeiroAcesso(validaUsuario).setVisible(true);
+                         this.dispose();
+                        
+                    } else {
+                    
+                    JOptionPane.showMessageDialog(null, "Bem-vindo, " + validaUsuario.getUsername() + "!");
+                    
                     
                     new JFTelaEstrutural().setVisible(true);
                     this.dispose();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Informe um usuário e senha válidos");
                     

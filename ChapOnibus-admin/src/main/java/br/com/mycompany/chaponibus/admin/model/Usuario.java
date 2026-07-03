@@ -12,6 +12,7 @@ public class Usuario {
     private String username;
     private String password;
     private String role;
+    private boolean primeiroAcesso;
 
     public String getUsername() {
         return username;
@@ -41,9 +42,18 @@ public class Usuario {
         
     }
 
-    public Usuario(String username, String password, String role) {
+    public Usuario(String username, String password, String role, boolean primeiroAcesso) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.primeiroAcesso = primeiroAcesso;
+    }
+    
+    public boolean isPrimeiroAcesso() {
+        return primeiroAcesso;
+    }
+    
+    public void setPrimeiroAcesso(boolean primeiroAcesso) {
+        this.primeiroAcesso = primeiroAcesso;
     }
 }
