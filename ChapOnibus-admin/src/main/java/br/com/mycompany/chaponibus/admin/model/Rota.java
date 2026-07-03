@@ -73,4 +73,17 @@ public class Rota {
     public String toString() {
         return nomeRota;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Rota other = (Rota) obj;
+        return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id);
+    }
 }

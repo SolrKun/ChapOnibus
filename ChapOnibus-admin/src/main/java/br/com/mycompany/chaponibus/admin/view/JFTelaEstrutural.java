@@ -18,6 +18,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFTelaEstrutural.class.getName());
     private Usuario atual;
+    
+    JPTelaInicial telaInicial = new JPTelaInicial();
 
     /**
      * Creates new form JFTelaInicial
@@ -26,6 +28,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.atual = Sessao.getUsuarioLogado();
+        
+        jPPainelConteudo.add(telaInicial, "cardInicial");
         
         CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
         cl.show(jPPainelConteudo, "cardInicial");
@@ -82,9 +86,9 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jPRodape = new javax.swing.JPanel();
         jBUsuario = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
-        jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
         jPRotas = new br.com.mycompany.chaponibus.admin.view.rotas.JPRotas();
         jPUsuarios1 = new br.com.mycompany.chaponibus.admin.view.usuarios.JPUsuarios();
+        jPOnibus1 = new br.com.mycompany.chaponibus.admin.view.onibus.JPOnibus();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(244, 247, 249));
@@ -202,9 +206,9 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         getContentPane().add(jPPainelNav, java.awt.BorderLayout.LINE_START);
 
         jPPainelConteudo.setLayout(new java.awt.CardLayout());
-        jPPainelConteudo.add(jPTelaInicial, "cardInicial");
         jPPainelConteudo.add(jPRotas, "cardRotas");
         jPPainelConteudo.add(jPUsuarios1, "cardUsuarios");
+        jPPainelConteudo.add(jPOnibus1, "cardOnibus");
 
         getContentPane().add(jPPainelConteudo, java.awt.BorderLayout.CENTER);
 
@@ -226,7 +230,8 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     }//GEN-LAST:event_jBUsuarioActionPerformed
 
     private void jBOnibusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOnibusActionPerformed
-        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) jPPainelConteudo.getLayout();
+        cl.show(jPPainelConteudo, "cardOnibus");
     }//GEN-LAST:event_jBOnibusActionPerformed
 
     private void jBRotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRotasActionPerformed
@@ -251,11 +256,11 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private javax.swing.JLabel jLLogo1;
     private javax.swing.JPanel jPBotoes;
     private javax.swing.JPanel jPCabecalho;
+    private br.com.mycompany.chaponibus.admin.view.onibus.JPOnibus jPOnibus1;
     private javax.swing.JPanel jPPainelConteudo;
     private javax.swing.JPanel jPPainelNav;
     private javax.swing.JPanel jPRodape;
     private br.com.mycompany.chaponibus.admin.view.rotas.JPRotas jPRotas;
-    private br.com.mycompany.chaponibus.admin.view.JPTelaInicial jPTelaInicial;
     private br.com.mycompany.chaponibus.admin.view.usuarios.JPUsuarios jPUsuarios1;
     // End of variables declaration//GEN-END:variables
 }

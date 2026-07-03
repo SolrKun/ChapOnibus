@@ -120,7 +120,7 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
         jPPrincipal.add(jCBPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 430, 40));
 
         jLInfo.setBackground(new java.awt.Color(236, 240, 255));
-        jLInfo.setText("O novo administrador deverá alterar sua senha no primeiro login.");
+        jLInfo.setText("<html>A senha padrão gerada é 123456. Por questões de segurança, o novo <br>administrador deverá alterar sua senha no primeiro login.</html>");
         jPPrincipal.add(jLInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 430, 40));
 
         jBCadastrar.setBackground(new java.awt.Color(248, 158, 49));

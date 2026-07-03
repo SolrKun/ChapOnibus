@@ -6,11 +6,27 @@ public class Onibus {
     private String placa;
     private String modelo;
     private int capacidade;
+    private Rota rotaAtual;
+
+    public Rota getRotaAtual() {
+        return rotaAtual;
+    }
+
+    public void setRotaAtual(Rota rotaAtual) {
+        this.rotaAtual = rotaAtual;
+    }
 
     public Onibus() {
     }
 
     public Onibus(String placa, String modelo, int capacidade) {
+        this.placa = placa;
+        this.modelo = modelo;
+        this.capacidade = capacidade;
+    }
+    
+    public Onibus(int id, String placa, String modelo, int capacidade) {
+        this.idOnibus = id;
         this.placa = placa;
         this.modelo = modelo;
         this.capacidade = capacidade;

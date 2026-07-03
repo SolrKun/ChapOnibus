@@ -11,7 +11,6 @@ import br.com.mycompany.chaponibus.admin.util.Sessao;
  * @author carlos62347296
  */
 public class JPTelaInicial extends javax.swing.JPanel {
-
     /**
      * Creates new form JPTelaInicial
      */
@@ -19,6 +18,11 @@ public class JPTelaInicial extends javax.swing.JPanel {
         initComponents();
         
         jLabel2.setText(Sessao.getUsuarioLogado().getUsername());
+        
+        if (!java.beans.Beans.isDesignTime()) {
+            if (Sessao.getUsuarioLogado() != null) {
+            }
+        }
     }
 
     /**

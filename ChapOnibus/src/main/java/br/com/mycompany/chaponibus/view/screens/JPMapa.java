@@ -384,11 +384,12 @@ public class JPMapa extends javax.swing.JPanel {
         jPAbaInferior.setOpaque(false);
         jPAbaInferior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPAbaInferior.add(jCBFiltroRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 340, 30));
+        jCBFiltroRotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPAbaInferior.add(jCBFiltroRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 340, 40));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Rota");
-        jPAbaInferior.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jPAbaInferior.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLayeredPane1.setLayer(jPAbaInferior, javax.swing.JLayeredPane.PALETTE_LAYER);
         jLayeredPane1.add(jPAbaInferior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 375, 150));
