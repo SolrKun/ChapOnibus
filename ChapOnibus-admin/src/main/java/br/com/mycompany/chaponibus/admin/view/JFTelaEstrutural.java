@@ -72,6 +72,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private void initComponents() {
 
         jPPainelNav = new javax.swing.JPanel();
+        jPCabecalho = new javax.swing.JPanel();
         jBUsuarios = new javax.swing.JButton();
         jBHome = new javax.swing.JButton();
         jBRotas = new javax.swing.JButton();
@@ -79,7 +80,13 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBBairros = new javax.swing.JButton();
         jLLogo = new javax.swing.JLabel();
         jLLogo1 = new javax.swing.JLabel();
+        jPBotoes = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jBRotas = new javax.swing.JButton();
         jBOnibus = new javax.swing.JButton();
+        jBNavCadastro1 = new javax.swing.JButton();
+        jPRodape = new javax.swing.JPanel();
+        jBUsuario = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
         jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
         jPRotas = new br.com.mycompany.chaponibus.admin.view.rotas.JPRotas();
@@ -90,31 +97,57 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jPPainelNav.setBackground(new java.awt.Color(244, 247, 249));
         jPPainelNav.setMinimumSize(new java.awt.Dimension(180, 160));
         jPPainelNav.setPreferredSize(new java.awt.Dimension(180, 160));
-        jPPainelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPPainelNav.setLayout(new java.awt.BorderLayout());
 
-        jBUsuarios.setBackground(new java.awt.Color(244, 247, 249));
-        jBUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBUsuarios.setForeground(new java.awt.Color(21, 80, 150));
-        jBUsuarios.setText("Usuários");
-        jBUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jBUsuarios.addActionListener(this::jBUsuariosActionPerformed);
-        jPPainelNav.add(jBUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 130, 40));
+        jPCabecalho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBHome.setBackground(new java.awt.Color(244, 247, 249));
-        jBHome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBHome.setForeground(new java.awt.Color(21, 80, 150));
-        jBHome.setText("Home");
-        jBHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jBHome.addActionListener(this::jBHomeActionPerformed);
-        jPPainelNav.add(jBHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 40));
+        jLLogo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLLogo.setForeground(new java.awt.Color(91, 95, 97));
+        jLLogo.setText("Painel Administrativo");
+        jPCabecalho.add(jLLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, 70));
 
-        jBRotas.setBackground(new java.awt.Color(244, 247, 249));
+        jLLogo1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLLogo1.setForeground(new java.awt.Color(0, 48, 99));
+        jLLogo1.setText("Chapônibus");
+        jPCabecalho.add(jLLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 70));
+
+        jPPainelNav.add(jPCabecalho, java.awt.BorderLayout.NORTH);
+
+        jPBotoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setBackground(new java.awt.Color(238, 241, 243));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(21, 80, 150));
+        jButton1.setText("Home");
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPBotoes.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 40));
+
+        jBRotas.setBackground(new java.awt.Color(238, 241, 243));
         jBRotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBRotas.setForeground(new java.awt.Color(21, 80, 150));
         jBRotas.setText("Rotas");
         jBRotas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBRotas.addActionListener(this::jBRotasActionPerformed);
-        jPPainelNav.add(jBRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 40));
+        jPBotoes.add(jBRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 40));
+
+        jBOnibus.setBackground(new java.awt.Color(238, 241, 243));
+        jBOnibus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBOnibus.setForeground(new java.awt.Color(21, 80, 150));
+        jBOnibus.setText("Ônibus");
+        jBOnibus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBOnibus.addActionListener(this::jBOnibusActionPerformed);
+        jPBotoes.add(jBOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 40));
+
+        jBNavCadastro1.setBackground(new java.awt.Color(238, 241, 243));
+        jBNavCadastro1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBNavCadastro1.setForeground(new java.awt.Color(21, 80, 150));
+        jBNavCadastro1.setText("Usuários");
+        jBNavCadastro1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBNavCadastro1.addActionListener(this::jBNavCadastro1ActionPerformed);
+        jPBotoes.add(jBNavCadastro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 130, 40));
+
+        jPPainelNav.add(jPBotoes, java.awt.BorderLayout.CENTER);
 
         jBUsuario.setBackground(new java.awt.Color(244, 247, 249));
         jBUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -132,16 +165,28 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBBairros.addActionListener(this::jBBairrosActionPerformed);
         jPPainelNav.add(jBBairros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 130, 40));
 
-        jLLogo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLLogo.setForeground(new java.awt.Color(91, 95, 97));
-        jLLogo.setText("Painel Administrativo");
-        jPPainelNav.add(jLLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, 70));
+        javax.swing.GroupLayout jPRodapeLayout = new javax.swing.GroupLayout(jPRodape);
+        jPRodape.setLayout(jPRodapeLayout);
+        jPRodapeLayout.setHorizontalGroup(
+            jPRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jPRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPRodapeLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPRodapeLayout.setVerticalGroup(
+            jPRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(jPRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPRodapeLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
-        jLLogo1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLLogo1.setForeground(new java.awt.Color(0, 48, 99));
-        jLLogo1.setText("Chapônibus");
-        jPPainelNav.add(jLLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 70));
-
+        jPPainelNav.add(jPRodape, java.awt.BorderLayout.SOUTH);
         jBOnibus.setBackground(new java.awt.Color(244, 247, 249));
         jBOnibus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBOnibus.setForeground(new java.awt.Color(21, 80, 150));
@@ -188,10 +233,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBUsuarioActionPerformed
 
-    private void jBBairrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBairrosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBBairrosActionPerformed
-
     private void jBOnibusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOnibusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBOnibusActionPerformed
@@ -209,6 +250,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBNavCadastro1;
     private javax.swing.JButton jBBairros;
     private javax.swing.JButton jBHome;
     private javax.swing.JButton jBOnibus;
@@ -217,8 +259,11 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private javax.swing.JButton jBUsuarios;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLLogo1;
+    private javax.swing.JPanel jPBotoes;
+    private javax.swing.JPanel jPCabecalho;
     private javax.swing.JPanel jPPainelConteudo;
     private javax.swing.JPanel jPPainelNav;
+    private javax.swing.JPanel jPRodape;
     private br.com.mycompany.chaponibus.admin.view.rotas.JPRotas jPRotas;
     private br.com.mycompany.chaponibus.admin.view.JPTelaInicial jPTelaInicial;
     private br.com.mycompany.chaponibus.admin.view.usuarios.JPUsuarios jPUsuarios1;
