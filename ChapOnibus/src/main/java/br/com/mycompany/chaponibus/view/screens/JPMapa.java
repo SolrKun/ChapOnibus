@@ -5,6 +5,7 @@
 package br.com.mycompany.chaponibus.view.screens;
 
 import br.com.mycompany.chaponibus.dao.RotaDAO;
+import br.com.mycompany.chaponibus.model.Onibus;
 import br.com.mycompany.chaponibus.model.PontoOnibus;
 import br.com.mycompany.chaponibus.model.PontoRota;
 import br.com.mycompany.chaponibus.model.Rota;
@@ -37,6 +38,15 @@ import org.jxmapviewer.viewer.TileFactoryInfo;
  */
 public class JPMapa extends javax.swing.JPanel {
     
+    private static class OnibusAtivo {
+        br.com.mycompany.chaponibus.model.Onibus dadosOnibus;
+        Rota rota;
+        List<PontoRota> trajeto;
+        int indiceAtual;
+        int subIndice;
+        GeoPosition posicaoAtual;
+    }
+    
     private JXMapViewer mapViewer;
     private JFEstruturaCelular telaPrincipal;
     private Sessao sessaoAtual = new Sessao();
@@ -44,6 +54,9 @@ public class JPMapa extends javax.swing.JPanel {
     private List<PontoRota> pontosTrajeto = new ArrayList<>();
     private List<PontoOnibus> pontosOnibus = new ArrayList<>();
     private List<Rota> listaDeRotasDisponiveis = new ArrayList<>();
+    
+    private List<OnibusAtivo> listaOnibusAtivos = new java.util.ArrayList<>();
+    private javax.swing.Timer timerSimulacaoCentral;
     
     public JPMapa(JFEstruturaCelular tela) {        
         this.telaPrincipal = tela;
@@ -80,17 +93,46 @@ public class JPMapa extends javax.swing.JPanel {
     public void recarregarMapaComDadosDoBanco() {
         try {
             RotaDAO dao = new RotaDAO();
-            listaDeRotasDisponiveis = dao.listarTodas();
+            List<Rota> rotasSimples = dao.listarTodas(); 
             
+            listaDeRotasDisponiveis.clear();
             jCBFiltroRotas.removeAllItems();
             jCBFiltroRotas.addItem("TODAS AS ROTAS");
 
-            for (Rota r : listaDeRotasDisponiveis) {
-                jCBFiltroRotas.addItem(r.getNomeRota());
+            listaOnibusAtivos.clear();
+            java.util.Random random = new java.util.Random();
+
+            for (Rota r : rotasSimples) {
+                Rota detalhada = dao.buscarCompleta(r.getId());
+                
+                if (detalhada != null) {
+                    listaDeRotasDisponiveis.add(detalhada); 
+                    jCBFiltroRotas.addItem(detalhada.getNomeRota());
+
+                    if (detalhada.getListaCliquesTrajeto() != null && !detalhada.getListaCliquesTrajeto().isEmpty()) {
+                        String placa = "MCO-" + (random.nextInt(8999) + 1000);
+                        String modelo = detalhada.getNomeRota().toLowerCase().contains("efapi") ? "Marcopolo Torino" : "Mercedes-Benz Padron";
+                        br.com.mycompany.chaponibus.model.Onibus veiculo = new br.com.mycompany.chaponibus.model.Onibus(placa, modelo, 60);
+                        
+                        OnibusAtivo novoOnibus = new OnibusAtivo();
+                        novoOnibus.dadosOnibus = veiculo;
+                        novoOnibus.rota = detalhada;
+                        novoOnibus.trajeto = detalhada.getListaCliquesTrajeto();
+                        
+                        if (novoOnibus.trajeto.size() > 1) {
+                            novoOnibus.indiceAtual = random.nextInt(novoOnibus.trajeto.size() - 1);
+                            novoOnibus.subIndice = random.nextInt(15);
+                            PontoRota pRef = novoOnibus.trajeto.get(novoOnibus.indiceAtual);
+                            novoOnibus.posicaoAtual = new GeoPosition(pRef.getLatitude(), pRef.getLongitude());
+                        }
+                        listaOnibusAtivos.add(novoOnibus);
+                    }
+                }
             }
 
-            desenharRotasNoMapa(null); 
+            iniciarSimulacaoGlobal();
             jCBFiltroRotas.setSelectedIndex(0);
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar rotas no mapa: " + e.getMessage());
         }
@@ -152,45 +194,149 @@ public class JPMapa extends javax.swing.JPanel {
     private void filtrarRotasNoMapa() {
         int indexSelecionado = jCBFiltroRotas.getSelectedIndex();
 
-        // Se for -1 (nada selecionado) ou 0 ("--- Mostrar Todas ---"), envia null para desenhar tudo
         if (indexSelecionado <= 0) {
             desenharRotasNoMapa(null);
             return;
         }
 
-        // Buscamos a rota correspondente na lista (subtrai 1 porque o index 0 é o texto informativo)
         Rota rotaEscolhida = listaDeRotasDisponiveis.get(indexSelecionado - 1);
         desenharRotasNoMapa(rotaEscolhida);
+
+        if (rotaEscolhida.getListaCliquesTrajeto() != null && !rotaEscolhida.getListaCliquesTrajeto().isEmpty()) {
+            java.util.Set<GeoPosition> todasAsPosicoes = new java.util.HashSet<>();
+            for (PontoRota p : rotaEscolhida.getListaCliquesTrajeto()) {
+                todasAsPosicoes.add(new GeoPosition(p.getLatitude(), p.getLongitude()));
+            }
+            mapViewer.zoomToBestFit(todasAsPosicoes, 0.7);
+        }
     }
     
     private void desenharRotasNoMapa(Rota rotaFiltro) {
-        try {
-            RotaDAO dao = new RotaDAO();
-            List<Painter<JXMapViewer>> painters = new ArrayList<>();
+        List<Painter<JXMapViewer>> painters = new java.util.ArrayList<>();
 
-            if (rotaFiltro != null) {
-                Rota detalhada = dao.buscarCompleta(rotaFiltro.getId());
-                if (detalhada != null) {
-                    painters.add(new RotaPainter(detalhada.getListaCliquesTrajeto()));
-                    painters.add(new ParadaPainter(detalhada.getListaPontosOnibus()));
+        if (rotaFiltro != null) {
+            painters.add(new RotaPainter(rotaFiltro.getListaCliquesTrajeto()));
+            painters.add(new ParadaPainter(rotaFiltro.getListaPontosOnibus()));
+        } else {
+            for (Rota r : listaDeRotasDisponiveis) {
+                painters.add(new RotaPainter(r.getListaCliquesTrajeto()));
+                painters.add(new ParadaPainter(r.getListaPontosOnibus()));
+            }
+        }
+
+        for (OnibusAtivo bus : listaOnibusAtivos) {
+            if (rotaFiltro == null || bus.rota.getId() == rotaFiltro.getId()) {
+                if (bus.posicaoAtual != null) {
+                    painters.add(new OnibusSimuladoPainter(bus.posicaoAtual, bus.dadosOnibus));
                 }
+            }
+        }
+
+        CompoundPainter<JXMapViewer> compoundPainter = new CompoundPainter<>(painters);
+        mapViewer.setOverlayPainter(compoundPainter);
+        mapViewer.repaint();
+    }
+    
+    private static class OnibusSimuladoPainter implements Painter<JXMapViewer> {
+        private final GeoPosition posicaoOnibus;
+        private final br.com.mycompany.chaponibus.model.Onibus dadosOnibus;
+        private static java.awt.Image imgOnibus = null;
+
+        public OnibusSimuladoPainter(GeoPosition posicaoOnibus, br.com.mycompany.chaponibus.model.Onibus dadosOnibus) {
+            this.posicaoOnibus = posicaoOnibus;
+            this.dadosOnibus = dadosOnibus;
+            
+            if (imgOnibus == null) {
+                java.net.URL imgUrl = getClass().getResource("/br/com/mycompany/chaponibus/assets/bus-side-solid.png");
+                if (imgUrl != null) {
+                    imgOnibus = new javax.swing.ImageIcon(imgUrl).getImage();
+                }
+            }
+        }
+
+        @Override
+        public void paint(Graphics2D g, JXMapViewer map, int w, int h) {
+            if (posicaoOnibus == null) return;
+
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            Point2D pixel = map.convertGeoPositionToPoint(posicaoOnibus);
+            int x = (int) pixel.getX();
+            int y = (int) pixel.getY();
+
+            int tamanhoFundo = 24;
+            g.setColor(new Color(130, 61, 0));
+            g.fillOval(x - (tamanhoFundo / 2), y - (tamanhoFundo / 2), tamanhoFundo, tamanhoFundo);
+
+//            g.setColor(Color.WHITE);
+//            g.setStroke(new BasicStroke(1.5f));
+//            g.drawOval(x - (tamanhoFundo / 2), y - (tamanhoFundo / 2), tamanhoFundo, tamanhoFundo);
+
+            if (imgOnibus != null) {
+                int tamanhoIcone = 16;
+                g.drawImage(imgOnibus, x - (tamanhoIcone / 2), y - (tamanhoIcone / 2), tamanhoIcone, tamanhoIcone, null);
             } else {
-                for (Rota r : listaDeRotasDisponiveis) {
-                    Rota detalhada = dao.buscarCompleta(r.getId());
-                    if (detalhada != null) {
-                        painters.add(new RotaPainter(detalhada.getListaCliquesTrajeto()));
-                        painters.add(new ParadaPainter(detalhada.getListaPontosOnibus()));
+                g.setColor(Color.WHITE);
+                g.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 10));
+                g.drawString("BUS", x - 10, y + 4);
+            }
+
+//            if (dadosOnibus != null) {
+//                String textoInformativo = dadosOnibus.getModelo() + " [" + dadosOnibus.getPlaca() + "]";
+//
+//                g.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 10));
+//                int larguraDoTexto = g.getFontMetrics().stringWidth(textoInformativo);
+//                int alturaDoTexto = 16;
+//
+//                g.setColor(new Color(30, 30, 30, 200));
+//                g.fillRoundRect(x - (larguraDoTexto / 2) - 6, y - 38, larguraDoTexto + 12, alturaDoTexto, 6, 6);
+//
+//                g.setColor(Color.WHITE);
+//                g.drawString(textoInformativo, x - (larguraDoTexto / 2), y - 26);
+//            }
+        }
+    }
+    
+    private void iniciarSimulacaoGlobal() {
+        if (timerSimulacaoCentral != null && timerSimulacaoCentral.isRunning()) {
+            timerSimulacaoCentral.stop();
+        }
+
+        int passosPorSegmento = 300;
+
+        timerSimulacaoCentral = new javax.swing.Timer(50, e -> {
+            for (OnibusAtivo bus : listaOnibusAtivos) {
+                if (bus.trajeto == null || bus.trajeto.size() < 2) continue;
+
+                PontoRota pontoAtual = bus.trajeto.get(bus.indiceAtual);
+                PontoRota pontoProximo = bus.trajeto.get(bus.indiceAtual + 1);
+
+                double t = (double) bus.subIndice / passosPorSegmento;
+                double lat = pontoAtual.getLatitude() + (pontoProximo.getLatitude() - pontoAtual.getLatitude()) * t;
+                double lon = pontoAtual.getLongitude() + (pontoProximo.getLongitude() - pontoAtual.getLongitude()) * t;
+
+                bus.posicaoAtual = new GeoPosition(lat, lon);
+                bus.subIndice++;
+
+                if (bus.subIndice > passosPorSegmento) {
+                    bus.subIndice = 0;
+                    bus.indiceAtual++;
+
+                    if (bus.indiceAtual >= bus.trajeto.size() - 1) {
+                        bus.indiceAtual = 0;
                     }
                 }
             }
 
-            CompoundPainter<JXMapViewer> compoundPainter = new CompoundPainter<>(painters);
-            mapViewer.setOverlayPainter(compoundPainter);
-            mapViewer.repaint();
+            int indexSelecionado = jCBFiltroRotas.getSelectedIndex();
+            Rota rotaFiltrada = null;
+            if (indexSelecionado > 0) {
+                rotaFiltrada = listaDeRotasDisponiveis.get(indexSelecionado - 1);
+            }
+            desenharRotasNoMapa(rotaFiltrada);
+        });
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar linhas no mapa: " + e.getMessage());
-        }
+        timerSimulacaoCentral.start();
     }
     
     @SuppressWarnings("unchecked")
