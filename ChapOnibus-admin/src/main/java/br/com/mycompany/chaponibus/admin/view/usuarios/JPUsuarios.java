@@ -100,36 +100,31 @@ public class JPUsuarios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPCabecalho = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPConteudo = new javax.swing.JPanel();
-        jBEditar = new javax.swing.JButton();
+        jBCadastrarUsuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTUsuarios = new javax.swing.JTable();
-        jBCadastrarUsuario = new javax.swing.JButton();
         jBExcluir = new javax.swing.JButton();
+        jBEditar = new javax.swing.JButton();
 
-        setLayout(new java.awt.BorderLayout());
-
-        jPCabecalho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(21, 80, 150));
         jLabel1.setText("Usuários");
-        jPCabecalho.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
 
-        add(jPCabecalho, java.awt.BorderLayout.PAGE_START);
-
-        jPConteudo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jBEditar.setBackground(new java.awt.Color(208, 125, 7));
-        jBEditar.setForeground(new java.awt.Color(255, 255, 255));
-        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+        jBCadastrarUsuario.setBackground(new java.awt.Color(21, 80, 150));
+        jBCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jBCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jBCadastrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBCadastrarUsuario.setLabel("Novo Usuário");
+        jBCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditarActionPerformed(evt);
+                jBCadastrarUsuarioActionPerformed(evt);
             }
         });
-        jPConteudo.add(jBEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 70, 45));
+        add(jBCadastrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, 130, 40));
 
         jTUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,19 +161,7 @@ public class JPUsuarios extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTUsuarios);
 
-        jPConteudo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 1010, 353));
-
-        jBCadastrarUsuario.setBackground(new java.awt.Color(21, 80, 150));
-        jBCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jBCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jBCadastrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBCadastrarUsuario.setLabel("Novo Usuário");
-        jBCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCadastrarUsuarioActionPerformed(evt);
-            }
-        });
-        jPConteudo.add(jBCadastrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 60, 130, 40));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 356, 1010, 353));
 
         jBExcluir.setBackground(new java.awt.Color(204, 0, 0));
         jBExcluir.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,9 +170,16 @@ public class JPUsuarios extends javax.swing.JPanel {
                 jBExcluirActionPerformed(evt);
             }
         });
-        jPConteudo.add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 70, 45));
+        add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 70, 45));
 
-        add(jPConteudo, java.awt.BorderLayout.CENTER);
+        jBEditar.setBackground(new java.awt.Color(208, 125, 7));
+        jBEditar.setForeground(new java.awt.Color(255, 255, 255));
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
+            }
+        });
+        add(jBEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 70, 45));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarUsuarioActionPerformed
@@ -286,8 +276,6 @@ public class JPUsuarios extends javax.swing.JPanel {
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPCabecalho;
-    private javax.swing.JPanel jPConteudo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTUsuarios;
     // End of variables declaration//GEN-END:variables
