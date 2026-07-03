@@ -4,7 +4,7 @@
 
 package br.com.mycompany.chaponibus.admin;
 
-import br.com.mycompany.chaponibus.admin.view.JFLogin;
+import br.com.mycompany.chaponibus.admin.view.login.JFLogin;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.UIManager;
 

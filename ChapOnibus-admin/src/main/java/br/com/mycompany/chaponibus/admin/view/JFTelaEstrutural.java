@@ -39,7 +39,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         configurarBotaoNav(jBHome, "/br/com/mycompany/chaponibus/admin/assets/home_icon.png", "Home");
         configurarBotaoNav(jBRotas, "/br/com/mycompany/chaponibus/admin/assets/rotas_icon.png", "Rotas");
         configurarBotaoNav(jBOnibus, "/br/com/mycompany/chaponibus/admin/assets/bus_icon.png", "Ônibus");
-        configurarBotaoNav(jBBairros, "/br/com/mycompany/chaponibus/admin/assets/map_icon.png", "Bairros");
         configurarBotaoNav(jBUsuarios, "/br/com/mycompany/chaponibus/admin/assets/usuarios_icon.png", "Usuários");
         configurarBotaoNav(jBUsuario, "/br/com/mycompany/chaponibus/admin/assets/usuario.png", Sessao.getUsuarioLogado().getUsername());
     }
@@ -72,14 +71,16 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private void initComponents() {
 
         jPPainelNav = new javax.swing.JPanel();
+        jPCabecalho = new javax.swing.JPanel();
+        jLLogo = new javax.swing.JLabel();
+        jLLogo1 = new javax.swing.JLabel();
+        jPBotoes = new javax.swing.JPanel();
         jBUsuarios = new javax.swing.JButton();
         jBHome = new javax.swing.JButton();
         jBRotas = new javax.swing.JButton();
-        jBUsuario = new javax.swing.JButton();
-        jBBairros = new javax.swing.JButton();
-        jLLogo = new javax.swing.JLabel();
-        jLLogo1 = new javax.swing.JLabel();
         jBOnibus = new javax.swing.JButton();
+        jPRodape = new javax.swing.JPanel();
+        jBUsuario = new javax.swing.JButton();
         jPPainelConteudo = new javax.swing.JPanel();
         jPTelaInicial = new br.com.mycompany.chaponibus.admin.view.JPTelaInicial();
         jPRotas = new br.com.mycompany.chaponibus.admin.view.rotas.JPRotas();
@@ -89,8 +90,49 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
 
         jPPainelNav.setBackground(new java.awt.Color(244, 247, 249));
         jPPainelNav.setMinimumSize(new java.awt.Dimension(180, 160));
+        jPPainelNav.setOpaque(false);
         jPPainelNav.setPreferredSize(new java.awt.Dimension(180, 160));
-        jPPainelNav.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPPainelNav.setLayout(new java.awt.BorderLayout());
+
+        jLLogo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLLogo.setForeground(new java.awt.Color(91, 95, 97));
+        jLLogo.setText("Painel Administrativo");
+
+        jLLogo1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLLogo1.setForeground(new java.awt.Color(0, 48, 99));
+        jLLogo1.setText("Chapônibus");
+
+        javax.swing.GroupLayout jPCabecalhoLayout = new javax.swing.GroupLayout(jPCabecalho);
+        jPCabecalho.setLayout(jPCabecalhoLayout);
+        jPCabecalhoLayout.setHorizontalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLLogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPCabecalhoLayout.setVerticalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLLogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPPainelNav.add(jPCabecalho, java.awt.BorderLayout.PAGE_START);
+
+        jPBotoes.setOpaque(false);
+        jPBotoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBUsuarios.setBackground(new java.awt.Color(244, 247, 249));
         jBUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -98,7 +140,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBUsuarios.setText("Usuários");
         jBUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBUsuarios.addActionListener(this::jBUsuariosActionPerformed);
-        jPPainelNav.add(jBUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 130, 40));
+        jPBotoes.add(jBUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 40));
 
         jBHome.setBackground(new java.awt.Color(244, 247, 249));
         jBHome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -106,7 +148,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBHome.setText("Home");
         jBHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBHome.addActionListener(this::jBHomeActionPerformed);
-        jPPainelNav.add(jBHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 40));
+        jPBotoes.add(jBHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, 40));
 
         jBRotas.setBackground(new java.awt.Color(244, 247, 249));
         jBRotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -114,33 +156,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBRotas.setText("Rotas");
         jBRotas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBRotas.addActionListener(this::jBRotasActionPerformed);
-        jPPainelNav.add(jBRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, 40));
-
-        jBUsuario.setBackground(new java.awt.Color(244, 247, 249));
-        jBUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBUsuario.setForeground(new java.awt.Color(24, 28, 30));
-        jBUsuario.setText("NomeUsuario");
-        jBUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jBUsuario.addActionListener(this::jBUsuarioActionPerformed);
-        jPPainelNav.add(jBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 130, 40));
-
-        jBBairros.setBackground(new java.awt.Color(244, 247, 249));
-        jBBairros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBBairros.setForeground(new java.awt.Color(21, 80, 150));
-        jBBairros.setText("Bairros");
-        jBBairros.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jBBairros.addActionListener(this::jBBairrosActionPerformed);
-        jPPainelNav.add(jBBairros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 130, 40));
-
-        jLLogo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLLogo.setForeground(new java.awt.Color(91, 95, 97));
-        jLLogo.setText("Painel Administrativo");
-        jPPainelNav.add(jLLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, 70));
-
-        jLLogo1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLLogo1.setForeground(new java.awt.Color(0, 48, 99));
-        jLLogo1.setText("Chapônibus");
-        jPPainelNav.add(jLLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 70));
+        jPBotoes.add(jBRotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 130, 40));
 
         jBOnibus.setBackground(new java.awt.Color(244, 247, 249));
         jBOnibus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -148,7 +164,37 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jBOnibus.setText("Ônibus");
         jBOnibus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jBOnibus.addActionListener(this::jBOnibusActionPerformed);
-        jPPainelNav.add(jBOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 130, 40));
+        jPBotoes.add(jBOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 40));
+
+        jPPainelNav.add(jPBotoes, java.awt.BorderLayout.CENTER);
+
+        jPRodape.setOpaque(false);
+
+        jBUsuario.setBackground(new java.awt.Color(244, 247, 249));
+        jBUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBUsuario.setForeground(new java.awt.Color(24, 28, 30));
+        jBUsuario.setText("NomeUsuario");
+        jBUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBUsuario.addActionListener(this::jBUsuarioActionPerformed);
+
+        javax.swing.GroupLayout jPRodapeLayout = new javax.swing.GroupLayout(jPRodape);
+        jPRodape.setLayout(jPRodapeLayout);
+        jPRodapeLayout.setHorizontalGroup(
+            jPRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPRodapeLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPRodapeLayout.setVerticalGroup(
+            jPRodapeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPRodapeLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jPPainelNav.add(jPRodape, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(jPPainelNav, java.awt.BorderLayout.LINE_START);
 
@@ -158,7 +204,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jPTelaInicial.setLayout(jPTelaInicialLayout);
         jPTelaInicialLayout.setHorizontalGroup(
             jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
         jPTelaInicialLayout.setVerticalGroup(
             jPTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,10 +234,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBUsuarioActionPerformed
 
-    private void jBBairrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBairrosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBBairrosActionPerformed
-
     private void jBOnibusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOnibusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBOnibusActionPerformed
@@ -209,7 +251,6 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBBairros;
     private javax.swing.JButton jBHome;
     private javax.swing.JButton jBOnibus;
     private javax.swing.JButton jBRotas;
@@ -217,8 +258,11 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
     private javax.swing.JButton jBUsuarios;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLLogo1;
+    private javax.swing.JPanel jPBotoes;
+    private javax.swing.JPanel jPCabecalho;
     private javax.swing.JPanel jPPainelConteudo;
     private javax.swing.JPanel jPPainelNav;
+    private javax.swing.JPanel jPRodape;
     private br.com.mycompany.chaponibus.admin.view.rotas.JPRotas jPRotas;
     private br.com.mycompany.chaponibus.admin.view.JPTelaInicial jPTelaInicial;
     private br.com.mycompany.chaponibus.admin.view.usuarios.JPUsuarios jPUsuarios1;
