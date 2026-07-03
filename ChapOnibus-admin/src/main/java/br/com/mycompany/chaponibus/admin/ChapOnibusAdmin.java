@@ -17,8 +17,7 @@ public class ChapOnibusAdmin {
     public static void main(String[] args) {
         FlatMacLightLaf.setup();
         
-        UIManager.put("TextComponent.arc", 15);
-        UIManager.put("Button.selectedBackground", new java.awt.Color(21,80,150));
+        UIManager.put("TextComponent.arc", 10);
                 
         java.awt.EventQueue.invokeLater(() -> {
             new JFLogin().setVisible(true);

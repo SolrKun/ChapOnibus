@@ -6,8 +6,11 @@ package br.com.mycompany.chaponibus.admin.view.login;
 
 import br.com.mycompany.chaponibus.admin.model.Usuario;
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
+import br.com.mycompany.chaponibus.admin.util.Sessao;
 import br.com.mycompany.chaponibus.admin.view.JFTelaEstrutural;
 import java.awt.Image;
+import java.net.URL;
+import static java.util.logging.Level.WARNING;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -18,9 +21,10 @@ import javax.swing.JOptionPane;
  */
 
 
-public class JFTrocarSenhaPrimeiroAcesso extends javax.swing.JFrame {    
-     private Usuario validaUsuario;
-     private UsuarioDAO usuarioDAO;
+public class JFTrocarSenhaPrimeiroAcesso extends javax.swing.JFrame { 
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JFLogin.class.getName());
+    private Usuario validaUsuario;
+    private UsuarioDAO usuarioDAO;
 
     /**
      * Creates new form JFTrocarSenhaPrimeiroAcesso
@@ -32,7 +36,7 @@ public class JFTrocarSenhaPrimeiroAcesso extends javax.swing.JFrame {
         this.validaUsuario = usuarioLogado;
         this.usuarioDAO = new UsuarioDAO();
         
-        jLabel3.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/logo cert.png", 64, 87));
+        jLabel3.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/logo-fundo-branco.png", 64, 87));
     }
     
     public ImageIcon createIcon(String endereco, int x, int y) {
@@ -92,6 +96,7 @@ public class JFTrocarSenhaPrimeiroAcesso extends javax.swing.JFrame {
 
         getContentPane().add(jLCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 190));
 
+        jLPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         jLPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Confirmar Nova Senha");
@@ -142,23 +147,49 @@ public class JFTrocarSenhaPrimeiroAcesso extends javax.swing.JFrame {
             return;
         }
         
-        if (!senhaNova.trim().equals(confirmacaoSenhaNova.trim())) return;
+        if (!senhaNova.trim().equals(confirmacaoSenhaNova.trim())) {
+            JOptionPane.showMessageDialog(null, "As duas senhas informadas devem ser iguais");
+            jPFSenha.requestFocus();
+            return;
+        }
         
         validaUsuario.setPassword(senhaNova);
         validaUsuario.setPrimeiroAcesso(false);
-
+        
         try {
-            usuarioDAO.atualizar(validaUsuario, validaUsuario.getUsername());
-
-            JOptionPane.showMessageDialog(this, "Senha atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            
-            jPFSenha.setText("");
-            jPFSenha1.setText("");
-            new JFTelaEstrutural().setVisible(true);
-            this.dispose();
+            URL imgURL = getClass().getResource("/br/com/mycompany/chaponibus/admin/assets/loading.gif");
+            if (imgURL != null) {
+                ImageIcon iconeOriginal = new ImageIcon(imgURL);
+                Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+                jBLogin.setIcon(new ImageIcon(imagemRedimensionada));
+            } else {
+                jBLogin.setText("Carregando...");
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            logger.log(WARNING, "Não foi possível carregar o GIF de loading", e);
         }
+        
+        jBLogin.setEnabled(false);
+        
+        new Thread(() -> {
+            try {
+                usuarioDAO.atualizar(validaUsuario, validaUsuario.getUsername());
+                Sessao.conectar(validaUsuario);
+
+                JOptionPane.showMessageDialog(this, "Senha atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                jPFSenha.setText("");
+                jPFSenha1.setText("");
+                new JFTelaEstrutural().setVisible(true);
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao atualizar no banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                jBLogin.setIcon(null);
+                jBLogin.setEnabled(true);
+            }
+        }).start();
+
+        
     }//GEN-LAST:event_jBLoginActionPerformed
 
     /**

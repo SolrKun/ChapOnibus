@@ -87,12 +87,15 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
         jPUsuarios1 = new br.com.mycompany.chaponibus.admin.view.usuarios.JPUsuarios();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(244, 247, 249));
 
         jPPainelNav.setBackground(new java.awt.Color(244, 247, 249));
         jPPainelNav.setMinimumSize(new java.awt.Dimension(180, 160));
         jPPainelNav.setOpaque(false);
         jPPainelNav.setPreferredSize(new java.awt.Dimension(180, 160));
         jPPainelNav.setLayout(new java.awt.BorderLayout());
+
+        jPCabecalho.setBackground(new java.awt.Color(244, 247, 249));
 
         jLLogo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLLogo.setForeground(new java.awt.Color(91, 95, 97));
@@ -131,7 +134,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
 
         jPPainelNav.add(jPCabecalho, java.awt.BorderLayout.PAGE_START);
 
-        jPBotoes.setOpaque(false);
+        jPBotoes.setBackground(new java.awt.Color(244, 247, 249));
         jPBotoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBUsuarios.setBackground(new java.awt.Color(244, 247, 249));
@@ -168,7 +171,7 @@ public class JFTelaEstrutural extends javax.swing.JFrame {
 
         jPPainelNav.add(jPBotoes, java.awt.BorderLayout.CENTER);
 
-        jPRodape.setOpaque(false);
+        jPRodape.setBackground(new java.awt.Color(244, 247, 249));
 
         jBUsuario.setBackground(new java.awt.Color(244, 247, 249));
         jBUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

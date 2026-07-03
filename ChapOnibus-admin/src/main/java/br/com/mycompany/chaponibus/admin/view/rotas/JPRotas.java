@@ -88,7 +88,7 @@ public class JPRotas extends javax.swing.JPanel {
         jPTabelaRotas = new br.com.mycompany.chaponibus.admin.view.rotas.JPTabelaRotas();
         jPDescricaoRotas = new br.com.mycompany.chaponibus.admin.view.rotas.JPDescricaoRotas();
 
-        setBackground(new java.awt.Color(244, 247, 249));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
         jPCabecalho.setBackground(new java.awt.Color(244, 247, 249));

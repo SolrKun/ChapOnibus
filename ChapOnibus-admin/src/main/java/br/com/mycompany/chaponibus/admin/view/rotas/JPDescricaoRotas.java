@@ -7,6 +7,8 @@ package br.com.mycompany.chaponibus.admin.view.rotas;
 import br.com.mycompany.chaponibus.admin.dao.RotaDAO;
 import br.com.mycompany.chaponibus.admin.model.PontoOnibus;
 import br.com.mycompany.chaponibus.admin.model.Rota;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingUtilities;
@@ -23,6 +25,20 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
      */
     public JPDescricaoRotas() {
         initComponents();
+        
+        jTPontosOnibus.setRowHeight(30);
+        jTPontosOnibus.setShowHorizontalLines(true);
+        jTPontosOnibus.setShowVerticalLines(false);
+        jTPontosOnibus.setGridColor(new Color(230, 235, 240));
+        jTPontosOnibus.putClientProperty("FlatLaf.style", "showCellFocusIndicator: false");
+        
+        jTPontosOnibus.getTableHeader().setPreferredSize(new Dimension(0, 45));
+        jTPontosOnibus.getTableHeader().putClientProperty("FlatLaf.style", 
+                "background: #f1f3f5;" +
+                "foreground: #212529;" +
+                "font: bold 16;" +
+                "separatorColor: #f1f3f5"
+        );
         
         jBRemoverPonto.setVisible(false);
     }
@@ -104,8 +120,7 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
         jPTabelaLayout.setVerticalGroup(
             jPTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPTabelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -117,33 +132,33 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
         jPCabecalho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLNome.setText("Nome da rota");
-        jPCabecalho.add(jLNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-        jPCabecalho.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 400, 30));
+        jPCabecalho.add(jLNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPCabecalho.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 400, 30));
 
         buttonGroup1.add(jRBPontoRota);
         jRBPontoRota.setSelected(true);
         jRBPontoRota.setText("Ponto de Rota");
         jRBPontoRota.addActionListener(this::jRBPontoRotaActionPerformed);
-        jPCabecalho.add(jRBPontoRota, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        jPCabecalho.add(jRBPontoRota, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
         jLCadastrarPontos.setText("Cadastrar pontos");
-        jPCabecalho.add(jLCadastrarPontos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPCabecalho.add(jLCadastrarPontos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
         buttonGroup1.add(jRBPontoOnibus);
         jRBPontoOnibus.setText("Ponto de Ônibus");
         jRBPontoOnibus.setActionCommand("");
         jRBPontoOnibus.addActionListener(this::jRBPontoOnibusActionPerformed);
-        jPCabecalho.add(jRBPontoOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        jPCabecalho.add(jRBPontoOnibus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
 
         jBRemoverPonto.setText("Remover ponto");
         jBRemoverPonto.addActionListener(this::jBRemoverPontoActionPerformed);
-        jPCabecalho.add(jBRemoverPonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 130, -1));
+        jPCabecalho.add(jBRemoverPonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 130, 30));
 
         jBDesfazerUltimoPonto.setText("Desfazer último ponto clicado");
         jBDesfazerUltimoPonto.addActionListener(this::jBDesfazerUltimoPontoActionPerformed);
-        jPCabecalho.add(jBDesfazerUltimoPonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 210, -1));
+        jPCabecalho.add(jBDesfazerUltimoPonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(21, 80, 150));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cadastro de Nova Rota");
@@ -153,22 +168,22 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
 
         jPBotoes.setMinimumSize(new java.awt.Dimension(440, 50));
         jPBotoes.setOpaque(false);
-        jPBotoes.setPreferredSize(new java.awt.Dimension(440, 50));
+        jPBotoes.setPreferredSize(new java.awt.Dimension(440, 60));
         jPBotoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBConfirmar.setBackground(new java.awt.Color(21, 80, 150));
         jBConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         jBConfirmar.setText("Salvar Rota");
         jBConfirmar.addActionListener(this::jBConfirmarActionPerformed);
-        jPBotoes.add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 130, 30));
+        jPBotoes.add(jBConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 130, 40));
 
         jBCancelar.setText("Cancelar");
         jBCancelar.addActionListener(this::jBCancelarActionPerformed);
-        jPBotoes.add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 120, 30));
+        jPBotoes.add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 120, 40));
 
         jBExcluir.setText("Excluir Rota");
         jBExcluir.addActionListener(this::jBExcluirActionPerformed);
-        jPBotoes.add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 30));
+        jPBotoes.add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 40));
 
         add(jPBotoes, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents

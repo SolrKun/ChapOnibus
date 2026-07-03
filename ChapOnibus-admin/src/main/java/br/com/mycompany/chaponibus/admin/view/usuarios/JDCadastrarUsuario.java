@@ -6,6 +6,8 @@ package br.com.mycompany.chaponibus.admin.view.usuarios;
 
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +24,16 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
     public JDCadastrarUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        jLTitulo.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/user-plus-solid.png", 32));
+        jLTitulo.setIconTextGap(15);
+        
+        jLInfo.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/circle-info-solid.png", 24));
+        jLInfo.putClientProperty("FlatLaf.style", "arc: 15; border: 4, 12, 4, 12");
+        jLInfo.setIconTextGap(8);
+        
+        jBCadastrar.putClientProperty("JButton.buttonType", "borderless");
+        jBCancelar.putClientProperty("JButton.buttonType", "borderless");
         
         this.usuarioDAO = new UsuarioDAO();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -45,6 +57,13 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
         return salvouComSucesso;
     }
     
+    public ImageIcon createIcon(String endereco, int tamanho) {
+        ImageIcon iconeOriginal = new ImageIcon(getClass().getResource(endereco));
+        Image imagemRedimensionada = iconeOriginal.getImage().getScaledInstance(tamanho, tamanho, Image.SCALE_SMOOTH);
+        ImageIcon iconeUsuario = new ImageIcon(imagemRedimensionada);
+        return iconeUsuario;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,60 +73,77 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPCabecalho = new javax.swing.JPanel();
+        jLTitulo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPPrincipal = new javax.swing.JPanel();
         jLUsuario = new javax.swing.JLabel();
-        jTFUsuario = new javax.swing.JTextField();
         jLPerfil = new javax.swing.JLabel();
+        jTFUsuario = new javax.swing.JTextField();
         jCBPerfil = new javax.swing.JComboBox<>();
+        jLInfo = new javax.swing.JLabel();
         jBCadastrar = new javax.swing.JButton();
+        jBCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLUsuario.setText("Usuário:");
+        jPCabecalho.setBackground(new java.awt.Color(21, 80, 150));
+        jPCabecalho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLPerfil.setText("Perfil:");
+        jLTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setText("Cadastro de Novo Administrador");
+        jPCabecalho.add(jLTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Preencha as informações para criar um novo acesso ao sistema.");
+        jPCabecalho.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+
+        getContentPane().add(jPCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 90));
+
+        jPPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jPPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLUsuario.setText("Usuário");
+        jPPrincipal.add(jLUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLPerfil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLPerfil.setText("Perfil");
+        jPPrincipal.add(jLPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPPrincipal.add(jTFUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 430, 40));
 
         jCBPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Super Administrador" }));
+        jPPrincipal.add(jCBPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 430, 40));
 
-        jBCadastrar.setText("Cadastrar");
+        jLInfo.setBackground(new java.awt.Color(236, 240, 255));
+        jLInfo.setText("O novo administrador deverá alterar sua senha no primeiro login.");
+        jPPrincipal.add(jLInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 430, 40));
+
+        jBCadastrar.setBackground(new java.awt.Color(248, 158, 49));
+        jBCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jBCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        jBCadastrar.setText("Salvar Administrador");
         jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastrarActionPerformed(evt);
             }
         });
+        jPPrincipal.add(jBCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 430, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBCadastrar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLPerfil)
-                            .addComponent(jLUsuario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTFUsuario)
-                            .addComponent(jCBPerfil, 0, 321, Short.MAX_VALUE))))
-                .addContainerGap(138, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLUsuario))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLPerfil)
-                    .addComponent(jCBPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jBCadastrar)
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
+        jBCancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jBCancelar.setText("Cancelar");
+        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarActionPerformed(evt);
+            }
+        });
+        jPPrincipal.add(jBCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 430, 50));
+
+        getContentPane().add(jPPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 470, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,6 +203,11 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
+    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
+        jTFUsuario.setText("");
+        this.dispose();
+    }//GEN-LAST:event_jBCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,9 +244,15 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrar;
+    private javax.swing.JButton jBCancelar;
     private javax.swing.JComboBox<String> jCBPerfil;
+    private javax.swing.JLabel jLInfo;
     private javax.swing.JLabel jLPerfil;
+    private javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLUsuario;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPCabecalho;
+    private javax.swing.JPanel jPPrincipal;
     private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
 }

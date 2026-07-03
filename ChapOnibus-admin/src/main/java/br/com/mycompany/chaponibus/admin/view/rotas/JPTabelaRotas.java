@@ -6,6 +6,8 @@ package br.com.mycompany.chaponibus.admin.view.rotas;
 
 import br.com.mycompany.chaponibus.admin.dao.RotaDAO;
 import br.com.mycompany.chaponibus.admin.model.Rota;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +24,20 @@ public class JPTabelaRotas extends javax.swing.JPanel {
     public JPTabelaRotas() {
         initComponents();
         carregarTabela();
+        
+        jTTabelaRotas.setRowHeight(30);
+        jTTabelaRotas.setShowHorizontalLines(true);
+        jTTabelaRotas.setShowVerticalLines(false);
+        jTTabelaRotas.setGridColor(new Color(230, 235, 240));
+        jTTabelaRotas.putClientProperty("FlatLaf.style", "showCellFocusIndicator: false");
+        
+        jTTabelaRotas.getTableHeader().setPreferredSize(new Dimension(0, 45));
+        jTTabelaRotas.getTableHeader().putClientProperty("FlatLaf.style", 
+                "background: #f1f3f5;" +
+                "foreground: #212529;" +
+                "font: bold 16;" +
+                "separatorColor: #f1f3f5"
+        );
     }
     
     public void carregarTabela() {
@@ -58,6 +74,7 @@ public class JPTabelaRotas extends javax.swing.JPanel {
         jTTabelaRotas = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(244, 247, 249));
+        setOpaque(false);
 
         jTTabelaRotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

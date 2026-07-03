@@ -38,17 +38,19 @@ public class JFLogin extends javax.swing.JFrame {
         this.setTitle("Chapônibus");
         this.usuarioDAO = new UsuarioDAO();
         
-        jLabel3.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/logo cert.png", 64, 87));
+        jLabel3.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/logo-fundo-branco.png", 64, 87));
         
         jTFUsuario.requestFocusInWindow();
         jTFUsuario.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/admin/assets/usuario.png", 16, 16));
         jTFUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
         jTFUsuario.setOpaque(false);
+        jTFUsuario.putClientProperty("FlatLaf.style", "iconTextGap: 8; margin: 6, 10, 6, 10");
         
         jPFSenha.putClientProperty(FlatClientProperties.STYLE, "showRevealButton: true;");
         jPFSenha.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, createIcon("/br/com/mycompany/chaponibus/admin/assets/chave.png", 16, 16));
         jPFSenha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, java.awt.Color.GRAY));
         jPFSenha.setOpaque(false);
+        jPFSenha.putClientProperty("FlatLaf.style", "iconTextGap: 8; margin: 6, 10, 6, 10");
     }
     
     public ImageIcon createIcon(String endereco, int x, int y) {
@@ -100,7 +102,7 @@ public class JFLogin extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 402, 120));
 
-        jPanel3.setBackground(new java.awt.Color(244, 247, 249));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTFUsuario.addActionListener(this::jTFUsuarioActionPerformed);
@@ -125,7 +127,7 @@ public class JFLogin extends javax.swing.JFrame {
         jBLogin.addActionListener(this::jBLoginActionPerformed);
         jPanel3.add(jBLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 320, 50));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 400, 280));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 400, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

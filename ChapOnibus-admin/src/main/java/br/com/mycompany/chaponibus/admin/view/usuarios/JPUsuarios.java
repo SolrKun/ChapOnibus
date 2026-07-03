@@ -6,6 +6,8 @@ package br.com.mycompany.chaponibus.admin.view.usuarios;
 
 import br.com.mycompany.chaponibus.admin.dao.UsuarioDAO;
 import br.com.mycompany.chaponibus.admin.model.Usuario;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Window;
 import java.util.List;
@@ -42,12 +44,24 @@ public class JPUsuarios extends javax.swing.JPanel {
         jBEditar.setToolTipText("Editar usuário selecionado");
         jBExcluir.setToolTipText("Excluir usuário selecionado");
         
-        
-          int iconSize = 20;
+        int iconSize = 20;
         
         jBEditar.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/edit_icon.png", iconSize));
         jBExcluir.setIcon(createIcon("/br/com/mycompany/chaponibus/admin/assets/excluir_icon.png", iconSize));
         
+        jTUsuarios.setRowHeight(30);
+        jTUsuarios.setShowHorizontalLines(true);
+        jTUsuarios.setShowVerticalLines(false);
+        jTUsuarios.setGridColor(new Color(230, 235, 240));
+        jTUsuarios.putClientProperty("FlatLaf.style", "showCellFocusIndicator: false");
+        
+        jTUsuarios.getTableHeader().setPreferredSize(new Dimension(0, 45));
+        jTUsuarios.getTableHeader().putClientProperty("FlatLaf.style", 
+                "background: #f1f3f5;" +
+                "foreground: #212529;" +
+                "font: bold 16;" +
+                "separatorColor: #f1f3f5"
+        );
     }
     
     public void preencherTabela() {
@@ -59,10 +73,12 @@ public class JPUsuarios extends javax.swing.JPanel {
             List<Usuario> lista = usuarioDAO.listarTodos();
         
             for (Usuario u : lista) {
-                modelo.addRow(new Object[] {
-                    u.getUsername(),
-                    u.getRole()
-                });
+                if (u.getRole().equals("Administrador") || u.getRole().equals("Super Administrador")) {
+                    modelo.addRow(new Object[] {
+                        u.getUsername(),
+                        u.getRole()
+                    });
+                }
             }
             
             jBExcluir.setVisible(false);
@@ -87,10 +103,6 @@ public class JPUsuarios extends javax.swing.JPanel {
         return iconeUsuario;
     }
 
-    
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,31 +112,45 @@ public class JPUsuarios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jBCadastrarUsuario = new javax.swing.JButton();
+        jPCabecalho = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPPrincipal = new javax.swing.JPanel();
+        jBEditar = new javax.swing.JButton();
+        jBExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTUsuarios = new javax.swing.JTable();
-        jBExcluir = new javax.swing.JButton();
-        jBEditar = new javax.swing.JButton();
+        jBCadastrarUsuario = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(21, 80, 150));
-        jLabel1.setText("Usuários");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
+        jPCabecalho.setBackground(new java.awt.Color(255, 255, 255));
+        jPCabecalho.setPreferredSize(new java.awt.Dimension(1110, 80));
+        jPCabecalho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBCadastrarUsuario.setBackground(new java.awt.Color(21, 80, 150));
-        jBCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jBCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jBCadastrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBCadastrarUsuario.setLabel("Novo Usuário");
-        jBCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(21, 80, 150));
+        jLabel2.setText("Gestão de Usuários Administradores");
+        jPCabecalho.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 450, -1));
+
+        add(jPCabecalho, java.awt.BorderLayout.PAGE_START);
+
+        jPPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+
+        jBEditar.setBackground(new java.awt.Color(208, 125, 7));
+        jBEditar.setForeground(new java.awt.Color(255, 255, 255));
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCadastrarUsuarioActionPerformed(evt);
+                jBEditarActionPerformed(evt);
             }
         });
-        add(jBCadastrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, 130, 40));
+
+        jBExcluir.setBackground(new java.awt.Color(204, 0, 0));
+        jBExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
 
         jTUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,25 +187,47 @@ public class JPUsuarios extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTUsuarios);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 356, 1010, 353));
-
-        jBExcluir.setBackground(new java.awt.Color(204, 0, 0));
-        jBExcluir.setForeground(new java.awt.Color(255, 255, 255));
-        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+        jBCadastrarUsuario.setBackground(new java.awt.Color(21, 80, 150));
+        jBCadastrarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBCadastrarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jBCadastrarUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBCadastrarUsuario.setLabel("Novo Usuário");
+        jBCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBExcluirActionPerformed(evt);
+                jBCadastrarUsuarioActionPerformed(evt);
             }
         });
-        add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 70, 45));
 
-        jBEditar.setBackground(new java.awt.Color(208, 125, 7));
-        jBEditar.setForeground(new java.awt.Color(255, 255, 255));
-        jBEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditarActionPerformed(evt);
-            }
-        });
-        add(jBEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 70, 45));
+        javax.swing.GroupLayout jPPrincipalLayout = new javax.swing.GroupLayout(jPPrincipal);
+        jPPrincipal.setLayout(jPPrincipalLayout);
+        jPPrincipalLayout.setHorizontalGroup(
+            jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPPrincipalLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBCadastrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1070, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
+        );
+        jPPrincipalLayout.setVerticalGroup(
+            jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPPrincipalLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCadastrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
+        );
+
+        add(jPPrincipal, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarUsuarioActionPerformed
@@ -275,7 +323,9 @@ public class JPUsuarios extends javax.swing.JPanel {
     private javax.swing.JButton jBCadastrarUsuario;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPCabecalho;
+    private javax.swing.JPanel jPPrincipal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTUsuarios;
     // End of variables declaration//GEN-END:variables
