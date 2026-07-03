@@ -137,7 +137,8 @@ public class JDCadastrarUsuario extends javax.swing.JDialog {
             Usuario novoUsuario = new Usuario(
                 username,
                 "123456",
-                perfil
+                perfil,
+                true
             );
             
             try {
