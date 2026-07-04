@@ -95,19 +95,36 @@ public class JPRotas extends javax.swing.JPanel {
         jPCabecalho.setMinimumSize(new java.awt.Dimension(1090, 50));
         jPCabecalho.setOpaque(false);
         jPCabecalho.setPreferredSize(new java.awt.Dimension(1110, 80));
-        jPCabecalho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jBCadastrarRota.setBackground(new java.awt.Color(21, 80, 150));
         jBCadastrarRota.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jBCadastrarRota.setForeground(new java.awt.Color(255, 255, 255));
         jBCadastrarRota.setText("Nova rota");
         jBCadastrarRota.addActionListener(this::jBCadastrarRotaActionPerformed);
-        jPCabecalho.add(jBCadastrarRota, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 210, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(21, 80, 150));
         jLabel1.setText("Gestão de Rotas");
-        jPCabecalho.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 310, -1));
+
+        javax.swing.GroupLayout jPCabecalhoLayout = new javax.swing.GroupLayout(jPCabecalho);
+        jPCabecalho.setLayout(jPCabecalhoLayout);
+        jPCabecalhoLayout.setHorizontalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 548, Short.MAX_VALUE)
+                .addComponent(jBCadastrarRota, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        jPCabecalhoLayout.setVerticalGroup(
+            jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCabecalhoLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jBCadastrarRota, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         add(jPCabecalho, java.awt.BorderLayout.PAGE_START);
 

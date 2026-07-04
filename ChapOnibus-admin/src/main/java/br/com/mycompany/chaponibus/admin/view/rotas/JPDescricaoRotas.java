@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingUtilities;
 import java.util.List;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -79,10 +80,7 @@ public class JPDescricaoRotas extends javax.swing.JPanel {
 
         jTPontosOnibus.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Pontos de Ônibus Cadastrados"
