@@ -267,7 +267,7 @@ This project strengthened my experience with:
 
 ---
 
-## Author
+## Authors
 
 **Carlos Eduardo da Silva**
 
