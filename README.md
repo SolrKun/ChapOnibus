@@ -70,23 +70,24 @@ ChapOnibus/
 │   ├── pom.xml
 │   └── src/
 │       ├── java/
-│       │    └── .../
-│       │         ├── connection/
-│       │         │   └── Database connection and configuration
-│       │         ├── dao/
-│       │         │   └── Data Access Objects (CRUD operations)
-│       │         ├── model/
-│       │         │   └── Business entities
-│       │         ├── view/
-│       │         │   └── User interface components
-│       │         └── ChapOnibus.java
-│       │             └── Application entry point
+│       │   └── .../
+│       │        ├── connection/
+│       │        │   └── Database connection and configuration
+│       │        ├── dao/
+│       │        │   └── Data Access Objects (CRUD operations)
+│       │        ├── model/
+│       │        │   └── Business entities
+│       │        ├── view/
+│       │        │   └── User interface components
+│       │        └── ChapOnibus.java
+│       │            └── Application entry point
 │       │
 │       └── resources/
-│           └── assets/
-│               ├── Images
-│               ├── Icons
-│               └── Other static resources
+│           └── .../
+│               └── assets/
+│                   ├── Images
+│                   ├── Icons
+│                   └── Other static resources
 │
 ├── ChapOnibus-admin/
 │   ├── pom.xml
@@ -100,10 +101,11 @@ ChapOnibus/
 │       │       └── ChapOnibusAdmin.java
 │       │
 │       └── resources/
-│           └── assets/
-│               ├── Images
-│               ├── Icons
-│               └── Other static resources
+│           └── .../
+│               └── assets/
+│                   ├── Images
+│                   ├── Icons
+│                   └── Other static resources
 │
 └── README.md
 
@@ -241,11 +243,31 @@ The repository contains two independent desktop applications:
 
 Screenshots showcasing the main application features will be added once the documentation is complete.
 
-* Login
-* Home Screen
-* Route Search
-* Interactive Map
-* Administrative Panel
+### Administrative Application
+
+#### Login
+<img width="401" height="412" alt="image" src="https://github.com/user-attachments/assets/58b9f7ad-2330-4575-906c-b0952c407b15" />
+
+
+#### Route Management
+<img width="1287" height="748" alt="image" src="https://github.com/user-attachments/assets/d04c53a9-3d25-4882-b50c-89ee370e8387" />
+
+
+#### Bus Register
+<img width="1287" height="749" alt="image" src="https://github.com/user-attachments/assets/60c0d0c3-c688-48f8-8984-93893f44b756" />
+
+
+#### Admin User Register
+<img width="1290" height="750" alt="image" src="https://github.com/user-attachments/assets/8f2a7da9-0449-429b-8232-d8b781f06c95" />
+
+### User Application
+
+#### Login
+<img width="370" height="757" alt="image" src="https://github.com/user-attachments/assets/00501896-e7ba-4284-916c-56e15cc5d5ce" />
+
+
+#### Home Screen
+<img width="374" height="757" alt="image" src="https://github.com/user-attachments/assets/dee76e24-bb0c-4ddb-a0b4-816b2d518044" />
 
 ---
 
