@@ -273,3 +273,7 @@ This project strengthened my experience with:
 
 * LinkedIn: https://www.linkedin.com/in/carloseddasilva
 * GitHub: https://github.com/SolrKun
+
+**Alex Guimarães**
+
+* GitHub: https://github.com/alexguimaa
